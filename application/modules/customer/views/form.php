@@ -54,7 +54,7 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label">Unit*</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="rank" required>
+                        <select class="form-control" name="unit" required>
                             <?php foreach ($units as $rank) :
                                 $srank = $rank->unit; ?>
                                 <option value="<?php echo $rank->unit; ?>" <?php if ($srank == $rank->unit) {
@@ -71,7 +71,8 @@
                     <label for="customer_type" class="col-sm-3 col-form-label"><?php echo display('customer_type') ?>*</label>
                     <div class="col-sm-9">
 
-                        <select name="customer_type" onchange="c_code(this.value)" class="form-control" required>
+                        <select name="customer_type" onchange="" class="form-control">
+
                             <option value="">Select Customer Type</option>
 
                             <option value="1" <?php if ($customers->type == 1 && issset($customers->customer_id)) {
@@ -100,7 +101,7 @@
                 <div class="form-group row" style="display:none;">
                     <label for="customer_cnic" class="col-sm-3 col-form-label"><?php echo display('customer_cnic') ?>*</label>
                     <div class="col-sm-9">
-                        <input type="number" name="customer_cnic" class="form-control" placeholder="<?php echo display('customer_cnic') ?>" id="customer_cnic" value="<?php echo $customers->customer_cnic ?>" required>
+                        <input type="number" name="customer_cnic" class="form-control" placeholder="<?php echo display('customer_cnic') ?>" id="customer_cnic" value="<?php echo $customers->customer_cnic ?>">
                     </div>
                 </div>
                 <div class="form-group row" style="display:none;">
@@ -147,34 +148,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function c_code(id) {
-        $.ajax({
-            url: "<?php echo site_url('customer/customer/customer_code/') ?>" + id,
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                console.log(data);
-                if (data.type == 1) {
-                    var c = data.c_code;
-                    var t = 'cc-';
-                    $('#customer_code').val(t + c);
-                }
-                if (data.type == 2) {
-                    var c = data.c_code;
-                    var t = 'cr-';
-                    $('#customer_code').val(t + c);
-                }
-                if (data.type == 3) {
-                    var c = data.c_code;
-                    var t = 'ls-';
-                    $('#customer_code').val(t + c);
-                }
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert('Error get data from ajax');
-            }
-        });
-    }
-</script>

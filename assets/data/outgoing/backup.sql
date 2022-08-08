@@ -30725,3 +30725,6 @@ UPDATE `user` SET `last_login` = '2022-08-08 19:20:23', `ip_address` = '::1'
 WHERE `id` = '1';
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES ('1020301000001', '837883-AGABA ANDREW', 'Customer Receivable', '4', '1', '1', '0', 'A', '0', '0', '0', '1', '2022-08-08 20:23:50');
+INSERT INTO `customer` (`customer_id`, `customer_code`, `customer_name`, `force_rank`, `unit`, `type`, `customer_phone`, `store_id`, `job_designation`, `customer_address`, `customer_cnic`, `business_address`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', '837883', 'AGABA ANDREW', 'Uganda Police', NULL, '', '07827881991', '', '', 'Naguru', '', '', '1', '1', '2022-08-08 20:23:50', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Customer', 'create', 28, '1', '2022-08-08 20:23:50');
