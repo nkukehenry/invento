@@ -3,7 +3,7 @@
 // module name
 $HmvcMenu["reports"] = array(
     //set icon
-    "icon"           => "<i class='ti-bag'></i>", 
+    "icon"           => "<i class='ti-list'></i>", 
 
     // stockmovment
 

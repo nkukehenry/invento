@@ -7,17 +7,17 @@ $HmvcMenu["purchase_order"] = array(
 
     // purchase_order
  
-        'add'    => array( 
+        'new_purchase'    => array( 
             "controller" => "purchase_order",
             "method"     => "form",
             "permission" => "create"
         ), 
-        'list'  => array( 
+        'purchases_list'  => array( 
             "controller" => "purchase_order",
             "method"     => "index",
             "permission" => "read"
         ), 
-        'receive_list'  => array( 
+        'previous_purchases'  => array( 
             "controller" => "purchase_order",
             "method"     => "receive_list",
             "permission" => "read"

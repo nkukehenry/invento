@@ -6,6 +6,18 @@ $HmvcMenu["product"] = array(
     "icon"           => "<i class='ti-bag'></i>", 
 
     // product
+
+        'add_product'    => array( 
+            "controller" => "product",
+            "method"     => "form",
+            "permission" => "create"
+        ), 
+        'product_list'  => array( 
+            "controller" => "product",
+            "method"     => "index",
+            "permission" => "read"
+        ), 
+ 
      'category'    => array( 
             "controller" => "product",
             "method"     => "category_index",
@@ -27,19 +39,8 @@ $HmvcMenu["product"] = array(
             "controller" => "product",
             "method"     => "unit_index",
             "permission" => "read"
-        ),  
+        ) 
 
-        'add_product'    => array( 
-            "controller" => "product",
-            "method"     => "form",
-            "permission" => "create"
-        ), 
-        'product_list'  => array( 
-            "controller" => "product",
-            "method"     => "index",
-            "permission" => "read"
-        ), 
- 
 );
    
 

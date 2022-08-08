@@ -13,6 +13,10 @@
                         </div>
                     </div>
 
+                    <?php $userdata= $this->session->userdata();
+
+
+                    ?>
                     <div class="panel-body">
                     <?php echo form_open_multipart('purchase_order/purchase_order/form',array('class' => 'form-vertical', 'id' => 'insert_purchase','name' => 'insert_purchase'))?>
                         
@@ -47,17 +51,17 @@
                             <table class="table table-bordered table-hover" id="purchaseTable">
                                 <thead>
                                     <tr>
-                                       <th class="text-center" width="20%"><?php echo display('product_name') ?><i class="text-danger">*</i></th>
-                                            <th class="text-center" width="10%"><?php echo display('product_code') ?></th>
-                                             <th class="text-center" width="15%"><?php echo display('location') ?></th>
-                                            <th class="text-center"><?php echo display('stock_ctn') ?></th>
-                                            <th class="text-center"><?php echo display('quantity') ?> <i class="text-danger">*</i></th>
-                                            <th class="text-center"><?php echo display('um') ?></th>
-                                            <th class="text-center"><?php echo display('price') ?><i class="text-danger">*</i></th>
-                                             <th class="text-center"><?php echo display('discount') ?></th>
-                                            <th class="text-center"><?php echo display('total') ?></th>
+                                       <th class="text-center" width="30%"><?php echo display('product_name') ?><i class="text-danger">*</i></th>
+                                            <!-- <th class="text-center" width="10%"><?php echo display('product_code') ?></th> -->
+                                             <th class="text-center" width="20%"><?php echo display('location') ?></th>
+                                            <th class="text-center" width="15%"><?php echo display('stock_ctn') ?></th>
+                                            <th class="text-center" width="8%><?php echo display('quantity') ?> <i class="text-danger">*</i></th>
+                                            <th class="text-center" width="8%"><?php echo display('um') ?></th>
+                                            <th class="text-center" width="8%"><?php echo display('price') ?><i class="text-danger">*</i></th>
+                                             <th class="text-center" width="8%"><?php echo display('discount') ?></th>
+                                            <th class="text-center" width="8%"><?php echo display('total') ?></th>
                                             
-                                            <th class="text-center"><?php echo display('action') ?></th>
+                                            <th class="text-center" width="8%"><?php echo display('action') ?></th>
                                         </tr>
                                 </thead>
                                 <tbody id="addPurchaseItem">
@@ -66,7 +70,7 @@
                                            <input type="text" name="product_name" required class="form-control product_name productSelection" onkeyup="product_pur_or_list(1);" placeholder="<?php echo display('product_name') ?>" id="product_name_1" tabindex="3" >
                                           
                                         </td>
-                                       <td class="span3 manufacturer">
+                                       <td class="span3 manufacturer" style="display: none;">
                                            <input type="text" name="product_c"  class="form-control  "  placeholder="<?php echo display('product_name') ?>" id="product_c_1" tabindex="4" >
 
                                             <input type="hidden" class="autocomplete_hidden_value product_id_1" name="product_id[]" id="SchoolHiddenId"/>
@@ -74,9 +78,22 @@
                                             <input type="hidden" class="sl" value="1">
                                         </td>
                                         <td class="wt">
-                                                <input type="text" id="location" class="form-control productSelection location" onkeyup="location_autocomplete(1);" placeholder="location" tabindex="5" required />
 
-                                            <input type="hidden" class="autocomplete_hidden_value2 store_id" name="store_id[]" id="Hiddenid" required/>
+                                          
+                                          <select class="form-control" name="store_id[]">
+                                            <?php
+                                            $sid = $userdata['store_id'];
+                                            foreach ($store as $key=>$value): ?>   
+                                            <option value="<?php echo $key ?>" 
+
+                                            <?php 
+                                            if (($sid==$key)&&($userdata['isAdmin']!=1)):
+                                               echo "selected"; endif; ?>
+                                              >
+                                              <?php echo $value; ?></option>
+                                          <?php endforeach; ?>
+                                          </select>
+                                          
                                             </td>
 
                                        <td class="wt">
@@ -233,6 +250,7 @@ function location_autocomplete(sl) {
             csrf_test_name: csrf_test_name
           },
           success: function( data ) {
+          
             response(data);
           }
         });
@@ -242,6 +260,7 @@ function location_autocomplete(sl) {
            return false;
        },
             select: function( event, ui ) {
+
             $(this).parent().parent().find(".autocomplete_hidden_value2").val(ui.item.value); 
             
             var sl = $(this).parent().parent().find(".sl").val(); 
@@ -287,7 +306,7 @@ function location_autocomplete(sl) {
            
 
 
-            newdiv.innerHTML =' <td class="span3"> <input type="text" name="product_name" required class="form-control product_name productSelection" onkeyup="product_pur_or_list('+ count +');" placeholder="<?php echo display('product_name') ?>" id="product_name_'+ count +'" tabindex="'+tab1+'" > </td><td class="span3 supplier"> <input type="text" name="product_c"  class="form-control  "  placeholder="<?php echo display('product_name') ?>" id="product_c_'+ count +'" tabindex="'+tab2+'" > <input type="hidden" class="autocomplete_hidden_value product_id_'+ count +'" name="product_id[]" id="SchoolHiddenId"/>  <input type="hidden" class="sl" value="'+ count +'">  </td>  <td class="wt"><input type="text" id="location" class="form-control productSelection location" tabindex="'+tab3+'" onkeyup="location_autocomplete('+ count +');" placeholder="location" required/><input type="hidden" class="autocomplete_hidden_value2 store_id" name="store_id[]" id="Hiddenid" required/></td><td class="wt"> <input type="text" id="available_quantity_'+ count +'" class="form-control text-right stock_ctn_'+ count +'" placeholder="0.00" readonly/> </td><td class="text-right"><input type="text" name="product_quantity[]" tabindex="'+tab4+'" required  id="quantity_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + '),checkqty(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="0.00" value="" min="0"/>  </td>   <td class="text-right"><input type="text" name="um[]" id="um_' + count + '" class="form-control text-center" tabindex="8" required="required"/></td><td class="test"><input type="text" name="product_rate[]" required onkeyup="calculate_store('+ count +'),checkqty(' + count + ');" onchange="calculate_store('+ count +');" id="product_rate_'+ count +'" class="form-control product_rate_'+ count +' text-right" placeholder="0.00" value="" min="0" tabindex="'+tab5+'"/></td> <td class="test"><input type="text" name="discount[]" onkeyup="calculate_store('+ count +'),checkqty('+ count +');" onchange="calculate_store('+ count +');" id="discount_'+ count +'" class="form-control discount_'+ count +' text-right" placeholder="0.00" value="" min="0" tabindex="9"/> </td><td class="text-right"><input class="form-control total_price text-right total_price_'+ count +'" type="text" name="total_price[]" id="total_price_'+ count +'" value="0.00" readonly="readonly" /> </td><td><button style="text-align: right;" class="btn btn-danger red" type="button" value="<?php echo display('delete')?>" onclick="deleteRow(this)"tabindex="'+tab6+'"><i class="fa fa-trash-o"></i></button></td>';
+            newdiv.innerHTML =' <td class="span3"> <input type="text" name="product_name" required class="form-control product_name productSelection" onkeyup="product_pur_or_list('+ count +');" placeholder="<?php echo display('product_name') ?>" id="product_name_'+ count +'" tabindex="'+tab1+'" > </td><td style="display:none;" class="span3 supplier"> <input type="text" name="product_c"  class="form-control  "  placeholder="<?php echo display('product_name') ?>" id="product_c_'+ count +'" tabindex="'+tab2+'" > <input type="hidden" class="autocomplete_hidden_value product_id_'+ count +'" name="product_id[]" id="SchoolHiddenId"/>  <input type="hidden" class="sl" value="'+ count +'">  </td>  <td class="wt"> <select class="form-control" name="store_id[]"> <?php $sid = $userdata['store_id']; foreach ($store as $key=>$value): ?><option value="<?php echo $key ?>"<?php if (($sid==$key)&&($userdata['isAdmin']!=1)): echo "selected"; endif; ?> ><?php echo $value; ?></option> <?php endforeach; ?> </select></td><td class="wt"> <input type="text" id="available_quantity_'+ count +'" class="form-control text-right stock_ctn_'+ count +'" placeholder="0.00" readonly/> </td><td class="text-right"><input type="text" name="product_quantity[]" tabindex="'+tab4+'" required  id="quantity_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + '),checkqty(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="0.00" value="" min="0"/>  </td>   <td class="text-right"><input type="text" name="um[]" id="um_' + count + '" class="form-control text-center" tabindex="8" required="required"/></td><td class="test"><input type="text" name="product_rate[]" required onkeyup="calculate_store('+ count +'),checkqty(' + count + ');" onchange="calculate_store('+ count +');" id="product_rate_'+ count +'" class="form-control product_rate_'+ count +' text-right" placeholder="0.00" value="" min="0" tabindex="'+tab5+'"/></td> <td class="test"><input type="text" name="discount[]" onkeyup="calculate_store('+ count +'),checkqty('+ count +');" onchange="calculate_store('+ count +');" id="discount_'+ count +'" class="form-control discount_'+ count +' text-right" placeholder="0.00" value="" min="0" tabindex="9"/> </td><td class="text-right"><input class="form-control total_price text-right total_price_'+ count +'" type="text" name="total_price[]" id="total_price_'+ count +'" value="0.00" readonly="readonly" /> </td><td><button style="text-align: right;" class="btn btn-danger red" type="button" value="<?php echo display('delete')?>" onclick="deleteRow(this)"tabindex="'+tab6+'"><i class="fa fa-trash-o"></i></button></td>';
             document.getElementById(divName).appendChild(newdiv);
             document.getElementById(tabin).focus();
             document.getElementById("add_invoice_item").setAttribute("tabindex", tab5);

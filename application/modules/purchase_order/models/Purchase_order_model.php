@@ -350,12 +350,20 @@ class Purchase_order_model extends CI_Model {
 //ajax loction data
 	//Product search item
 	public function search_location($location){
-		$query=$this->db->select('*')
+		$this->db->select('*')
 				->from('store')
-				->where('isactive',1)
-				->like('store_name', $location, 'after')
-				->group_by('store_id')
-				->get();
+				->where('isactive',1);
+		
+		//if not admin, return own store
+				
+	   if(!$this->session->userdata()['isAdmin']){
+		    $this->db->where('store_id',$this->session->userdata()['store_id']);
+		}else{
+			$this->db->like('store_name', $location, 'after');
+		}
+
+		$query = $this->db->group_by('store_id')->get();
+
 		if ($query->num_rows() > 0) {
 			return $query->result_array();	
 		}

@@ -30441,3 +30441,283 @@ CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@ca
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-07 08:31:33', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-0001', '1', '2', '2022-08-07', '1');
+INSERT INTO `stock_movement_details` (`movement_id`, `product_id`, `proposal_qty`) VALUES (1, '1', '0');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'create', 'Stockmovment ID :1', '1', '2022-08-07 08:33:46');
+DELETE FROM `stock_movement`
+WHERE `movement_id` = '1';
+DELETE FROM `stock_movement_details`
+WHERE `movement_id` = '1';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'delete', 'Stockmovment ID :1', '1', '2022-08-07 08:33:58');
+DELETE FROM `stock_movement`
+WHERE `movement_id` = '1';
+DELETE FROM `stock_movement_details`
+WHERE `movement_id` = '1';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'delete', 'Stockmovment ID :1', '1', '2022-08-07 08:34:02');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `supplier_id`, `store_id`, `warehouse_id`, `voucher_no`, `receive_by`, `receive_date`) VALUES ('20220807083451', '20220803213739', '1', 0, 0, 1002, '1', '2022-08-07');
+INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES ('20220807083451', '1', '30', '6000', '1', '');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220803213739', 'PO', '2022-08-07', 10107, 'PO Receive Receive No 20220807083451', '180000.00', 0, '1', 1, '1', '2022-08-07', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220803213739', 'PO', '2022-08-07', '5020200008', 'PO received For PO No.20220803213739 Receive No.20220807083451', 0, '180000.00', NULL, 1, '1', '2022-08-07', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order receive', 'create', 'Order Id- total amount-180000.00', '1', '2022-08-07 08:34:51');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_logout` = '2022-08-07 08:40:58'
+WHERE `id` = '1';
+UPDATE `user` SET `last_login` = '2022-08-07 08:41:30', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+DELETE FROM `purchase_order`
+WHERE `po_no` = '20220803213739';
+DELETE FROM `purchase_order_details`
+WHERE `po_no` = '20220803213739';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'delete', 'Orde Id-20220803213739', '1', '2022-08-07 08:41:59');
+UPDATE `user` SET `last_logout` = '2022-08-07 08:50:11'
+WHERE `id` = '1';
+UPDATE `user` SET `last_login` = '2022-08-07 08:50:43', `ip_address` = '::1'
+WHERE `id` = '3';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_logout` = '2022-08-07 08:58:12'
+WHERE `id` = '3';
+UPDATE `user` SET `last_login` = '2022-08-07 08:59:12', `ip_address` = '::1'
+WHERE `id` = '3';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_logout` = '2022-08-07 09:17:39'
+WHERE `id` = '3';
+UPDATE `user` SET `last_login` = '2022-08-07 09:17:48', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `product_brand` (`brand_id`, `brand_name`, `category_id`, `isactive`) VALUES ('', 'Super', '2', 1);
+INSERT INTO `product_brand` (`brand_id`, `brand_name`, `category_id`, `isactive`) VALUES ('', 'Super Tile', '2', 1);
+UPDATE `product_brand` SET `brand_id` = '2', `brand_name` = 'Roofings', `category_id` = '1', `isactive` = 1
+WHERE `brand_id` = '2';
+UPDATE `product_brand` SET `brand_id` = '1', `brand_name` = 'Mukwano', `category_id` = '1', `isactive` = 1
+WHERE `brand_id` = '1';
+UPDATE `product_model` SET `model_id` = '2', `model_name` = '30 Gauge', `category_id` = '2', `isactive` = 1
+WHERE `model_id` = '2';
+UPDATE `product_model` SET `model_id` = '3', `model_name` = '28 Gauge', `category_id` = '2', `isactive` = 1
+WHERE `model_id` = '3';
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'Iron Sheets-Super Tile-30 Gauge', 'pro-1002', NULL, '2', NULL, NULL, '30 Gauge mabaati', '0', '0', '0', '0', '1', '2022-08-07 12:42:03', '', '', 1);
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'Iron Sheets-Super Tile-30 Gauge', 'pro-1002', NULL, '2', NULL, NULL, '', '0', '0', '0', '0', '1', '2022-08-07 12:47:35', '', '', 1);
+UPDATE `product` SET `product_id` = '1', `product_name` = 'Grains-Mukwano-3000', `product_code` = 'pro-1001', `category` = '1', `model` = '1', `unit` = '1', `brand` = '1', `product_details` = 'Mukwano cereal', `purchase_price` = '0', `minimum_price` = '0', `retail_price` = '0', `block_price` = '0', `isactive` = '1'
+WHERE `product_id` IN('1');
+UPDATE `product` SET `product_id` = '1', `product_name` = 'Grains-Mukwano-3000', `product_code` = 'pro-1001', `category` = '1', `model` = '1', `unit` = '1', `brand` = '1', `product_details` = 'Mukwano cereal', `purchase_price` = '100', `minimum_price` = '0', `retail_price` = '0', `block_price` = '0', `isactive` = '1'
+WHERE `product_id` IN('1');
+UPDATE `product` SET `product_id` = '1', `product_name` = 'Grains-Mukwano-3000', `product_code` = 'pro-1001', `category` = '1', `model` = '1', `unit` = '1', `brand` = '1', `product_details` = 'Mukwano cereal', `purchase_price` = '100', `minimum_price` = '100', `retail_price` = '0', `block_price` = '0', `isactive` = '1'
+WHERE `product_id` IN('1');
+UPDATE `product` SET `product_id` = '1', `product_name` = 'Grains-Mukwano-3000', `product_code` = 'pro-1001', `category` = '1', `model` = '1', `unit` = '1', `brand` = '1', `product_details` = 'Mukwano cereal', `purchase_price` = '100', `minimum_price` = '100', `retail_price` = '100', `block_price` = '100', `isactive` = '1'
+WHERE `product_id` IN('1');
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', 'Mukw', '1', 1);
+UPDATE `product` SET `product_id` = '1', `product_name` = 'Iron Sheets-Super Tile-Grains', `product_code` = 'pro-1001', `model` = NULL, `category` = '1', `brand` = NULL, `unit` = NULL, `product_details` = 'Mukwano cereal', `purchase_price` = '100', `block_price` = '100', `minimum_price` = '100', `retail_price` = '100', `createby` = '1', `createdate` = '2022-08-07 12:51:40', `updateby` = '1', `updatedate` = '2022-08-07 12:51:40', `isactive` = 1
+WHERE `product_id` = '1';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'update', 'product ID :1', '1', '2022-08-07 12:51:40');
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'Iron Sheets-Super Tile-30 Gauge', 'pro-1002', '2', NULL, '4', '3', '', '0', '0', '0', '0', '1', '2022-08-07 12:58:22', '', '', 1);
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'Iron Sheets-Super-30 Gauge', 'pro-1002', '2', NULL, '3', '3', '', '0', '0', '0', '0', '1', '2022-08-07 12:58:34', '', '', 1);
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'Iron Sheets-Super Tile-30 Gauge', 'pro-1002', '2', '2', '4', '3', '', '0', '0', '0', '0', '1', '2022-08-07 13:03:58', '', '', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'create', 'product ID :2', '1', '2022-08-07 13:03:58');
+UPDATE `product` SET `product_id` = '1', `product_name` = 'Iron Sheets-Super-30 Gauge', `product_code` = 'pro-1001', `model` = '2', `category` = '2', `brand` = '3', `unit` = '3', `product_details` = 'Mukwano cereal', `purchase_price` = '100', `block_price` = '100', `minimum_price` = '100', `retail_price` = '100', `createby` = '1', `createdate` = '2022-08-07 13:05:26', `updateby` = '1', `updatedate` = '2022-08-07 13:05:26', `isactive` = 1
+WHERE `product_id` = '1';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'update', 'product ID :1', '1', '2022-08-07 13:05:26');
+INSERT INTO `purchase_order` (`po_no`, `supplier_id`, `total_amnt`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`) VALUES ('20220807130740', '1', '120000000.00', 0, 0, '1', '2022-08-07 13:07:40', 0);
+INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES ('652993653175363', '20220807130740', '1', '100', '1200000', '', '1');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'create', 'Orde Id-20220807130740 total amount-120000000.00', '1', '2022-08-07 13:07:41');
+INSERT INTO `purchase_order` (`po_no`, `supplier_id`, `total_amnt`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`) VALUES ('20220807135913', '1', '30000.00', 0, 0, '1', '2022-08-07 13:59:13', 0);
+INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES ('521477282458543', '20220807135913', '1', '30', '1000', '', '1');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'create', 'Orde Id-20220807135913 total amount-30000.00', '1', '2022-08-07 13:59:13');
+UPDATE `purchase_order` SET `po_no` = '20220807135913', `isapproved` = 1
+WHERE `po_no` = '20220807135913';
+INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `supplier_id`, `store_id`, `warehouse_id`, `voucher_no`, `receive_by`, `receive_date`) VALUES ('20220807135941', '20220807135913', '1', 0, 0, 1003, '1', '2022-08-07');
+INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES ('20220807135941', '1', '30', '1000', '1', '');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807135913', 'PO', '2022-08-07', 10107, 'PO Receive Receive No 20220807135941', '30000.00', 0, '1', 1, '1', '2022-08-07', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807135913', 'PO', '2022-08-07', '5020200008', 'PO received For PO No.20220807135913 Receive No.20220807135941', 0, '30000.00', NULL, 1, '1', '2022-08-07', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order receive', 'create', 'Order Id- total amount-30000.00', '1', '2022-08-07 13:59:42');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `product` SET `product_id` = '2', `product_name` = 'Iron Sheets-Super Tile-30 Gauge', `product_code` = 'pro-1002', `category` = '2', `model` = '2', `unit` = '3', `brand` = '4', `product_details` = '', `purchase_price` = '0', `minimum_price` = '0', `retail_price` = '0', `block_price` = '0', `isactive` = '1'
+WHERE `product_id` IN('2');
+UPDATE `product` SET `product_id` = '1', `product_name` = 'Iron Sheets-Super-30 Gauge', `product_code` = 'pro-1001', `category` = '2', `model` = '2', `unit` = '3', `brand` = '3', `product_details` = 'Mukwano cereal', `purchase_price` = '100', `minimum_price` = '100', `retail_price` = '1000', `block_price` = '100', `isactive` = '1'
+WHERE `product_id` IN('1');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `purchase_order` (`po_no`, `supplier_id`, `total_amnt`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`) VALUES ('20220807145331', '1', '10000.00', 0, 0, '1', '2022-08-07 14:53:31', 0);
+INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES ('865317715264154', '20220807145331', '1', '100', '100', '', '2');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'create', 'Orde Id-20220807145331 total amount-10000.00', '1', '2022-08-07 14:53:31');
+INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `supplier_id`, `store_id`, `warehouse_id`, `voucher_no`, `receive_by`, `receive_date`) VALUES ('20220807145345', '20220807145331', '1', 0, 0, 1004, '1', '2022-08-07');
+INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES ('20220807145345', '1', '100', '100', '2', '');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807145331', 'PO', '2022-08-07', 10107, 'PO Receive Receive No 20220807145345', '10000.00', 0, '2', 1, '1', '2022-08-07', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807145331', 'PO', '2022-08-07', '5020200008', 'PO received For PO No.20220807145331 Receive No.20220807145345', 0, '10000.00', NULL, 1, '1', '2022-08-07', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order receive', 'create', 'Order Id- total amount-10000.00', '1', '2022-08-07 14:53:45');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+DELETE FROM `supplier`
+WHERE `supplier_id` = '1';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'delete', 'Supplier ID :1', '1', '2022-08-07 15:00:21');
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES (5020200009, 'sup-1-MS ROOFINGS', 'Account Payable', '3', '1', '1', '0', 'L', '0', '0', '0', '1', '2022-08-07 15:02:26');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_code`, `phone`, `address`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', 'MS ROOFINGS', 'sup-1', '', '', '', '', '', 1, '1', '2022-08-07 15:02:26', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'create', 'Supplier ID :2', '1', '2022-08-07 15:02:26');
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES (5020200010, 'sup-2-MS UGANDA BAATI LTD', 'Account Payable', '3', '1', '1', '0', 'L', '0', '0', '0', '1', '2022-08-07 15:02:55');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_code`, `phone`, `address`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', 'MS UGANDA BAATI LTD', 'sup-2', '', '', '', '', '', 1, '1', '2022-08-07 15:02:55', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'create', 'Supplier ID :3', '1', '2022-08-07 15:02:55');
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES (5020200011, 'sup-3-MS MMI STEEL MILLSLTS/KIBOKO', 'Account Payable', '3', '1', '1', '0', 'L', '0', '0', '0', '1', '2022-08-07 15:03:12');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_code`, `phone`, `address`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', 'MS MMI STEEL MILLSLTS/KIBOKO', 'sup-3', '', '', '', '', '', 1, '1', '2022-08-07 15:03:12', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'create', 'Supplier ID :4', '1', '2022-08-07 15:03:12');
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES (5020200012, 'sup-4-MS GOOD WILL UGANDA LTD', 'Account Payable', '3', '1', '1', '0', 'L', '0', '0', '0', '1', '2022-08-07 15:03:32');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_code`, `phone`, `address`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', 'MS GOOD WILL UGANDA LTD', 'sup-4', '', '', '', '', '', 1, '1', '2022-08-07 15:03:32', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'create', 'Supplier ID :5', '1', '2022-08-07 15:03:32');
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES (5020200013, 'sup-5-MS HIMA CEMENT LTD', 'Account Payable', '3', '1', '1', '0', 'L', '0', '0', '0', '1', '2022-08-07 15:03:45');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_code`, `phone`, `address`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', 'MS HIMA CEMENT LTD', 'sup-5', '', '', '', '', '', 1, '1', '2022-08-07 15:03:45', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'create', 'Supplier ID :6', '1', '2022-08-07 15:03:45');
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES (5020200014, 'sup-6-MS TORORO CEMENT LTD', 'Account Payable', '3', '1', '1', '0', 'L', '0', '0', '0', '1', '2022-08-07 15:03:58');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_code`, `phone`, `address`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', 'MS TORORO CEMENT LTD', 'sup-6', '', '', '', '', '', 1, '1', '2022-08-07 15:03:58', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'create', 'Supplier ID :7', '1', '2022-08-07 15:03:58');
+INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`) VALUES (5020200015, 'sup-7-MS KAMPALA CEMENT LTD', 'Account Payable', '3', '1', '1', '0', 'L', '0', '0', '0', '1', '2022-08-07 15:04:10');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_code`, `phone`, `address`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES ('', 'MS KAMPALA CEMENT LTD', 'sup-7', '', '', '', '', '', 1, '1', '2022-08-07 15:04:10', '', '');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Supplier', 'create', 'Supplier ID :8', '1', '2022-08-07 15:04:10');
+DELETE FROM `product_category`
+WHERE `category_id` = '1';
+UPDATE `product_category` SET `category_id` = '2', `category_name` = 'IRON SHEET', `isactive` = 1
+WHERE `category_id` = '2';
+INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`) VALUES ('', 'IRON BARS', 1);
+INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`) VALUES ('', 'RIDGES', 1);
+INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`) VALUES ('', 'VALLEYS', 1);
+INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`) VALUES ('', 'TILES', 1);
+INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`) VALUES ('', 'CEMENT', 1);
+DELETE FROM `product_model`
+WHERE `model_id` = '5';
+DELETE FROM `product_model`
+WHERE `model_id` = '2';
+DELETE FROM `product_model`
+WHERE `model_id` = '3';
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', '28', '2', 1);
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', '30', '2', 1);
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', '28', '4', 1);
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', '28', '5', 1);
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', 'R8', '3', 1);
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', 'Y10', '3', 1);
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', 'Y12', '3', 1);
+INSERT INTO `product_model` (`model_id`, `model_name`, `category_id`, `isactive`) VALUES ('', 'Y16', '3', 1);
+DELETE FROM `product_brand`
+WHERE `brand_id` = '1';
+DELETE FROM `product_brand`
+WHERE `brand_id` = '2';
+UPDATE `product_brand` SET `brand_id` = '4', `brand_name` = 'SUPER TILE', `category_id` = '2', `isactive` = 1
+WHERE `brand_id` = '4';
+UPDATE `product_brand` SET `brand_id` = '3', `brand_name` = 'SUPER', `category_id` = '2', `isactive` = 1
+WHERE `brand_id` = '3';
+INSERT INTO `product_brand` (`brand_id`, `brand_name`, `category_id`, `isactive`) VALUES ('', 'ECHO TILE', '2', 1);
+INSERT INTO `product_brand` (`brand_id`, `brand_name`, `category_id`, `isactive`) VALUES ('', 'SUPER ECHO', '2', 1);
+INSERT INTO `product_brand` (`brand_id`, `brand_name`, `category_id`, `isactive`) VALUES ('', 'NORMAL CORRUGATION', '2', 1);
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'IRON SHEET-SUPER TILE-28', 'pro-1001', '6', '2', '4', '3', '', '0', '0', '0', '0', '1', '2022-08-07 15:32:53', '', '', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'create', 'product ID :3', '1', '2022-08-07 15:32:54');
+INSERT INTO `product_brand` (`brand_id`, `brand_name`, `category_id`, `isactive`) VALUES ('', 'MAXTILE', '2', 1);
+INSERT INTO `purchase_order` (`po_no`, `supplier_id`, `total_amnt`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`) VALUES ('20220807153707', '2', '10000000.00', 0, 0, '1', '2022-08-07 15:37:07', 0);
+INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES ('862651447837354', '20220807153707', '3', '100', '100000', '', '2');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'create', 'Orde Id-20220807153707 total amount-10000000.00', '1', '2022-08-07 15:37:07');
+INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `supplier_id`, `store_id`, `warehouse_id`, `voucher_no`, `receive_by`, `receive_date`) VALUES ('20220807153736', '20220807153707', '2', 0, 0, 1005, '1', '2022-08-07');
+INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES ('20220807153736', '3', '100', '100000', '2', '');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807153707', 'PO', '2022-08-07', 10107, 'PO Receive Receive No 20220807153736', '10000000.00', 0, '2', 1, '1', '2022-08-07', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807153707', 'PO', '2022-08-07', '5020200009', 'PO received For PO No.20220807153707 Receive No.20220807153736', 0, '10000000.00', NULL, 1, '1', '2022-08-07', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order receive', 'create', 'Order Id- total amount-10000000.00', '1', '2022-08-07 15:37:36');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'IRON SHEET-NORMAL CORRUGATION-30', 'pro-1002', '7', '2', '7', '3', '', '0', '0', '0', '0', '1', '2022-08-07 15:40:45', '', '', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'create', 'product ID :4', '1', '2022-08-07 15:40:45');
+INSERT INTO `purchase_order` (`po_no`, `supplier_id`, `total_amnt`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`) VALUES ('20220807154155', '3', '9000000.00', 0, 0, '1', '2022-08-07 15:41:55', 0);
+INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES ('112817497946542', '20220807154155', '4', '90', '100000', '', '2');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'create', 'Orde Id-20220807154155 total amount-9000000.00', '1', '2022-08-07 15:41:55');
+INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `supplier_id`, `store_id`, `warehouse_id`, `voucher_no`, `receive_by`, `receive_date`) VALUES ('20220807154227', '20220807154155', '3', 0, 0, 1006, '1', '2022-08-07');
+INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES ('20220807154227', '4', '70', '100000', '2', '');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807154155', 'PO', '2022-08-07', 10107, 'PO Receive Receive No 20220807154227', '7000000.00', 0, '2', 1, '1', '2022-08-07', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807154155', 'PO', '2022-08-07', '5020200010', 'PO received For PO No.20220807154155 Receive No.20220807154227', 0, '7000000.00', NULL, 1, '1', '2022-08-07', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order receive', 'create', 'Order Id- total amount-7000000.00', '1', '2022-08-07 15:42:27');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `sales_parent` (`sale_id`, `invoice_no`, `customer_id`, `sale_type_id`, `store_id`, `salesman`, `sales_date`, `sales_time`, `gurrantor_1`, `gurrantor_2`, `advance_amnt`, `lease_id`, `inquiry_officer`, `remaining_amnt`, `installment_amnt`, `package_price`, `total_amnt`) VALUES ('20220807154352', '1000', '0', '1', NULL, '1', '2022-08-07', '15:43:52', NULL, NULL, '', NULL, NULL, NULL, 0, 0, '3000.00');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 15:43:52', NULL, 'Cash in hand debit For Invoice No1000', '3000.00', 0, NULL, 1, '1', '2022-08-07 15:43:52', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 15:43:52', 403, 'Cost of sale debit For Invoice No1000', NULL, 0, NULL, 1, '1', '2022-08-07 15:43:52', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 15:43:52', 10107, 'Inventory credit For Invoice No1000', 0, NULL, NULL, 1, '1', '2022-08-07 15:43:52', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 15:43:52', NULL, 'Customer debit for Product For Invoice No1000', '3000.00', 0, NULL, 1, '1', '2022-08-07 15:43:52', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 15:43:52', NULL, 'Customer credit for Paid Amount For Invoice No1000', 0, '3000.00', NULL, 1, '1', '2022-08-07 15:43:52', 1);
+INSERT INTO `payment_collection` (`sale_id`, `invoice_no`, `customer_id`, `receive_amnt`, `due_amnt`, `receive_by`, `receive_date`) VALUES ('20220807154352', '1000', '0', '3000.00', NULL, '1', '2022-08-07');
+INSERT INTO `sale_details` (`sale_id`, `product_id`, `qty`, `sell_price`, `sale_type_id`, `lease_unit_price`) VALUES ('20220807154352', '', '30', '100', '1', NULL);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Sales', 'create', 'invoice_no-1000 total amount-3000.00', '1', '2022-08-07 15:43:52');
+UPDATE `user` SET `last_login` = '2022-08-07 19:04:20', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'RIDGES-SUPER TILE-28-Maroon', 'pro-1003', '6', '4', '4', '3', '', '0', '0', '0', '0', '1', '2022-08-07 19:54:25', '', '', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'create', 'product ID :5', '1', '2022-08-07 19:54:25');
+INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `model`, `category`, `brand`, `unit`, `product_details`, `purchase_price`, `block_price`, `minimum_price`, `retail_price`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES ('', 'VALLEYS-SUPER ECHO-30-Black', 'pro-1004', '7', '5', '6', '3', '', '0', '0', '0', '0', '1', '2022-08-07 20:10:54', '', '', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'create', 'product ID :6', '1', '2022-08-07 20:10:54');
+UPDATE `product_category` SET `category_id` = '6', `category_name` = 'TILES', `isactive` = 1
+WHERE `category_id` = '6';
+UPDATE `product_category` SET `category_id` = '6', `category_name` = 'TILES', `brand_label` = 'Type', `model_label` = 'Size', `uses_color` = '0', `isactive` = 1
+WHERE `category_id` = '6';
+UPDATE `product_category` SET `category_id` = '4', `category_name` = 'RIDGES', `brand_label` = 'Brand', `model_label` = 'Model', `uses_color` = '1', `isactive` = 1
+WHERE `category_id` = '4';
+UPDATE `product_category` SET `category_id` = '4', `category_name` = 'RIDGES', `brand_label` = 'Brand', `model_label` = 'Model', `uses_color` = '1', `isactive` = 1
+WHERE `category_id` = '4';
+UPDATE `product_category` SET `category_id` = '4', `category_name` = 'RIDGES', `brand_label` = 'Brand', `model_label` = 'Model', `uses_color` = '1', `parent_category_id` = '2', `isactive` = 1
+WHERE `category_id` = '4';
+UPDATE `product_category` SET `category_id` = '4', `category_name` = 'RIDGES', `brand_label` = 'Brand', `model_label` = 'Model', `uses_color` = '1', `parent_category_id` = '2', `isactive` = 1
+WHERE `category_id` = '4';
+UPDATE `product_category` SET `category_id` = '5', `category_name` = 'VALLEYS', `brand_label` = 'Brand', `model_label` = 'Model', `uses_color` = '1', `parent_category_id` = '2', `isactive` = 1
+WHERE `category_id` = '5';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `purchase_order` (`po_no`, `supplier_id`, `total_amnt`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`) VALUES ('20220807205857', '3', '10000000.00', 0, 0, '1', '2022-08-07 20:58:57', 0);
+INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES ('747926455473834', '20220807205857', '6', '100', '100000', '', '2');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'create', 'Orde Id-20220807205857 total amount-10000000.00', '1', '2022-08-07 20:58:57');
+INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `supplier_id`, `store_id`, `warehouse_id`, `voucher_no`, `receive_by`, `receive_date`) VALUES ('20220807205922', '20220807205857', '3', 0, 0, 1007, '1', '2022-08-07');
+INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES ('20220807205922', '6', '100', '100000', '2', '');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807205857', 'PO', '2022-08-07', 10107, 'PO Receive Receive No 20220807205922', '10000000.00', 0, '2', 1, '1', '2022-08-07', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220807205857', 'PO', '2022-08-07', '5020200010', 'PO received For PO No.20220807205857 Receive No.20220807205922', 0, '10000000.00', NULL, 1, '1', '2022-08-07', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order receive', 'create', 'Order Id- total amount-10000000.00', '1', '2022-08-07 20:59:22');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `sales_parent` (`sale_id`, `invoice_no`, `customer_id`, `sale_type_id`, `store_id`, `salesman`, `sales_date`, `sales_time`, `gurrantor_1`, `gurrantor_2`, `advance_amnt`, `lease_id`, `inquiry_officer`, `remaining_amnt`, `installment_amnt`, `package_price`, `total_amnt`) VALUES ('20220807210643', '1000', '0', '1', NULL, '1', '2022-08-07', '21:06:43', NULL, NULL, '', NULL, NULL, NULL, 0, 0, '3000000.00');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 21:06:43', NULL, 'Cash in hand debit For Invoice No1000', '3000000.00', 0, NULL, 1, '1', '2022-08-07 21:06:43', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 21:06:43', 403, 'Cost of sale debit For Invoice No1000', NULL, 0, NULL, 1, '1', '2022-08-07 21:06:43', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 21:06:43', 10107, 'Inventory credit For Invoice No1000', 0, NULL, NULL, 1, '1', '2022-08-07 21:06:43', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 21:06:43', NULL, 'Customer debit for Product For Invoice No1000', '3000000.00', 0, NULL, 1, '1', '2022-08-07 21:06:43', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('1000', 'CIV', '2022-08-07 21:06:43', NULL, 'Customer credit for Paid Amount For Invoice No1000', 0, '3000000.00', NULL, 1, '1', '2022-08-07 21:06:43', 1);
+INSERT INTO `payment_collection` (`sale_id`, `invoice_no`, `customer_id`, `receive_amnt`, `due_amnt`, `receive_by`, `receive_date`) VALUES ('20220807210643', '1000', '0', '3000000.00', NULL, '1', '2022-08-07');
+INSERT INTO `sale_details` (`sale_id`, `product_id`, `qty`, `sell_price`, `sale_type_id`, `lease_unit_price`) VALUES ('20220807210643', '4', '30', '100000', '1', NULL);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Sales', 'create', 'invoice_no-1000 total amount-3000000.00', '1', '2022-08-07 21:06:43');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-08 21:09:29', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);

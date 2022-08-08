@@ -152,10 +152,10 @@ class Product extends MX_Controller {
 		$this->form_validation->set_rules('product_details', display('product_details')  ,'max_length[200]');
 	    $createby=$this->session->userdata('id');
 		$createdate=date('Y-m-d H:i:s');
-		$model = $this->db->select('*')->from('product_model')->where('model_name',$this->input->post('model_name'))->get()->row();
-		$category = $this->db->select('*')->from('product_category')->where('category_name',$this->input->post('category_name'))->get()->row();
-		$brand = $this->db->select('*')->from('product_brand')->where('brand_name',$this->input->post('brand_name'))->get()->row();
-		$unit = $this->db->select('*')->from('product_unit')->where('unit_name',$this->input->post('unit_name'))->get()->row();
+		$model = $this->db->select('*')->from('product_model')->where('model_id',$this->input->post('model_name'))->get()->row();
+		$category = $this->db->select('*')->from('product_category')->where('category_id',$this->input->post('category_name'))->get()->row();
+		$brand = $this->db->select('*')->from('product_brand')->where('brand_id',$this->input->post('brand_name'))->get()->row();
+		$unit = $this->db->select('*')->from('product_unit')->where('unit_id',$this->input->post('unit_name'))->get()->row();
 		$ids = $this->input->post('product_id');
 		$updatedby = (!empty($ids)?$this->session->userdata('id'):'');
 		$updatdate = (!empty($ids)?date('Y-m-d H:i:s'):'');
@@ -165,7 +165,7 @@ class Product extends MX_Controller {
 			'product_name'    => $this->input->post('product_name'),
 			'product_code'    => $this->input->post('product_code'),
 			'model'           => $model->model_id,
-			'category'        => $this->input->post('category_id'),
+			'category'        => $category->category_id,
 			'brand'           => $brand->brand_id,
 			'unit'            => $unit->unit_id,
 			'product_details' => $this->input->post('product_details'),
@@ -179,6 +179,8 @@ class Product extends MX_Controller {
 			'updatedate'      => $updatdate,
 			'isactive'        => 1, 
 		]; 
+
+		
 		if ($this->form_validation->run()) { 
 
 			if (empty($postData['product_id'])) {
@@ -246,6 +248,8 @@ class Product extends MX_Controller {
 			$data['categories']    = $this->product_model->category_list();
 			$data['brand']       = $this->product_model->brand_dropdown();
 			$data['product_code']= $text.$this->code_generator();
+			$data['colors']      = $this->get_product_colors(0,true);
+
 			$data['page']        = "form";   
 			echo Modules::run('template/layout', $data); 
 		}   
@@ -319,7 +323,11 @@ class Product extends MX_Controller {
 		#-------------------------------#
 	       $data['category']   = (Object) $postData = [
 			'category_id' 	  => $this->input->post('category_id'), 
-			'category_name'    => $this->input->post('category_name'),
+			'category_name'   => $this->input->post('category_name'),
+			'brand_label'     => $this->input->post('brand_label'),
+			'model_label'     => $this->input->post('model_label'),
+			'uses_color'      => $this->input->post('uses_color'),
+			'parent_category_id'   => $this->input->post('parent_category_id'),
 			'isactive'        => 1, 
 		]; 
 		if ($this->form_validation->run()) { 
@@ -351,10 +359,14 @@ class Product extends MX_Controller {
  
 
 		} else { 
+
 			if(!empty($id)) {
 				$data['title'] = display('update');
 				$data['categorys']   = $this->product_model->findById_category($id);
 			}
+
+			$data['all_categorys']   = $this->product_model->category_list();
+
 			$data['module'] = "product";
 			$data['page']   = "categry_form";   
 			echo Modules::run('template/layout', $data); 
@@ -908,7 +920,13 @@ public function delete_unit($id = null)
 
 		public function brand_categories($category_id){
 
+			$category = $this->get_category($category_id);
+
 			$this->db->where('category_id',$category_id);
+			
+			if($category->parent_category_id>0)
+			$this->db->or_where('category_id',$category->parent_category_id);
+
 			$brands = $this->db->get('product_brand');
 
 			echo json_encode($brands->result_array());
@@ -916,7 +934,13 @@ public function delete_unit($id = null)
 
 		public function model_categories($category_id){
 
+			$category = $this->get_category($category_id);
+
 			$this->db->where('category_id',$category_id);
+
+			if($category->parent_category_id>0)
+			$this->db->or_where('category_id',$category->parent_category_id);
+
 			$models = $this->db->get('product_model');
 
 			echo json_encode($models->result_array());
@@ -924,10 +948,62 @@ public function delete_unit($id = null)
 
 		public function unit_categories($category_id){
 
+			$category = $this->get_category($category_id);
+
 			$this->db->where('category_id',$category_id);
+
+			if($category->parent_category_id>0)
+			$this->db->or_where('category_id',$category->parent_category_id);
+
 			$units = $this->db->get('product_unit');
 
 			echo json_encode($units->result_array());
+		}
+
+		public function category_details($category_id){
+			$category = $this->get_category($category_id);
+
+			if($category->parent_category_id>0) //return properties of inherited category
+			$category = $this->get_category($category->parent_category_id);
+
+		    echo json_encode($category);
+		}
+
+       public function product_colors($category_id=0){
+       	    
+       		$data = $this->get_product_colors($category_id,$get_all);
+
+			echo json_encode($data);
+		}
+
+
+		public function get_product_colors($category_id=0,$get_all=false){
+
+			$category = $this->get_category($category_id);
+
+			if($category->parent_category_id>0)
+				$category_id = $category->parent_category_id;
+
+			$category = $this->get_category($category_id);
+
+			if($get_all){
+       	    	$data = $this->db->get('product_colors')->result();
+       	    }else{
+
+	       	    if(!$category->uses_color){
+	       	    	$data = [];
+	       	    }else{
+	       	    	$data = $this->db->get('product_colors')->result();
+	       	    }
+       	   }
+
+       	   return $data;
+		}
+
+		public function get_category($category_id){
+
+			$this->db->where('category_id',$category_id);
+			return $this->db->get('product_category')->row();
 		}
 
 

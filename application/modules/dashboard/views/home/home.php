@@ -2,7 +2,7 @@
   <link href="<?php echo base_url('assets/css/Ionicons/css/ionicons.min.css') ?>" rel="stylesheet" type="text/css"/>
   <link href="<?php echo base_url('assets/css/counterIsa.css') ?>" rel="stylesheet" type="text/css"/>
 <div class="row">
- <section class="content">
+ <section class="content" >
       <!-- Small boxes (Stat box) -->
       <div class="row">
          <div class="col-lg-3 col-xs-6">
@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <?php */ ?>
+        
 
 
          <div class="col-lg-3 col-xs-6">
@@ -68,6 +68,7 @@
             <a href="#" class="small-box-footer"><?php echo display('qty')?>/<?php echo display('value')?></a>
           </div>
         </div>
+     
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-primary">
@@ -82,6 +83,9 @@
             <a href="#" class="small-box-footer"><?php echo display('total')?> / <?php echo display('active')?></a>
           </div>
         </div>
+
+        <?php */ ?>
+
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
@@ -130,6 +134,21 @@
 
         
         </div>
+
+
+   <div class="col-sm-12 col-md-12">
+        <div class="panel panel-bd lobidrag">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <span><?php echo display('monthly_sales_performance')?></span>
+                </div>
+            </div>
+            <div class="panel-body">                                    
+                <canvas id="lineChart" height="100"></canvas>                                    
+            </div>
+        </div>
+    </div>
+    
     </section>
     
     <!-- Bar Chart -->
@@ -163,18 +182,6 @@
    
     
 
-   <div class="col-sm-12 col-md-12">
-                            <div class="panel panel-bd lobidrag">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <span><?php echo display('monthly_sales_performance')?></span>
-                                    </div>
-                                </div>
-                                <div class="panel-body">                                    
-                                    <canvas id="lineChart" height="100"></canvas>                                    
-                                </div>
-                            </div>
-                        </div>
 </div>
  
 

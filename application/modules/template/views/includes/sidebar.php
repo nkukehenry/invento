@@ -32,7 +32,9 @@
         $path = 'application/modules/';
         $map  = directory_map($path);
         $HmvcMenu   = array();
-        $ignoreMenu = ['lease','return','accounts','receiving'];
+
+        $ignoreMenu = ['lease','return','accounts','orderreceive','payment'];
+
         if (is_array($map) && sizeof($map) > 0)
         foreach ($map as $key => $value) {
             $menu = str_replace("\\", '/', $path.$key.'config/menu.php'); 
@@ -127,6 +129,7 @@
                 <li><a href="<?php echo base_url('dashboard/user/user_role_view') ?>"><?php echo display('user_role_list')?></a></li> 
             </ul>
         </li>
+
         <!--<li class="treeview <?php echo (($this->uri->segment(2)=="module")?"active":null) ?>">-->
         <!--    <a href="#">-->
         <!--        <i class="pe-7s-box2"></i><span><?php echo display('module')?></span>-->
@@ -139,6 +142,7 @@
         <!--        <li><a href="<?php echo base_url('dashboard/module/index') ?>"><?php echo display('module_list')?></a></li> -->
         <!--    </ul>-->
         <!--</li>-->
+
         <li class="treeview <?php echo (($this->uri->segment(2)=="role_permission")?"active":null) ?>">
             <a href="#">
                 <i class="ti-lock"></i><span><?php echo display('role_permission')?></span>

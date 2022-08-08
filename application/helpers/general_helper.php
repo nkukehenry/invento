@@ -32,3 +32,18 @@ function tree_from_rows($rows)
     }
     return $tree;
 }
+
+function dd($data){
+
+    print_r($data);
+    exit();
+    
+}
+
+function get_category($category_id){
+
+ $CI =& get_instance();
+ $CI->db->where('category_id',$category_id);
+ return $CI->db->get('product_category')->row();
+ 
+}

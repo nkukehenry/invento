@@ -146,7 +146,7 @@ class Purchase_order extends MX_Controller {
 
 		$list[''] = '';
 		foreach ($product_info as $value) {
-			$json_product[] = array('label'=>$value['product_name'].'('.$value['product_code'].')','value'=>$value['product_id']);
+			$json_product[] = array('label'=>$value['product_name'],'value'=>$value['product_id']);
 		} 
 		
         echo json_encode($json_product);
@@ -162,16 +162,21 @@ class Purchase_order extends MX_Controller {
 
 	//location autocomplete ajax data
 	public function location_search()
-	{	$location 	= $this->input->post('location');
+	{	
+	
+		$location 	= $this->input->post('location');
        	$location_info 	= $this->purchase_order_model->search_location($location);
         $warehouse 	= $this->purchase_order_model->search_warehouse($location);
 		$list[''] = '';
+
 		foreach ($location_info as $value) {
 			$json_location[] = array('label'=>$value['store_name'],'value'=>$value['store_id']);
 		} 
+
 		foreach ($warehouse as $ware) {
 			$json_warehouse[] = array('label'=>$ware['warehouse_name'],'value'=>$ware['warehouse_id']);
 		} 
+
         echo json_encode($json_location);
 	}
 	// reaceive product

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2022 at 10:22 AM
+-- Generation Time: Aug 08, 2022 at 09:10 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -102,7 +102,40 @@ INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user
 (12, 'purchase Receive', 'update', 'Receive Id- total amount-560000.00', '1', '2022-08-03 21:36:53'),
 (13, 'purchase order', 'delete', 'Orde Id-20220803213446', '1', '2022-08-03 21:37:08'),
 (14, 'purchase order', 'create', 'Orde Id-20220803213739 total amount-600000.00', '1', '2022-08-03 21:37:39'),
-(15, 'purchase order receive', 'create', 'Order Id- total amount-180000.00', '1', '2022-08-03 21:39:46');
+(15, 'purchase order receive', 'create', 'Order Id- total amount-180000.00', '1', '2022-08-03 21:39:46'),
+(16, 'Stockmovment', 'create', 'Stockmovment ID :1', '1', '2022-08-07 08:33:46'),
+(17, 'Stockmovment', 'delete', 'Stockmovment ID :1', '1', '2022-08-07 08:33:58'),
+(18, 'Stockmovment', 'delete', 'Stockmovment ID :1', '1', '2022-08-07 08:34:02'),
+(19, 'purchase order receive', 'create', 'Order Id- total amount-180000.00', '1', '2022-08-07 08:34:51'),
+(20, 'purchase order', 'delete', 'Orde Id-20220803213739', '1', '2022-08-07 08:41:59'),
+(21, 'Product', 'update', 'product ID :1', '1', '2022-08-07 12:51:40'),
+(22, 'Product', 'create', 'product ID :2', '1', '2022-08-07 13:03:58'),
+(23, 'Product', 'update', 'product ID :1', '1', '2022-08-07 13:05:26'),
+(24, 'purchase order', 'create', 'Orde Id-20220807130740 total amount-120000000.00', '1', '2022-08-07 13:07:41'),
+(25, 'purchase order', 'create', 'Orde Id-20220807135913 total amount-30000.00', '1', '2022-08-07 13:59:13'),
+(26, 'purchase order receive', 'create', 'Order Id- total amount-30000.00', '1', '2022-08-07 13:59:42'),
+(27, 'purchase order', 'create', 'Orde Id-20220807145331 total amount-10000.00', '1', '2022-08-07 14:53:31'),
+(28, 'purchase order receive', 'create', 'Order Id- total amount-10000.00', '1', '2022-08-07 14:53:45'),
+(29, 'Supplier', 'delete', 'Supplier ID :1', '1', '2022-08-07 15:00:21'),
+(30, 'Supplier', 'create', 'Supplier ID :2', '1', '2022-08-07 15:02:26'),
+(31, 'Supplier', 'create', 'Supplier ID :3', '1', '2022-08-07 15:02:55'),
+(32, 'Supplier', 'create', 'Supplier ID :4', '1', '2022-08-07 15:03:12'),
+(33, 'Supplier', 'create', 'Supplier ID :5', '1', '2022-08-07 15:03:32'),
+(34, 'Supplier', 'create', 'Supplier ID :6', '1', '2022-08-07 15:03:45'),
+(35, 'Supplier', 'create', 'Supplier ID :7', '1', '2022-08-07 15:03:58'),
+(36, 'Supplier', 'create', 'Supplier ID :8', '1', '2022-08-07 15:04:10'),
+(37, 'Product', 'create', 'product ID :3', '1', '2022-08-07 15:32:54'),
+(38, 'purchase order', 'create', 'Orde Id-20220807153707 total amount-10000000.00', '1', '2022-08-07 15:37:07'),
+(39, 'purchase order receive', 'create', 'Order Id- total amount-10000000.00', '1', '2022-08-07 15:37:36'),
+(40, 'Product', 'create', 'product ID :4', '1', '2022-08-07 15:40:45'),
+(41, 'purchase order', 'create', 'Orde Id-20220807154155 total amount-9000000.00', '1', '2022-08-07 15:41:55'),
+(42, 'purchase order receive', 'create', 'Order Id- total amount-7000000.00', '1', '2022-08-07 15:42:27'),
+(43, 'Sales', 'create', 'invoice_no-1000 total amount-3000.00', '1', '2022-08-07 15:43:52'),
+(44, 'Product', 'create', 'product ID :5', '1', '2022-08-07 19:54:25'),
+(45, 'Product', 'create', 'product ID :6', '1', '2022-08-07 20:10:54'),
+(46, 'purchase order', 'create', 'Orde Id-20220807205857 total amount-10000000.00', '1', '2022-08-07 20:58:57'),
+(47, 'purchase order receive', 'create', 'Order Id- total amount-10000000.00', '1', '2022-08-07 20:59:22'),
+(48, 'Sales', 'create', 'invoice_no-1000 total amount-3000000.00', '1', '2022-08-07 21:06:43');
 
 -- --------------------------------------------------------
 
@@ -289,11 +322,18 @@ INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActi
 ('301', 'Store Income', 'Income', 1, 1, 0, 0, 'I', 0, 0, '0.00', '2', '2018-07-07 13:40:37', 'admin', '2015-09-17 17:00:02'),
 ('3020501', 'Students Info. Correction Fee', 'Others (Non-Academic Income)', 3, 1, 1, 0, 'I', 0, 0, '0.00', 'admin', '2015-10-15 17:24:45', '', '2015-10-15 00:00:00'),
 ('1010601', 'Sub Station', 'Electrical Equipment', 3, 1, 1, 0, 'A', 0, 0, '0.00', 'admin', '2016-03-27 10:44:11', '', '2015-10-15 00:00:00'),
+('5020200009', 'sup-1-MS ROOFINGS', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-08-07 15:02:26', '', '0000-00-00 00:00:00'),
 ('5020200008', 'sup-1-Mukawno', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-07-31 21:49:48', '', '0000-00-00 00:00:00'),
+('5020200010', 'sup-2-MS UGANDA BAATI LTD', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-08-07 15:02:55', '', '0000-00-00 00:00:00'),
+('5020200011', 'sup-3-MS MMI STEEL MILLSLTS/KIBOKO', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-08-07 15:03:12', '', '0000-00-00 00:00:00'),
 ('5020200006', 'sup-4-Eco star', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '2', '2018-07-27 10:15:58', '', '2015-10-15 00:00:00'),
+('5020200012', 'sup-4-MS GOOD WILL UGANDA LTD', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-08-07 15:03:32', '', '0000-00-00 00:00:00'),
+('5020200013', 'sup-5-MS HIMA CEMENT LTD', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-08-07 15:03:45', '', '0000-00-00 00:00:00'),
 ('5020200007', 'sup-5-New', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '2', '2018-08-02 16:23:42', '', '2015-10-15 00:00:00'),
 ('5020200002', 'sup-5-Sharif', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '2', '2018-07-12 10:04:21', '', '2015-10-15 00:00:00'),
+('5020200014', 'sup-6-MS TORORO CEMENT LTD', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-08-07 15:03:58', '', '0000-00-00 00:00:00'),
 ('5020200003', 'sup-6-Talha', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '2', '2018-07-14 10:16:52', '', '2015-10-15 00:00:00'),
+('5020200015', 'sup-7-MS KAMPALA CEMENT LTD', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '1', '2022-08-07 15:04:10', '', '0000-00-00 00:00:00'),
 ('5020200004', 'sup-7-MS. Tel&Co.', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '2', '2018-07-19 05:06:18', '', '2015-10-15 00:00:00'),
 ('5020200005', 'sup-8-july', 'Account Payable', 3, 1, 1, 0, 'L', 0, 0, '0.00', '2', '2018-07-27 09:41:53', '', '2015-10-15 00:00:00'),
 ('4020704', 'TB Care Expenses', 'Miscellaneous Expenses', 3, 1, 1, 0, 'E', 0, 0, '0.00', 'admin', '2016-10-08 13:03:04', '', '2015-10-15 00:00:00'),
@@ -414,7 +454,13 @@ CREATE TABLE `acc_transaction` (
 
 INSERT INTO `acc_transaction` (`ID`, `VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`, `IsAppove`) VALUES
 (357, '20220731215056', 'PO', '2022-07-31', '10107', 'PO Receive Receive No 20220731215254', '300000.00', '0.00', 2, '1', '1', '2022-07-31 00:00:00', NULL, NULL, '1'),
-(358, '20220803213739', 'PO', '2022-08-03', '10107', 'PO Receive Receive No 20220803213946', '180000.00', '0.00', 1, '1', '1', '2022-08-03 00:00:00', NULL, NULL, '1');
+(358, '20220803213739', 'PO', '2022-08-03', '10107', 'PO Receive Receive No 20220803213946', '180000.00', '0.00', 1, '1', '1', '2022-08-03 00:00:00', NULL, NULL, '1'),
+(359, '20220803213739', 'PO', '2022-08-07', '10107', 'PO Receive Receive No 20220807083451', '180000.00', '0.00', 1, '1', '1', '2022-08-07 00:00:00', NULL, NULL, '1'),
+(360, '20220807135913', 'PO', '2022-08-07', '10107', 'PO Receive Receive No 20220807135941', '30000.00', '0.00', 1, '1', '1', '2022-08-07 00:00:00', NULL, NULL, '1'),
+(361, '20220807145331', 'PO', '2022-08-07', '10107', 'PO Receive Receive No 20220807145345', '10000.00', '0.00', 2, '1', '1', '2022-08-07 00:00:00', NULL, NULL, '1'),
+(362, '20220807153707', 'PO', '2022-08-07', '10107', 'PO Receive Receive No 20220807153736', '10000000.00', '0.00', 2, '1', '1', '2022-08-07 00:00:00', NULL, NULL, '1'),
+(363, '20220807154155', 'PO', '2022-08-07', '10107', 'PO Receive Receive No 20220807154227', '7000000.00', '0.00', 2, '1', '1', '2022-08-07 00:00:00', NULL, NULL, '1'),
+(364, '20220807205857', 'PO', '2022-08-07', '10107', 'PO Receive Receive No 20220807205922', '10000000.00', '0.00', 2, '1', '1', '2022-08-07 00:00:00', NULL, NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -556,7 +602,7 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 (20, 'sent_message', 'Sent Message'),
 (21, 'message_details', 'Message Details'),
 (22, 'new_message', 'New Message'),
-(23, 'receiver_name', 'Receiver Name'),
+(23, 'receiver_name', 'Received By'),
 (24, 'sender_name', 'Sender Name'),
 (25, 'subject', 'Subject'),
 (26, 'message', 'Message'),
@@ -738,7 +784,7 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 (203, 'check_receive', 'Check_receive'),
 (204, 'receive', 'Receive'),
 (205, 'order_qty', 'Order QTY'),
-(206, 'receive_quantity', 'Receive QTY'),
+(206, 'receive_quantity', 'Received QTY'),
 (207, 'order_date', 'Order Date'),
 (208, 'storewarehouse', 'Store/warehouse'),
 (209, 'successfully_approved', 'Successfully Approved'),
@@ -752,7 +798,7 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 (217, 'block_price', 'Block Price'),
 (218, 'a', 'A'),
 (219, 'in', 'In A'),
-(220, 'receive_qty', 'Receive QTY'),
+(220, 'receive_qty', 'Received QTY'),
 (221, 'sale', 'Sales'),
 (222, 'cashsale', 'Cash Sale'),
 (223, 'invoice_id', 'Invoice ID'),
@@ -800,23 +846,23 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 (265, 'model_name', 'Model Name'),
 (266, 'model', 'Model'),
 (267, 'add_model', 'Add Model'),
-(268, 'brand', 'Manufacturer'),
+(268, 'brand', 'Brand'),
 (269, 'brand_name', 'Brand Name'),
 (270, 'brand_list', 'Brand List'),
 (271, 'unit_name', 'Unit Name'),
 (272, 'unit', 'Unit of Measurement'),
 (273, 'add_unit', 'Add Unit'),
 (274, 'unit_list', 'Unit List'),
-(275, 'pur_price', 'Pur Price'),
+(275, 'pur_price', 'Cost Price'),
 (276, 'min_price', 'Min Price'),
-(277, 'retprice', 'Retl Price'),
+(277, 'retprice', 'Retail Price'),
 (278, 'bl_price', 'BL Price'),
 (279, 'cash', 'Cash'),
 (280, 'credit', 'Credit'),
 (281, 'customer_type', 'Customer Type'),
 (282, 'code', 'Code'),
 (283, 'cnic', 'CNIC'),
-(284, 'um', 'U/M'),
+(284, 'um', 'Units'),
 (285, 'contact', 'Contact#'),
 (286, 'package_amount', 'Package Amount'),
 (287, 'recovery_received', 'Recovery Received'),
@@ -965,7 +1011,7 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 (430, 'qty', 'Qty'),
 (431, 'value', 'Value'),
 (432, 'backup', 'Backup'),
-(433, 'receive_date', 'Receive Date'),
+(433, 'receive_date', 'Date Received '),
 (434, 'customer_and_address', 'Customer & Address#'),
 (435, 'gurrantor_and_contact', 'Gurrantor & Contact#'),
 (436, 'lease_date', 'Lease Date'),
@@ -979,7 +1025,11 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 (444, 'amount_equal', 'Amount Equal'),
 (445, 'check_all_product', 'Check All Products'),
 (446, 'check_all_store', 'Check All Stores'),
-(447, 'new_sale', 'New Sale');
+(447, 'new_sale', 'New Sale'),
+(448, 'new_purchase', 'New Purchase'),
+(449, 'purchases_list', 'Purchases list'),
+(450, 'previous_purchases', 'Previous Purchases'),
+(451, 'color_name', 'Color');
 
 -- --------------------------------------------------------
 
@@ -1096,6 +1146,14 @@ CREATE TABLE `payment_collection` (
   `updatedate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `payment_collection`
+--
+
+INSERT INTO `payment_collection` (`id`, `sale_id`, `invoice_no`, `customer_id`, `receive_amnt`, `due_amnt`, `receive_by`, `receive_date`, `is_installment`, `updateby`, `updatedate`) VALUES
+(1, 20220807154352, '1000', 0, 3000, NULL, 1, '2022-08-07', 0, 0, '0000-00-00 00:00:00'),
+(2, 20220807210643, '1000', 0, 3000000, NULL, 1, '2022-08-07', 0, 0, '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -1110,6 +1168,7 @@ CREATE TABLE `product` (
   `brand` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `unit` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `model` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `color_id` int(11) NOT NULL DEFAULT 1,
   `product_details` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `purchase_price` float NOT NULL DEFAULT 0,
   `minimum_price` float NOT NULL DEFAULT 0,
@@ -1126,8 +1185,11 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `category`, `brand`, `unit`, `model`, `product_details`, `purchase_price`, `minimum_price`, `retail_price`, `block_price`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES
-(1, 'pro-1001', 'Grains-Mukwano-3000', '1', '1', '1', '1', 'Mukwano cereal', 0, 0, 0, 0, 1, '1', '2022-07-31 21:49:06', '', '0000-00-00 00:00:00');
+INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `category`, `brand`, `unit`, `model`, `color_id`, `product_details`, `purchase_price`, `minimum_price`, `retail_price`, `block_price`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES
+(3, 'pro-1001', 'IRON SHEET-SUPER TILE-28', '2', '4', '3', '6', 1, '', 0, 0, 0, 0, 1, '1', '2022-08-07 15:32:53', '', '0000-00-00 00:00:00'),
+(4, 'pro-1002', 'IRON SHEET-NORMAL CORRUGATION-30', '2', '7', '3', '7', 1, '', 0, 0, 0, 0, 1, '1', '2022-08-07 15:40:45', '', '0000-00-00 00:00:00'),
+(5, 'pro-1003', 'RIDGES-SUPER TILE-28-Maroon', '4', '4', '3', '6', 1, '', 0, 0, 0, 0, 1, '1', '2022-08-07 19:54:25', '', '0000-00-00 00:00:00'),
+(6, 'pro-1004', 'VALLEYS-SUPER ECHO-30-Black', '5', '6', '3', '7', 1, '', 0, 0, 0, 0, 1, '1', '2022-08-07 20:10:54', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1147,8 +1209,12 @@ CREATE TABLE `product_brand` (
 --
 
 INSERT INTO `product_brand` (`brand_id`, `brand_name`, `isactive`, `category_id`) VALUES
-(1, 'Mukwano', 1, 1),
-(2, 'Roofings', 1, 2);
+(3, 'SUPER', 1, 2),
+(4, 'SUPER TILE', 1, 2),
+(5, 'ECHO TILE', 1, 2),
+(6, 'SUPER ECHO', 1, 2),
+(7, 'NORMAL CORRUGATION', 1, 2),
+(8, 'MAXTILE', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1159,16 +1225,49 @@ INSERT INTO `product_brand` (`brand_id`, `brand_name`, `isactive`, `category_id`
 CREATE TABLE `product_category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `isactive` tinyint(1) NOT NULL
+  `isactive` tinyint(1) NOT NULL,
+  `brand_label` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Brand',
+  `model_label` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Model',
+  `uses_color` int(11) NOT NULL DEFAULT 0,
+  `parent_category_id` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_category`
 --
 
-INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`) VALUES
-(1, 'Grains', 1),
-(2, 'Iron Sheets', 1);
+INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`, `brand_label`, `model_label`, `uses_color`, `parent_category_id`) VALUES
+(2, 'IRON SHEET', 1, 'Type', 'Gauge', 1, 0),
+(3, 'IRON BARS', 1, 'Brand', 'Model', 0, 0),
+(4, 'RIDGES', 1, 'Brand', 'Model', 1, 2),
+(5, 'VALLEYS', 1, 'Brand', 'Model', 1, 2),
+(6, 'TILES', 1, 'Type', 'Size', 0, 0),
+(7, 'CEMENT', 1, 'Brand', 'Model', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_colors`
+--
+
+CREATE TABLE `product_colors` (
+  `color_id` int(11) NOT NULL,
+  `color_name` varchar(50) NOT NULL DEFAULT 'N/A'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_colors`
+--
+
+INSERT INTO `product_colors` (`color_id`, `color_name`) VALUES
+(1, 'N/A'),
+(2, 'Maroon'),
+(3, 'Blue'),
+(4, 'Green'),
+(5, 'Black'),
+(6, 'Black Red'),
+(7, 'Potter Clay'),
+(8, 'Harvest Gold');
 
 -- --------------------------------------------------------
 
@@ -1188,8 +1287,13 @@ CREATE TABLE `product_model` (
 --
 
 INSERT INTO `product_model` (`model_id`, `model_name`, `isactive`, `category_id`) VALUES
-(1, '3000', 1, 0),
-(2, '32 gauge', 1, 2);
+(1, 'N/A', 1, 2),
+(6, '28', 1, 2),
+(7, '30', 1, 2),
+(10, 'R8', 1, 3),
+(11, 'Y10', 1, 3),
+(12, 'Y12', 1, 3),
+(13, 'Y16', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -1209,9 +1313,10 @@ CREATE TABLE `product_unit` (
 --
 
 INSERT INTO `product_unit` (`unit_id`, `unit_name`, `isactive`, `category_id`) VALUES
-(1, 'Kg', 1, 1),
-(2, 'Ltr', 1, 1),
-(3, 'Pieces', 1, 2);
+(1, 'N/A', 1, NULL),
+(3, 'Pieces', 1, 2),
+(4, 'Kg', 1, 1),
+(5, 'Ltr', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1238,7 +1343,12 @@ CREATE TABLE `purchase_order` (
 
 INSERT INTO `purchase_order` (`po_no`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`, `supplier_id`, `total_amnt`, `updateby`, `updatedate`) VALUES
 (20220731215056, 0, 0, '3', '2022-07-31 21:58:46', 1, 1, 300000, NULL, NULL),
-(20220803213739, 0, 0, '1', '2022-08-03 21:37:39', 1, 1, 600000, NULL, NULL);
+(20220807130740, 0, 0, '1', '2022-08-07 13:07:40', 0, 1, 120000000, NULL, NULL),
+(20220807135913, 0, 0, '1', '2022-08-07 13:59:13', 1, 1, 30000, NULL, NULL),
+(20220807145331, 0, 0, '1', '2022-08-07 14:53:31', 0, 1, 10000, NULL, NULL),
+(20220807153707, 0, 0, '1', '2022-08-07 15:37:07', 0, 2, 10000000, NULL, NULL),
+(20220807154155, 0, 0, '1', '2022-08-07 15:41:55', 0, 3, 9000000, NULL, NULL),
+(20220807205857, 0, 0, '1', '2022-08-07 20:58:57', 0, 3, 10000000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1261,9 +1371,14 @@ CREATE TABLE `purchase_order_details` (
 --
 
 INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES
+(112817497946542, 20220807154155, 4, 90, 100000, 0, 2),
 (496921796193467, 20220731215056, 1, 100, 3000, 0, 2),
+(521477282458543, 20220807135913, 1, 30, 1000, 0, 1),
+(652993653175363, 20220807130740, 1, 100, 1200000, 0, 1),
+(747926455473834, 20220807205857, 6, 100, 100000, 0, 2),
 (762698246881112, 0, 1, 100, 5600, 0, 2),
-(779878141122665, 20220803213739, 1, 100, 6000, 0, 1);
+(862651447837354, 20220807153707, 3, 100, 100000, 0, 2),
+(865317715264154, 20220807145331, 1, 100, 100, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -1290,7 +1405,13 @@ CREATE TABLE `purchase_receive` (
 
 INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `store_id`, `receive_by`, `receive_date`, `supplier_id`, `voucher_no`, `warehouse_id`, `updateby`, `updatedate`) VALUES
 (20220731215254, 20220731215056, 0, 1, '2022-07-31', 1, 1000, 0, 0, '0000-00-00 00:00:00'),
-(20220803213946, 20220803213739, 0, 1, '2022-08-03', 1, 1001, 0, 0, '0000-00-00 00:00:00');
+(20220803213946, 20220803213739, 0, 1, '2022-08-03', 1, 1001, 0, 0, '0000-00-00 00:00:00'),
+(20220807083451, 20220803213739, 0, 1, '2022-08-07', 1, 1002, 0, 0, '0000-00-00 00:00:00'),
+(20220807135941, 20220807135913, 0, 1, '2022-08-07', 1, 1003, 0, 0, '0000-00-00 00:00:00'),
+(20220807145345, 20220807145331, 0, 1, '2022-08-07', 1, 1004, 0, 0, '0000-00-00 00:00:00'),
+(20220807153736, 20220807153707, 0, 1, '2022-08-07', 2, 1005, 0, 0, '0000-00-00 00:00:00'),
+(20220807154227, 20220807154155, 0, 1, '2022-08-07', 3, 1006, 0, 0, '0000-00-00 00:00:00'),
+(20220807205922, 20220807205857, 0, 1, '2022-08-07', 3, 1007, 0, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1313,7 +1434,13 @@ CREATE TABLE `purchase_receive_details` (
 
 INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES
 (20220731215254, 1, 100, 3000, 2, 0),
-(20220803213946, 1, 30, 6000, 1, 0);
+(20220803213946, 1, 30, 6000, 1, 0),
+(20220807083451, 1, 30, 6000, 1, 0),
+(20220807135941, 1, 30, 1000, 1, 0),
+(20220807145345, 1, 100, 100, 2, 0),
+(20220807153736, 3, 100, 100000, 2, 0),
+(20220807154227, 4, 70, 100000, 2, 0),
+(20220807205922, 6, 100, 100000, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -1543,6 +1670,14 @@ CREATE TABLE `sale_details` (
   `sale_type_id` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `sale_details`
+--
+
+INSERT INTO `sale_details` (`sale_id`, `product_id`, `qty`, `sell_price`, `lease_unit_price`, `sale_type_id`) VALUES
+(20220807154352, 0, 30, 100, NULL, 1),
+(20220807210643, 4, 30, 100000, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -1766,7 +1901,13 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`supplier_id`, `supplier_code`, `supplier_name`, `address`, `phone`, `email`, `contact_per_name`, `c_p_contact`, `isactive`, `createby`, `createdate`, `updateby`, `updatedate`) VALUES
-(1, 'sup-1', 'Mukawno', 'Kampala', '0755260502', 'sarah@cashawo.com', '0787878887', '', 1, 1, '2022-07-31 21:49:48', 0, '0000-00-00 00:00:00');
+(2, 'sup-1', 'MS ROOFINGS', '', '', '', '', '', 1, 1, '2022-08-07 15:02:26', 0, '0000-00-00 00:00:00'),
+(3, 'sup-2', 'MS UGANDA BAATI LTD', '', '', '', '', '', 1, 1, '2022-08-07 15:02:55', 0, '0000-00-00 00:00:00'),
+(4, 'sup-3', 'MS MMI STEEL MILLSLTS/KIBOKO', '', '', '', '', '', 1, 1, '2022-08-07 15:03:12', 0, '0000-00-00 00:00:00'),
+(5, 'sup-4', 'MS GOOD WILL UGANDA LTD', '', '', '', '', '', 1, 1, '2022-08-07 15:03:32', 0, '0000-00-00 00:00:00'),
+(6, 'sup-5', 'MS HIMA CEMENT LTD', '', '', '', '', '', 1, 1, '2022-08-07 15:03:45', 0, '0000-00-00 00:00:00'),
+(7, 'sup-6', 'MS TORORO CEMENT LTD', '', '', '', '', '', 1, 1, '2022-08-07 15:03:58', 0, '0000-00-00 00:00:00'),
+(8, 'sup-7', 'MS KAMPALA CEMENT LTD', '', '', '', '', '', 1, 1, '2022-08-07 15:04:10', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1824,8 +1965,11 @@ CREATE TABLE `tmp_store_stock` (
 --
 
 INSERT INTO `tmp_store_stock` (`StoreID`, `Stock_Date`, `ProdID`, `InQty`, `OutQty`, `category_id`, `brand_id`, `model_id`, `Remarks`) VALUES
-(1, '2022-08-03 00:00:00', 1, 30, 0, '', '', '', 'purchase_receive'),
-(2, '2022-07-31 00:00:00', 1, 100, 0, '', '', '', 'purchase_receive');
+(1, '2022-08-03 00:00:00', 1, 90, 0, '', '', '', 'purchase_receive'),
+(2, '2022-07-31 00:00:00', 1, 200, 0, '', '', '', 'purchase_receive'),
+(2, '2022-08-07 00:00:00', 3, 100, 0, '', '', '', 'purchase_receive'),
+(2, '2022-08-07 00:00:00', 4, 70, 0, '', '', '', 'purchase_receive'),
+(2, '2022-08-07 00:00:00', 6, 100, 0, '', '', '', 'purchase_receive');
 
 -- --------------------------------------------------------
 
@@ -1868,9 +2012,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `status`, `is_admin`, `store_id`) VALUES
-(1, NULL, NULL, NULL, 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', NULL, NULL, '2022-08-03 19:50:07', '2022-07-31 21:57:24', '::1', 1, 1, NULL),
+(1, NULL, NULL, NULL, 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', NULL, NULL, '2022-08-08 21:09:29', '2022-08-07 08:50:11', '::1', 1, 1, NULL),
 (2, 'Henry', 'May', 'Henry', 'henry@admin.com', '21232f297a57a5a743894a0e4a801fc3', NULL, '', NULL, NULL, NULL, 1, 1, 2),
-(3, 'Henry', 'May', 'hery', 'henry@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, './assets/img/user/Website-Logo.png', '2022-07-31 21:57:46', '2022-07-31 22:13:56', '::1', 1, 1, 2);
+(3, 'Henry', 'May', 'hery', 'henry@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, './assets/img/user/Website-Logo.png', '2022-08-07 08:59:12', '2022-08-07 09:17:39', '::1', 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -2043,6 +2187,12 @@ ALTER TABLE `product_category`
   ADD UNIQUE KEY `category_name_unique` (`category_name`);
 
 --
+-- Indexes for table `product_colors`
+--
+ALTER TABLE `product_colors`
+  ADD PRIMARY KEY (`color_id`);
+
+--
 -- Indexes for table `product_model`
 --
 ALTER TABLE `product_model`
@@ -2200,7 +2350,7 @@ ALTER TABLE `warehouse`
 -- AUTO_INCREMENT for table `accesslog`
 --
 ALTER TABLE `accesslog`
-  MODIFY `sl_no` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `sl_no` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `acc_customer_income`
@@ -2224,7 +2374,7 @@ ALTER TABLE `acc_income_expence`
 -- AUTO_INCREMENT for table `acc_transaction`
 --
 ALTER TABLE `acc_transaction`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=359;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=365;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -2254,7 +2404,7 @@ ALTER TABLE `gurrantor`
 -- AUTO_INCREMENT for table `language`
 --
 ALTER TABLE `language`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=448;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=452;
 
 --
 -- AUTO_INCREMENT for table `lease`
@@ -2290,43 +2440,49 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT for table `payment_collection`
 --
 ALTER TABLE `payment_collection`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_brand`
 --
 ALTER TABLE `product_brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `product_colors`
+--
+ALTER TABLE `product_colors`
+  MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_model`
 --
 ALTER TABLE `product_model`
-  MODIFY `model_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `model_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `product_unit`
 --
 ALTER TABLE `product_unit`
-  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `purchase_order_details`
 --
 ALTER TABLE `purchase_order_details`
-  MODIFY `row_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=779878141122666;
+  MODIFY `row_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=865317715264155;
 
 --
 -- AUTO_INCREMENT for table `purchase_return`
@@ -2380,7 +2536,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `stock_movement`
 --
 ALTER TABLE `stock_movement`
-  MODIFY `movement_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `movement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `store`
@@ -2392,7 +2548,7 @@ ALTER TABLE `store`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `synchronizer_setting`
