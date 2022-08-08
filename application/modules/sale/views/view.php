@@ -32,7 +32,7 @@ function printDiv() {
                  	<div class="col-sm-4" style="width: 33.33333333%; float: left;">                 		
 						
           				<?php $companyinfo = $this->db->select('*')->from('setting')->get()->row();?>
-                        <img src="<?php echo base_url((!empty($companyinfo->logo)?$companyinfo->logo:'assets/img/icons/default.jpg')) ?>" alt="User Image"><br>
+                        <img src="<?php echo base_url((!empty($companyinfo->logo)?$companyinfo->logo:'assets/img/icons/default.jpg')) ?>" alt="User Image"><br><br>
                         <?php echo $companyinfo->title;?>
                         <br>
                         <?php echo $companyinfo->address;?>
@@ -43,19 +43,19 @@ function printDiv() {
               			      
                     </div>
                     <div class="col-sm-4" style="text-align: center; width: 33.33333333%; float: left;">
-                    	 <h2>Sales Invoice</h2>
+                    	 <h2>RECEIPT</h2>
                     </div>
                      <div class="col-sm-4" style="text-align: right; width: 33.33333333%; float: left;">
-                         Invoice NO: <?php echo $sales->invoice_no;?><br>
-    					 Invoice Date: <?php echo $sales->sales_date;?><br> 
-                         Salesman: <?php echo $sales->firstname.' '.$sales->lastname;?>                         
+                         Receipt NO: <?php echo $sales->invoice_no;?><br>
+    					           Receipt Date: <?php echo $sales->sales_date;?><br> 
+                        <!--  Attendant: <?php echo $sales->firstname.' '.$sales->lastname;?>  -->                        
                      </div>
                    </div>
                    </div>
                    <div class="row">  
                    	<div class="form-group">
                         <div class="col-sm-6" style="padding-left: 70px; width: 50%; float: left;">
-                            <h2>Store</h2>
+                            <h2>Shop Details</h2>
                             <?php echo $s_info->store_name;?><br> 
                             <?php if(!empty($s_info->store_phone)){?><i class="fa fa-phone"></i><?php } ?>  <?php echo $s_info->store_phone;?><br> 
                             <?php echo $s_info->store_address;?>
@@ -63,7 +63,7 @@ function printDiv() {
                         
                         <div class="col-sm-6" style="text-align: right; padding-right: 70px;width: 50%; float: right;">
                             <h2> <?php echo display('customer') ?></h2>
-                            <?php echo $sales->customer_name;?> <br>
+                            <?php echo ucwords($sales->customer_name);?> <br>
                            <?php if(!empty($s_info->customer_phone)){?><i class="fa fa-phone"></i><?php } ?> <?php echo $sales->customer_phone;?> 
                             <?php
                                 if($sales->customer_address){
@@ -122,7 +122,7 @@ function printDiv() {
                                     </td>
                                         <td  style="text-align:right;"></td>
                                         <td class="text-center">
-                                           <?php echo $sales->total_amnt;?> 
+                                           <?php echo number_format($sales->total_amnt,2);?> 
                                         </td>
                                     </tr>
                                     <?php if($sales->sale_type_id ==2){?> 

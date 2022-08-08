@@ -21,6 +21,8 @@ class Sale_model extends CI_Model {
 		$installamnt = (!empty($installmentamnt)? $this->input->post('installment_price'):0);
 		$pack_pr= $this->input->post('package_price');
 		$package_price = (!empty($pack_pr)? $this->input->post('package_price'):0);
+
+    $pay_slip_no = $this->input->post('pay_slip_no');
 		
 		#----------sales entry---------------------#
 	   $postparentData = array(
@@ -30,6 +32,7 @@ class Sale_model extends CI_Model {
 			'sale_type_id'	        =>	$this->input->post('sale_type'),
 			'store_id'              =>  $this->session->userdata('store_id'),
 			'salesman'		          =>	$createby,
+      'pay_slip_no'           =>  $pay_slip_no,
 			'sales_date'		        =>	$this->input->post('salesdate'),
 			'sales_time'            =>  date('H:i:s'),
 			'gurrantor_1'           =>  $gurrantor1,
@@ -45,7 +48,7 @@ class Sale_model extends CI_Model {
 
 	 $this->db->insert('sales_parent',$postparentData);
 	  
-        ///print_r( $postparentData);exit;
+   // print_r( $postparentData);exit;
 	// Find the acc COAID for the store	
 	$store_info = $this->db->select('*')->from('store')->where('store_id',$this->session->userdata('store_id'))->get()->row();
 	//print_r($store_info);

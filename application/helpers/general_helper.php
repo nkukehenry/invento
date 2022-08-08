@@ -47,3 +47,10 @@ function get_category($category_id){
  return $CI->db->get('product_category')->row();
  
 }
+
+function get_customer($id){
+
+ $CI =& get_instance();
+ $CI->db->where('customer_id',$id);
+ return $CI->db->get('customer')->row();
+}

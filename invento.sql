@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 08, 2022 at 09:10 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Host: 127.0.0.1:3306
+-- Generation Time: Aug 08, 2022 at 09:44 PM
+-- Server version: 8.0.27
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,6 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `get_store_stock`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_store_stock` (IN `s_id` INT, OUT `store_id` INT, OUT `stock_date` DATE, OUT `prod_id` BIGINT, OUT `in_qty` INT, OUT `out_qty` INT, OUT `rem` VARCHAR(20), OUT `CatID` INT, OUT `BrandID` INT, OUT `ModelID` INT)  BEGIN 
 
   DECLARE done INT DEFAULT FALSE;
@@ -74,14 +75,16 @@ DELIMITER ;
 -- Table structure for table `accesslog`
 --
 
-CREATE TABLE `accesslog` (
-  `sl_no` bigint(20) NOT NULL,
-  `action_page` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `action_done` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `remarks` text COLLATE utf8_unicode_ci NOT NULL,
-  `user_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `entry_date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `accesslog`;
+CREATE TABLE IF NOT EXISTS `accesslog` (
+  `sl_no` bigint NOT NULL AUTO_INCREMENT,
+  `action_page` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `action_done` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `remarks` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `entry_date` datetime DEFAULT NULL,
+  UNIQUE KEY `SerialNo` (`sl_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `accesslog`
@@ -135,7 +138,8 @@ INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user
 (45, 'Product', 'create', 'product ID :6', '1', '2022-08-07 20:10:54'),
 (46, 'purchase order', 'create', 'Orde Id-20220807205857 total amount-10000000.00', '1', '2022-08-07 20:58:57'),
 (47, 'purchase order receive', 'create', 'Order Id- total amount-10000000.00', '1', '2022-08-07 20:59:22'),
-(48, 'Sales', 'create', 'invoice_no-1000 total amount-3000000.00', '1', '2022-08-07 21:06:43');
+(48, 'Sales', 'create', 'invoice_no-1000 total amount-3000000.00', '1', '2022-08-07 21:06:43'),
+(49, 'Customer', 'create', '28', '1', '2022-08-08 20:23:50');
 
 -- --------------------------------------------------------
 
@@ -143,29 +147,32 @@ INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user
 -- Table structure for table `acc_coa`
 --
 
-CREATE TABLE `acc_coa` (
-  `HeadCode` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `HeadName` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `PHeadName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `HeadLevel` int(11) NOT NULL,
+DROP TABLE IF EXISTS `acc_coa`;
+CREATE TABLE IF NOT EXISTS `acc_coa` (
+  `HeadCode` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `HeadName` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `PHeadName` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `HeadLevel` int NOT NULL,
   `IsActive` tinyint(1) NOT NULL,
   `IsTransaction` tinyint(1) NOT NULL,
   `IsGL` tinyint(1) NOT NULL,
-  `HeadType` char(1) COLLATE utf8_unicode_ci NOT NULL,
+  `HeadType` char(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `IsBudget` tinyint(1) NOT NULL,
   `IsDepreciation` tinyint(1) NOT NULL,
   `DepreciationRate` decimal(18,2) NOT NULL,
-  `CreateBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `CreateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `CreateDate` datetime NOT NULL,
-  `UpdateBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `UpdateDate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `UpdateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `UpdateDate` datetime NOT NULL,
+  PRIMARY KEY (`HeadName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `acc_coa`
 --
 
 INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActive`, `IsTransaction`, `IsGL`, `HeadType`, `IsBudget`, `IsDepreciation`, `DepreciationRate`, `CreateBy`, `CreateDate`, `UpdateBy`, `UpdateDate`) VALUES
+('1020301000001', '837883-AGABA ANDREW', 'Customer Receivable', 4, 1, 1, 0, 'A', 0, 0, '0.00', '1', '2022-08-08 20:23:50', '', '0000-00-00 00:00:00'),
 ('4021403', 'AC', 'Repair and Maintenance', 3, 1, 1, 0, 'E', 0, 0, '0.00', 'admin', '2015-10-15 19:33:55', '', '2015-10-15 00:00:00'),
 ('50202', 'Account Payable', 'Current Liabilities', 2, 1, 0, 1, 'L', 0, 0, '0.00', 'admin', '2015-10-15 19:50:43', '', '2015-10-15 00:00:00'),
 ('10203', 'Account Receivable', 'Current Asset', 2, 1, 0, 0, 'A', 0, 0, '0.00', '', '2015-10-15 00:00:00', 'admin', '2013-09-18 15:29:35'),
@@ -365,13 +372,15 @@ INSERT INTO `acc_coa` (`HeadCode`, `HeadName`, `PHeadName`, `HeadLevel`, `IsActi
 -- Table structure for table `acc_customer_income`
 --
 
-CREATE TABLE `acc_customer_income` (
-  `ID` int(11) NOT NULL,
-  `Customer_Id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `VNo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `acc_customer_income`;
+CREATE TABLE IF NOT EXISTS `acc_customer_income` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Customer_Id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `VNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Date` date NOT NULL,
-  `Amount` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Amount` decimal(10,2) NOT NULL,
+  UNIQUE KEY `ID` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -379,15 +388,17 @@ CREATE TABLE `acc_customer_income` (
 -- Table structure for table `acc_glsummarybalance`
 --
 
-CREATE TABLE `acc_glsummarybalance` (
-  `ID` int(11) NOT NULL,
-  `COAID` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+DROP TABLE IF EXISTS `acc_glsummarybalance`;
+CREATE TABLE IF NOT EXISTS `acc_glsummarybalance` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `COAID` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Debit` decimal(18,2) DEFAULT NULL,
   `Credit` decimal(18,2) DEFAULT NULL,
-  `FYear` int(11) DEFAULT NULL,
-  `CreateBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `CreateDate` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `FYear` int DEFAULT NULL,
+  `CreateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CreateDate` datetime DEFAULT NULL,
+  UNIQUE KEY `ID` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -395,21 +406,23 @@ CREATE TABLE `acc_glsummarybalance` (
 -- Table structure for table `acc_income_expence`
 --
 
-CREATE TABLE `acc_income_expence` (
-  `ID` int(11) NOT NULL,
-  `VNo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Student_Id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `acc_income_expence`;
+CREATE TABLE IF NOT EXISTS `acc_income_expence` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `VNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Student_Id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Date` date NOT NULL,
-  `Paymode` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Perpose` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Narration` text COLLATE utf8_unicode_ci NOT NULL,
-  `StoreID` int(11) NOT NULL,
-  `COAID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Paymode` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Perpose` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Narration` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `StoreID` int NOT NULL,
+  `COAID` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Amount` decimal(10,2) NOT NULL,
-  `IsApprove` tinyint(4) NOT NULL,
-  `CreateBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `CreateDate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `IsApprove` tinyint NOT NULL,
+  `CreateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `CreateDate` datetime NOT NULL,
+  UNIQUE KEY `ID` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -417,12 +430,13 @@ CREATE TABLE `acc_income_expence` (
 -- Table structure for table `acc_temp`
 --
 
-CREATE TABLE `acc_temp` (
-  `COAID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `acc_temp`;
+CREATE TABLE IF NOT EXISTS `acc_temp` (
+  `COAID` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Debit` decimal(18,2) NOT NULL,
   `Credit` decimal(18,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -430,23 +444,25 @@ CREATE TABLE `acc_temp` (
 -- Table structure for table `acc_transaction`
 --
 
-CREATE TABLE `acc_transaction` (
-  `ID` int(11) NOT NULL,
-  `VNo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Vtype` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+DROP TABLE IF EXISTS `acc_transaction`;
+CREATE TABLE IF NOT EXISTS `acc_transaction` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `VNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Vtype` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `VDate` date DEFAULT NULL,
-  `COAID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Narration` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `COAID` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Narration` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `Debit` decimal(18,2) DEFAULT NULL,
   `Credit` decimal(18,2) DEFAULT NULL,
-  `StoreID` int(11) NOT NULL,
-  `IsPosted` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `CreateBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `StoreID` int NOT NULL,
+  `IsPosted` char(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CreateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
-  `UpdateBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `UpdateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `UpdateDate` datetime DEFAULT NULL,
-  `IsAppove` char(10) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `IsAppove` char(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  UNIQUE KEY `ID` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=365 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `acc_transaction`
@@ -468,12 +484,13 @@ INSERT INTO `acc_transaction` (`ID`, `VNo`, `Vtype`, `VDate`, `COAID`, `Narratio
 -- Table structure for table `country_state_city`
 --
 
-CREATE TABLE `country_state_city` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `country_state_city`;
+CREATE TABLE IF NOT EXISTS `country_state_city` (
+  `id` int NOT NULL,
   `name` varchar(30) NOT NULL,
   `text` varchar(30) NOT NULL,
-  `parent_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `parent_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `country_state_city`
@@ -488,23 +505,36 @@ INSERT INTO `country_state_city` (`id`, `name`, `text`, `parent_id`) VALUES
 -- Table structure for table `customer`
 --
 
-CREATE TABLE `customer` (
-  `customer_id` int(11) NOT NULL,
-  `customer_code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `store_id` int(11) NOT NULL COMMENT 'This is Store ID',
-  `customer_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_phone` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `customer_cnic` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `job_designation` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `business_address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type` int(11) NOT NULL,
-  `createby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE IF NOT EXISTS `customer` (
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `customer_code` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'This is the file Number',
+  `force_rank` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `unit` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `customer_phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `customer_address` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `store_id` int DEFAULT NULL COMMENT 'This is Store ID',
+  `customer_cnic` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `job_designation` varchar(120) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `business_address` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` int DEFAULT NULL,
+  `createby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `updatedate` datetime NOT NULL,
-  `isactive` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `isactive` tinyint(1) NOT NULL,
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `customer_code_unique` (`customer_code`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customer_id`, `customer_code`, `force_rank`, `unit`, `customer_name`, `customer_phone`, `customer_address`, `store_id`, `customer_cnic`, `job_designation`, `business_address`, `type`, `createby`, `createdate`, `updateby`, `updatedate`, `isactive`) VALUES
+(27, '0', 'IGP', 'Uganda Police', 'OCHOLA OKOTH', '', 'Nagulu', NULL, NULL, NULL, NULL, NULL, '1', '2022-08-08 20:06:26', '', '2022-08-08 20:06:26', 1),
+(28, '837883', 'IGP', 'Uganda Police', 'AGABA ANDREW', '07827881991', 'Naguru', 0, '', '', '', 0, '1', '2022-08-08 20:23:50', '', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -512,12 +542,15 @@ CREATE TABLE `customer` (
 -- Table structure for table `customer_gurrantor_map`
 --
 
-CREATE TABLE `customer_gurrantor_map` (
-  `rowid` bigint(20) NOT NULL,
-  `lease_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `gurrantor_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `customer_gurrantor_map`;
+CREATE TABLE IF NOT EXISTS `customer_gurrantor_map` (
+  `rowid` bigint NOT NULL AUTO_INCREMENT,
+  `lease_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `gurrantor_id` int NOT NULL,
+  PRIMARY KEY (`rowid`),
+  UNIQUE KEY `lease_id` (`lease_id`,`customer_id`,`gurrantor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -525,21 +558,24 @@ CREATE TABLE `customer_gurrantor_map` (
 -- Table structure for table `employee`
 --
 
-CREATE TABLE `employee` (
-  `id` int(11) NOT NULL,
-  `image` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `employeeno` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `store_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `designation` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `CardNo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `department` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE IF NOT EXISTS `employee` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `image` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `employeeno` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `store_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `designation` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `CardNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `department` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `isactive` tinyint(1) NOT NULL,
-  `createby` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `createby` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`employeeno`),
+  UNIQUE KEY `ID` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -547,22 +583,25 @@ CREATE TABLE `employee` (
 -- Table structure for table `gurrantor`
 --
 
-CREATE TABLE `gurrantor` (
-  `gurrantor_id` int(11) NOT NULL,
-  `gurrantor_code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `gurrantor_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `gurrantor_phone` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `gurrantor_address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `gurrantor_cnic` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `job_designation` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `business_address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `createby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `gurrantor`;
+CREATE TABLE IF NOT EXISTS `gurrantor` (
+  `gurrantor_id` int NOT NULL AUTO_INCREMENT,
+  `gurrantor_code` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `store_id` int NOT NULL,
+  `gurrantor_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `gurrantor_phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `gurrantor_address` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `gurrantor_cnic` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `job_designation` varchar(120) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `business_address` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `updatedate` datetime NOT NULL,
-  `isactive` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `isactive` tinyint(1) NOT NULL,
+  PRIMARY KEY (`gurrantor_id`),
+  UNIQUE KEY `gurrantor_code_unique` (`gurrantor_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -570,11 +609,13 @@ CREATE TABLE `gurrantor` (
 -- Table structure for table `language`
 --
 
-CREATE TABLE `language` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `language`;
+CREATE TABLE IF NOT EXISTS `language` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `phrase` varchar(100) NOT NULL,
-  `english` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `english` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=454 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `language`
@@ -1029,7 +1070,9 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 (448, 'new_purchase', 'New Purchase'),
 (449, 'purchases_list', 'Purchases list'),
 (450, 'previous_purchases', 'Previous Purchases'),
-(451, 'color_name', 'Color');
+(451, 'color_name', 'Color'),
+(452, 'upload_customers', 'Upload Customer'),
+(453, 'upload', 'Upload');
 
 -- --------------------------------------------------------
 
@@ -1037,20 +1080,22 @@ INSERT INTO `language` (`id`, `phrase`, `english`) VALUES
 -- Table structure for table `lease`
 --
 
-CREATE TABLE `lease` (
-  `lease_id` int(11) NOT NULL,
-  `package_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `package_name` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `lease_duration` int(11) NOT NULL,
+DROP TABLE IF EXISTS `lease`;
+CREATE TABLE IF NOT EXISTS `lease` (
+  `lease_id` int NOT NULL AUTO_INCREMENT,
+  `package_code` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `package_name` varchar(120) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `lease_duration` int NOT NULL,
   `advance` decimal(2,2) NOT NULL,
   `markup` decimal(2,2) NOT NULL,
-  `grace_period` tinyint(2) NOT NULL COMMENT 'if customer wants to settle within the grace period then he will not be charged for the current month''s lease',
+  `grace_period` tinyint NOT NULL COMMENT 'if customer wants to settle within the grace period then he will not be charged for the current month''s lease',
   `isactive` tinyint(1) NOT NULL,
-  `createby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `createby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`lease_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1058,11 +1103,15 @@ CREATE TABLE `lease` (
 -- Table structure for table `lease_product_map`
 --
 
-CREATE TABLE `lease_product_map` (
-  `row_id` bigint(20) NOT NULL,
-  `lease_id` int(11) NOT NULL,
-  `product_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `lease_product_map`;
+CREATE TABLE IF NOT EXISTS `lease_product_map` (
+  `row_id` bigint NOT NULL AUTO_INCREMENT,
+  `lease_id` int NOT NULL,
+  `product_id` bigint NOT NULL,
+  PRIMARY KEY (`row_id`),
+  KEY `fk_lease_id1` (`lease_id`),
+  KEY `fk_prod_id1` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1070,11 +1119,14 @@ CREATE TABLE `lease_product_map` (
 -- Table structure for table `lease_store_map`
 --
 
-CREATE TABLE `lease_store_map` (
-  `row_id` bigint(20) NOT NULL,
-  `lease_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `lease_store_map`;
+CREATE TABLE IF NOT EXISTS `lease_store_map` (
+  `row_id` bigint NOT NULL AUTO_INCREMENT,
+  `lease_id` int NOT NULL,
+  `store_id` int NOT NULL,
+  PRIMARY KEY (`row_id`),
+  KEY `fk_store_lease_id1` (`lease_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1082,16 +1134,18 @@ CREATE TABLE `lease_store_map` (
 -- Table structure for table `message`
 --
 
-CREATE TABLE `message` (
-  `id` int(11) NOT NULL,
-  `sender_id` int(11) NOT NULL,
-  `receiver_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE IF NOT EXISTS `message` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sender_id` int NOT NULL,
+  `receiver_id` int NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `datetime` datetime NOT NULL,
-  `sender_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unseen, 1=seen, 2=delete',
-  `receiver_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unseen, 1=seen, 2=delete'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `sender_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=unseen, 1=seen, 2=delete',
+  `receiver_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=unseen, 1=seen, 2=delete',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -1099,14 +1153,16 @@ CREATE TABLE `message` (
 -- Table structure for table `module`
 --
 
-CREATE TABLE `module` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `module`;
+CREATE TABLE IF NOT EXISTS `module` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `description` text DEFAULT NULL,
+  `description` text,
   `image` varchar(255) NOT NULL,
   `directory` varchar(100) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `module`
@@ -1132,19 +1188,21 @@ INSERT INTO `module` (`id`, `name`, `description`, `image`, `directory`, `status
 -- Table structure for table `payment_collection`
 --
 
-CREATE TABLE `payment_collection` (
-  `id` bigint(20) NOT NULL,
-  `sale_id` bigint(20) NOT NULL,
-  `invoice_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `payment_collection`;
+CREATE TABLE IF NOT EXISTS `payment_collection` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `sale_id` bigint NOT NULL,
+  `invoice_no` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `customer_id` int NOT NULL,
   `receive_amnt` float NOT NULL,
   `due_amnt` float DEFAULT NULL,
-  `receive_by` int(11) NOT NULL,
+  `receive_by` int NOT NULL,
   `receive_date` date NOT NULL,
-  `is_installment` int(11) NOT NULL DEFAULT 0,
-  `updateby` int(11) NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `is_installment` int NOT NULL DEFAULT '0',
+  `updateby` int NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `payment_collection`
@@ -1160,26 +1218,28 @@ INSERT INTO `payment_collection` (`id`, `sale_id`, `invoice_no`, `customer_id`, 
 -- Table structure for table `product`
 --
 
-CREATE TABLE `product` (
-  `product_id` bigint(20) NOT NULL,
-  `product_code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `product_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `category` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `brand` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `unit` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `model` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `color_id` int(11) NOT NULL DEFAULT 1,
-  `product_details` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `purchase_price` float NOT NULL DEFAULT 0,
-  `minimum_price` float NOT NULL DEFAULT 0,
-  `retail_price` float NOT NULL DEFAULT 0,
-  `block_price` float NOT NULL DEFAULT 0,
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product` (
+  `product_id` bigint NOT NULL AUTO_INCREMENT,
+  `product_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `product_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `category` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `brand` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `unit` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `color_id` int NOT NULL DEFAULT '1',
+  `product_details` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `purchase_price` float NOT NULL DEFAULT '0',
+  `minimum_price` float NOT NULL DEFAULT '0',
+  `retail_price` float NOT NULL DEFAULT '0',
+  `block_price` float NOT NULL DEFAULT '0',
   `isactive` tinyint(1) NOT NULL,
-  `createby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `createby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product`
@@ -1197,12 +1257,15 @@ INSERT INTO `product` (`product_id`, `product_code`, `product_name`, `category`,
 -- Table structure for table `product_brand`
 --
 
-CREATE TABLE `product_brand` (
-  `brand_id` int(11) NOT NULL,
-  `brand_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `product_brand`;
+CREATE TABLE IF NOT EXISTS `product_brand` (
+  `brand_id` int NOT NULL AUTO_INCREMENT,
+  `brand_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `isactive` tinyint(1) NOT NULL,
-  `category_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `category_id` int DEFAULT NULL,
+  PRIMARY KEY (`brand_id`),
+  UNIQUE KEY `brand_name_unique` (`brand_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_brand`
@@ -1222,15 +1285,18 @@ INSERT INTO `product_brand` (`brand_id`, `brand_name`, `isactive`, `category_id`
 -- Table structure for table `product_category`
 --
 
-CREATE TABLE `product_category` (
-  `category_id` int(11) NOT NULL,
-  `category_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `product_category`;
+CREATE TABLE IF NOT EXISTS `product_category` (
+  `category_id` int NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `isactive` tinyint(1) NOT NULL,
-  `brand_label` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Brand',
-  `model_label` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Model',
-  `uses_color` int(11) NOT NULL DEFAULT 0,
-  `parent_category_id` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `brand_label` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Brand',
+  `model_label` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Model',
+  `uses_color` int NOT NULL DEFAULT '0',
+  `parent_category_id` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`category_id`),
+  UNIQUE KEY `category_name_unique` (`category_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_category`
@@ -1250,10 +1316,12 @@ INSERT INTO `product_category` (`category_id`, `category_name`, `isactive`, `bra
 -- Table structure for table `product_colors`
 --
 
-CREATE TABLE `product_colors` (
-  `color_id` int(11) NOT NULL,
-  `color_name` varchar(50) NOT NULL DEFAULT 'N/A'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `product_colors`;
+CREATE TABLE IF NOT EXISTS `product_colors` (
+  `color_id` int NOT NULL AUTO_INCREMENT,
+  `color_name` varchar(50) NOT NULL DEFAULT 'N/A',
+  PRIMARY KEY (`color_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product_colors`
@@ -1275,12 +1343,15 @@ INSERT INTO `product_colors` (`color_id`, `color_name`) VALUES
 -- Table structure for table `product_model`
 --
 
-CREATE TABLE `product_model` (
-  `model_id` int(11) NOT NULL,
-  `model_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `product_model`;
+CREATE TABLE IF NOT EXISTS `product_model` (
+  `model_id` int NOT NULL AUTO_INCREMENT,
+  `model_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `isactive` tinyint(1) NOT NULL,
-  `category_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `category_id` int DEFAULT NULL,
+  PRIMARY KEY (`model_id`),
+  UNIQUE KEY `model_name_unique` (`model_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_model`
@@ -1301,12 +1372,15 @@ INSERT INTO `product_model` (`model_id`, `model_name`, `isactive`, `category_id`
 -- Table structure for table `product_unit`
 --
 
-CREATE TABLE `product_unit` (
-  `unit_id` int(11) NOT NULL,
-  `unit_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `product_unit`;
+CREATE TABLE IF NOT EXISTS `product_unit` (
+  `unit_id` int NOT NULL AUTO_INCREMENT,
+  `unit_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `isactive` tinyint(1) NOT NULL,
-  `category_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `category_id` int DEFAULT NULL,
+  PRIMARY KEY (`unit_id`),
+  UNIQUE KEY `unit_name_unique` (`unit_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_unit`
@@ -1324,18 +1398,20 @@ INSERT INTO `product_unit` (`unit_id`, `unit_name`, `isactive`, `category_id`) V
 -- Table structure for table `purchase_order`
 --
 
-CREATE TABLE `purchase_order` (
-  `po_no` bigint(20) NOT NULL,
-  `store_id` int(11) DEFAULT NULL,
-  `warehouse_id` int(11) DEFAULT NULL,
-  `createby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `purchase_order`;
+CREATE TABLE IF NOT EXISTS `purchase_order` (
+  `po_no` bigint NOT NULL,
+  `store_id` int DEFAULT NULL,
+  `warehouse_id` int DEFAULT NULL,
+  `createby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
   `isapproved` tinyint(1) DEFAULT NULL,
-  `supplier_id` int(11) NOT NULL,
+  `supplier_id` int NOT NULL,
   `total_amnt` float NOT NULL,
-  `updateby` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `updatedate` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updatedate` datetime DEFAULT NULL,
+  PRIMARY KEY (`po_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `purchase_order`
@@ -1356,15 +1432,18 @@ INSERT INTO `purchase_order` (`po_no`, `store_id`, `warehouse_id`, `createby`, `
 -- Table structure for table `purchase_order_details`
 --
 
-CREATE TABLE `purchase_order_details` (
-  `row_id` bigint(20) NOT NULL,
-  `po_no` bigint(20) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `order_qty` int(11) NOT NULL,
+DROP TABLE IF EXISTS `purchase_order_details`;
+CREATE TABLE IF NOT EXISTS `purchase_order_details` (
+  `row_id` bigint NOT NULL AUTO_INCREMENT,
+  `po_no` bigint NOT NULL,
+  `product_id` bigint NOT NULL,
+  `order_qty` int NOT NULL,
   `product_rate` float NOT NULL,
   `discount` float NOT NULL,
-  `store_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `store_id` int NOT NULL,
+  PRIMARY KEY (`row_id`),
+  KEY `fk_po_no1` (`po_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=865317715264155 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `purchase_order_details`
@@ -1386,18 +1465,21 @@ INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qt
 -- Table structure for table `purchase_receive`
 --
 
-CREATE TABLE `purchase_receive` (
-  `receive_id` bigint(20) NOT NULL,
-  `po_no` bigint(20) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `receive_by` int(11) NOT NULL,
+DROP TABLE IF EXISTS `purchase_receive`;
+CREATE TABLE IF NOT EXISTS `purchase_receive` (
+  `receive_id` bigint NOT NULL,
+  `po_no` bigint NOT NULL,
+  `store_id` int NOT NULL,
+  `receive_by` int NOT NULL,
   `receive_date` date NOT NULL,
-  `supplier_id` int(11) NOT NULL,
-  `voucher_no` int(11) NOT NULL,
-  `warehouse_id` int(11) NOT NULL,
-  `updateby` int(11) NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `supplier_id` int NOT NULL,
+  `voucher_no` int NOT NULL,
+  `warehouse_id` int NOT NULL,
+  `updateby` int NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`receive_id`),
+  KEY `fk_po_no` (`po_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `purchase_receive`
@@ -1419,14 +1501,16 @@ INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `store_id`, `receive_by`,
 -- Table structure for table `purchase_receive_details`
 --
 
-CREATE TABLE `purchase_receive_details` (
-  `receive_id` bigint(20) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `receive_qty` int(11) NOT NULL,
+DROP TABLE IF EXISTS `purchase_receive_details`;
+CREATE TABLE IF NOT EXISTS `purchase_receive_details` (
+  `receive_id` bigint NOT NULL,
+  `product_id` bigint NOT NULL,
+  `receive_qty` int NOT NULL,
   `product_rate` float NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `discount` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `store_id` int NOT NULL,
+  `discount` float NOT NULL,
+  KEY `fk_receive_id` (`receive_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `purchase_receive_details`
@@ -1448,21 +1532,23 @@ INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty
 -- Table structure for table `purchase_return`
 --
 
-CREATE TABLE `purchase_return` (
-  `preturn_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `warehouse_id` int(11) NOT NULL,
-  `supplier_id` int(11) NOT NULL,
-  `po_no` bigint(20) NOT NULL,
+DROP TABLE IF EXISTS `purchase_return`;
+CREATE TABLE IF NOT EXISTS `purchase_return` (
+  `preturn_id` int NOT NULL AUTO_INCREMENT,
+  `store_id` int NOT NULL,
+  `warehouse_id` int NOT NULL,
+  `supplier_id` int NOT NULL,
+  `po_no` bigint NOT NULL,
   `return_date` date NOT NULL,
   `totalamount` float NOT NULL,
   `totaldiscount` float NOT NULL,
-  `return_reason` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `createby` int(11) NOT NULL,
+  `return_reason` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createby` int NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` int(11) NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` int NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`preturn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1470,14 +1556,15 @@ CREATE TABLE `purchase_return` (
 -- Table structure for table `purchase_return_details`
 --
 
-CREATE TABLE `purchase_return_details` (
-  `preturn_id` int(11) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `qty` int(11) NOT NULL,
+DROP TABLE IF EXISTS `purchase_return_details`;
+CREATE TABLE IF NOT EXISTS `purchase_return_details` (
+  `preturn_id` int NOT NULL,
+  `product_id` bigint NOT NULL,
+  `qty` int NOT NULL,
   `product_rate` float NOT NULL,
-  `store_id` int(11) NOT NULL,
+  `store_id` int NOT NULL,
   `discount` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1485,22 +1572,23 @@ CREATE TABLE `purchase_return_details` (
 -- Stand-in structure for view `recovery_list`
 -- (See below for the actual view)
 --
-CREATE TABLE `recovery_list` (
+DROP VIEW IF EXISTS `recovery_list`;
+CREATE TABLE IF NOT EXISTS `recovery_list` (
 `over_due` double
-,`store_id` int(11)
+,`store_id` int
 ,`invoice_no` varchar(20)
-,`customer_id` int(11)
+,`customer_id` int
 ,`sales_date` date
-,`lease_id` int(11)
+,`lease_id` int
 ,`installment_amnt` float
-,`gurrantor_1` int(11)
+,`gurrantor_1` int
 ,`remaining_amnt` float
 ,`package_price` float
-,`advance_amnt` int(11)
+,`advance_amnt` int
 ,`receive_amnt` double
 ,`receive_date` date
-,`is_installment` int(11)
-,`lease_duration` int(11)
+,`is_installment` int
+,`lease_duration` int
 ,`advance` decimal(2,2)
 ,`markup` decimal(2,2)
 );
@@ -1511,15 +1599,19 @@ CREATE TABLE `recovery_list` (
 -- Table structure for table `role_permission`
 --
 
-CREATE TABLE `role_permission` (
-  `id` int(11) NOT NULL,
-  `fk_module_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `role_permission`;
+CREATE TABLE IF NOT EXISTS `role_permission` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fk_module_id` int NOT NULL,
+  `role_id` int NOT NULL,
   `create` tinyint(1) DEFAULT NULL,
   `read` tinyint(1) DEFAULT NULL,
   `update` tinyint(1) DEFAULT NULL,
-  `delete` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `delete` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_module_id` (`fk_module_id`),
+  KEY `fk_user_id` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=485 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `role_permission`
@@ -1596,28 +1688,32 @@ INSERT INTO `role_permission` (`id`, `fk_module_id`, `role_id`, `create`, `read`
 -- Table structure for table `sales_parent`
 --
 
-CREATE TABLE `sales_parent` (
-  `sale_id` bigint(20) NOT NULL,
-  `sale_type_id` tinyint(4) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `invoice_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `salesman` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sales_parent`;
+CREATE TABLE IF NOT EXISTS `sales_parent` (
+  `sale_id` bigint NOT NULL AUTO_INCREMENT,
+  `sale_type_id` tinyint NOT NULL,
+  `store_id` int NOT NULL,
+  `invoice_no` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `customer_id` int NOT NULL,
+  `salesman` int NOT NULL,
   `sales_date` date NOT NULL,
   `sales_time` time NOT NULL,
-  `lease_id` int(11) DEFAULT NULL,
-  `gurrantor_1` int(11) DEFAULT NULL,
-  `gurrantor_2` int(11) DEFAULT NULL,
-  `inquiry_officer` int(11) DEFAULT NULL,
+  `lease_id` int DEFAULT NULL,
+  `gurrantor_1` int DEFAULT NULL,
+  `gurrantor_2` int DEFAULT NULL,
+  `inquiry_officer` int DEFAULT NULL,
   `total_amnt` float DEFAULT NULL,
   `package_price` float DEFAULT NULL,
-  `advance_amnt` int(11) DEFAULT NULL,
+  `advance_amnt` int DEFAULT NULL,
   `remaining_amnt` float DEFAULT NULL,
   `installment_amnt` float DEFAULT NULL,
-  `is_lease_settled` tinyint(1) NOT NULL DEFAULT 0,
-  `updateby` int(11) NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `is_lease_settled` tinyint(1) NOT NULL DEFAULT '0',
+  `updateby` int NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`sale_id`),
+  UNIQUE KEY `invoice_no` (`invoice_no`),
+  KEY `sale_type_id` (`sale_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1625,21 +1721,23 @@ CREATE TABLE `sales_parent` (
 -- Table structure for table `sales_return`
 --
 
-CREATE TABLE `sales_return` (
-  `sreturn_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sales_return`;
+CREATE TABLE IF NOT EXISTS `sales_return` (
+  `sreturn_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `store_id` int NOT NULL,
   `sale_type_id` tinyint(1) DEFAULT NULL,
-  `invoice_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `invoice_no` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `return_date` date NOT NULL,
   `totalamount` float NOT NULL,
   `totaldiscount` float NOT NULL,
-  `return_reason` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `createby` int(11) NOT NULL,
+  `return_reason` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createby` int NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` int(11) NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` int NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`sreturn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1647,13 +1745,14 @@ CREATE TABLE `sales_return` (
 -- Table structure for table `sales_return_details`
 --
 
-CREATE TABLE `sales_return_details` (
-  `sreturn_id` int(11) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `qty` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sales_return_details`;
+CREATE TABLE IF NOT EXISTS `sales_return_details` (
+  `sreturn_id` int NOT NULL,
+  `product_id` bigint NOT NULL,
+  `qty` int NOT NULL,
   `product_rate` float NOT NULL,
   `discount` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1661,14 +1760,16 @@ CREATE TABLE `sales_return_details` (
 -- Table structure for table `sale_details`
 --
 
-CREATE TABLE `sale_details` (
-  `sale_id` bigint(20) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sale_details`;
+CREATE TABLE IF NOT EXISTS `sale_details` (
+  `sale_id` bigint NOT NULL,
+  `product_id` int NOT NULL,
+  `qty` int NOT NULL,
   `sell_price` float NOT NULL,
   `lease_unit_price` float DEFAULT NULL,
-  `sale_type_id` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `sale_type_id` tinyint DEFAULT NULL,
+  UNIQUE KEY `sale_id` (`sale_id`,`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sale_details`
@@ -1684,16 +1785,19 @@ INSERT INTO `sale_details` (`sale_id`, `product_id`, `qty`, `sell_price`, `lease
 -- Table structure for table `sale_type`
 --
 
-CREATE TABLE `sale_type` (
-  `sale_type_id` tinyint(4) NOT NULL,
-  `sale_type` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `shortcode` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `createby` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sale_type`;
+CREATE TABLE IF NOT EXISTS `sale_type` (
+  `sale_type_id` tinyint NOT NULL AUTO_INCREMENT,
+  `sale_type` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `shortcode` varchar(3) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createby` int NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` int(11) NOT NULL,
+  `updateby` int NOT NULL,
   `upadatedate` datetime NOT NULL,
-  `isactive` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `isactive` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`sale_type_id`),
+  UNIQUE KEY `shortcode` (`shortcode`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sale_type`
@@ -1710,15 +1814,18 @@ INSERT INTO `sale_type` (`sale_type_id`, `sale_type`, `shortcode`, `createby`, `
 -- Table structure for table `sec_role`
 --
 
-CREATE TABLE `sec_role` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `sec_role`;
+CREATE TABLE IF NOT EXISTS `sec_role` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `isactive` tinyint(1) NOT NULL,
-  `createby` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `createby` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `updatedate` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `updatedate` datetime DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  UNIQUE KEY `ID` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sec_role`
@@ -1739,13 +1846,15 @@ INSERT INTO `sec_role` (`id`, `name`, `isactive`, `createby`, `createdate`, `upd
 -- Table structure for table `sec_userrole`
 --
 
-CREATE TABLE `sec_userrole` (
-  `id` int(11) NOT NULL,
-  `user_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `roleid` int(11) NOT NULL,
-  `createby` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `createdate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `sec_userrole`;
+CREATE TABLE IF NOT EXISTS `sec_userrole` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `roleid` int NOT NULL,
+  `createby` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createdate` datetime NOT NULL,
+  UNIQUE KEY `ID` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sec_userrole`
@@ -1761,18 +1870,20 @@ INSERT INTO `sec_userrole` (`id`, `user_id`, `roleid`, `createby`, `createdate`)
 -- Table structure for table `setting`
 --
 
-CREATE TABLE `setting` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `setting`;
+CREATE TABLE IF NOT EXISTS `setting` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `address` text DEFAULT NULL,
+  `address` text,
   `email` varchar(50) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `logo` varchar(50) DEFAULT NULL,
   `favicon` varchar(100) DEFAULT NULL,
   `language` varchar(100) DEFAULT NULL,
   `site_align` varchar(50) DEFAULT NULL,
-  `footer_text` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `footer_text` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `setting`
@@ -1787,28 +1898,32 @@ INSERT INTO `setting` (`id`, `title`, `address`, `email`, `phone`, `logo`, `favi
 -- Table structure for table `stock_movement`
 --
 
-CREATE TABLE `stock_movement` (
-  `movement_id` int(11) NOT NULL,
-  `proposal_code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `issue_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `for_store_id` int(11) NOT NULL,
-  `from_store_id` int(11) NOT NULL,
-  `for_warehouse` int(11) DEFAULT NULL,
-  `from_warehouse` int(11) DEFAULT NULL,
+DROP TABLE IF EXISTS `stock_movement`;
+CREATE TABLE IF NOT EXISTS `stock_movement` (
+  `movement_id` int NOT NULL AUTO_INCREMENT,
+  `proposal_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `issue_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `for_store_id` int NOT NULL,
+  `from_store_id` int NOT NULL,
+  `for_warehouse` int DEFAULT NULL,
+  `from_warehouse` int DEFAULT NULL,
   `proposal_datetime` date NOT NULL,
-  `proposal_by` int(11) NOT NULL,
+  `proposal_by` int NOT NULL,
   `issue_datetime` date NOT NULL,
-  `issue_by` int(11) NOT NULL,
-  `proposal_remarks` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `issue_remarks` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `receive_by` int(11) NOT NULL,
+  `issue_by` int NOT NULL,
+  `proposal_remarks` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `issue_remarks` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `receive_by` int NOT NULL,
   `receive_datetime` date NOT NULL,
-  `receive_remarks` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_approved` tinyint(1) NOT NULL DEFAULT 0,
+  `receive_remarks` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_approved` tinyint(1) NOT NULL DEFAULT '0',
   `is_proposed` tinyint(1) DEFAULT NULL,
   `is_issued` tinyint(1) DEFAULT NULL,
-  `is_received` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `is_received` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`movement_id`),
+  UNIQUE KEY `proposal_code_unique` (`proposal_code`),
+  UNIQUE KEY `issue_code_unique` (`issue_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1816,13 +1931,15 @@ CREATE TABLE `stock_movement` (
 -- Table structure for table `stock_movement_details`
 --
 
-CREATE TABLE `stock_movement_details` (
-  `movement_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `proposal_qty` int(11) NOT NULL,
-  `issue_qty` int(11) NOT NULL,
-  `received_qty` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `stock_movement_details`;
+CREATE TABLE IF NOT EXISTS `stock_movement_details` (
+  `movement_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `proposal_qty` int NOT NULL,
+  `issue_qty` int NOT NULL,
+  `received_qty` int NOT NULL,
+  KEY `stock_movement_details_ibfk_1` (`movement_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1830,19 +1947,20 @@ CREATE TABLE `stock_movement_details` (
 -- Stand-in structure for view `stoere_overdue`
 -- (See below for the actual view)
 --
-CREATE TABLE `stoere_overdue` (
-`store_id` int(11)
+DROP VIEW IF EXISTS `stoere_overdue`;
+CREATE TABLE IF NOT EXISTS `stoere_overdue` (
+`store_id` int
 ,`invoice_no` varchar(20)
-,`customer_id` int(11)
+,`customer_id` int
 ,`sales_date` date
-,`lease_id` int(11)
+,`lease_id` int
 ,`installment_amnt` float
 ,`package_price` float
-,`advance_amnt` int(11)
+,`advance_amnt` int
 ,`receive_amnt` float
 ,`receive_date` date
-,`is_installment` int(11)
-,`lease_duration` int(11)
+,`is_installment` int
+,`lease_duration` int
 ,`advance` decimal(2,2)
 ,`markup` decimal(2,2)
 );
@@ -1853,18 +1971,20 @@ CREATE TABLE `stoere_overdue` (
 -- Table structure for table `store`
 --
 
-CREATE TABLE `store` (
-  `store_id` int(11) NOT NULL,
-  `store_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `store_code` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `store_phone` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `store_address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `createby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `store`;
+CREATE TABLE IF NOT EXISTS `store` (
+  `store_id` int NOT NULL AUTO_INCREMENT,
+  `store_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `store_code` varchar(3) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `store_phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `store_address` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `updatedate` datetime DEFAULT NULL,
-  `isactive` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `isactive` tinyint(1) NOT NULL,
+  PRIMARY KEY (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `store`
@@ -1880,21 +2000,23 @@ INSERT INTO `store` (`store_id`, `store_name`, `store_code`, `store_phone`, `sto
 -- Table structure for table `supplier`
 --
 
-CREATE TABLE `supplier` (
-  `supplier_id` int(11) NOT NULL,
-  `supplier_code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `supplier_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `contact_per_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `c_p_contact` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `supplier`;
+CREATE TABLE IF NOT EXISTS `supplier` (
+  `supplier_id` int NOT NULL AUTO_INCREMENT,
+  `supplier_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `supplier_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `contact_per_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `c_p_contact` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `isactive` tinyint(1) NOT NULL,
-  `createby` int(11) NOT NULL,
+  `createby` int NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` int(11) NOT NULL,
-  `updatedate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updateby` int NOT NULL,
+  `updatedate` datetime NOT NULL,
+  PRIMARY KEY (`supplier_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `supplier`
@@ -1915,15 +2037,17 @@ INSERT INTO `supplier` (`supplier_id`, `supplier_code`, `supplier_name`, `addres
 -- Table structure for table `synchronizer_setting`
 --
 
-CREATE TABLE `synchronizer_setting` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `synchronizer_setting`;
+CREATE TABLE IF NOT EXISTS `synchronizer_setting` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `hostname` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `port` varchar(10) NOT NULL,
   `debug` varchar(10) NOT NULL,
-  `project_root` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `project_root` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `synchronizer_setting`
@@ -1938,9 +2062,11 @@ INSERT INTO `synchronizer_setting` (`id`, `hostname`, `username`, `password`, `p
 -- Table structure for table `test`
 --
 
-CREATE TABLE `test` (
-  `test_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `test`;
+CREATE TABLE IF NOT EXISTS `test` (
+  `test_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`test_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1948,17 +2074,18 @@ CREATE TABLE `test` (
 -- Table structure for table `tmp_store_stock`
 --
 
-CREATE TABLE `tmp_store_stock` (
-  `StoreID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tmp_store_stock`;
+CREATE TABLE IF NOT EXISTS `tmp_store_stock` (
+  `StoreID` int NOT NULL,
   `Stock_Date` datetime NOT NULL,
-  `ProdID` bigint(20) NOT NULL,
-  `InQty` int(11) NOT NULL,
-  `OutQty` int(11) NOT NULL,
+  `ProdID` bigint NOT NULL,
+  `InQty` int NOT NULL,
+  `OutQty` int NOT NULL,
   `category_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `brand_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `model_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `Remarks` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Remarks` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tmp_store_stock`
@@ -1977,8 +2104,9 @@ INSERT INTO `tmp_store_stock` (`StoreID`, `Stock_Date`, `ProdID`, `InQty`, `OutQ
 -- Table structure for table `treeview_items`
 --
 
-CREATE TABLE `treeview_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `treeview_items`;
+CREATE TABLE IF NOT EXISTS `treeview_items` (
+  `id` int NOT NULL,
   `name` varchar(200) NOT NULL,
   `text` varchar(200) NOT NULL,
   `parent_id` varchar(11) NOT NULL
@@ -1990,11 +2118,12 @@ CREATE TABLE `treeview_items` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(50) DEFAULT NULL,
   `lastname` varchar(50) DEFAULT NULL,
-  `about` text DEFAULT NULL,
+  `about` text,
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
   `password_reset_token` varchar(20) DEFAULT NULL,
@@ -2002,17 +2131,18 @@ CREATE TABLE `user` (
   `last_login` datetime DEFAULT NULL,
   `last_logout` datetime DEFAULT NULL,
   `ip_address` varchar(14) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `is_admin` tinyint(4) NOT NULL DEFAULT 0,
-  `store_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `is_admin` tinyint NOT NULL DEFAULT '0',
+  `store_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `status`, `is_admin`, `store_id`) VALUES
-(1, NULL, NULL, NULL, 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', NULL, NULL, '2022-08-08 21:09:29', '2022-08-07 08:50:11', '::1', 1, 1, NULL),
+(1, NULL, NULL, NULL, 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', NULL, NULL, '2022-08-08 19:20:23', '2022-08-07 08:50:11', '::1', 1, 1, NULL),
 (2, 'Henry', 'May', 'Henry', 'henry@admin.com', '21232f297a57a5a743894a0e4a801fc3', NULL, '', NULL, NULL, NULL, 1, 1, 2),
 (3, 'Henry', 'May', 'hery', 'henry@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL, './assets/img/user/Website-Logo.png', '2022-08-07 08:59:12', '2022-08-07 09:17:39', '::1', 1, 0, 2);
 
@@ -2022,18 +2152,20 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `email`, `password`,
 -- Table structure for table `warehouse`
 --
 
-CREATE TABLE `warehouse` (
-  `warehouse_id` int(11) NOT NULL,
-  `warehouse_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `warehouse_code` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `warehouse_phone` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `warehouse_address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `createby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `warehouse`;
+CREATE TABLE IF NOT EXISTS `warehouse` (
+  `warehouse_id` int NOT NULL AUTO_INCREMENT,
+  `warehouse_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `warehouse_code` varchar(3) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `warehouse_phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `warehouse_address` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `createby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
-  `updateby` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `updatedate` datetime NOT NULL,
-  `isactive` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `isactive` tinyint(1) NOT NULL,
+  PRIMARY KEY (`warehouse_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2042,7 +2174,8 @@ CREATE TABLE `warehouse` (
 --
 DROP TABLE IF EXISTS `recovery_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recovery_list`  AS SELECT `sales_parent`.`remaining_amnt`- sum(`payment_collection`.`receive_amnt`) AS `over_due`, `sales_parent`.`store_id` AS `store_id`, `sales_parent`.`invoice_no` AS `invoice_no`, `sales_parent`.`customer_id` AS `customer_id`, `sales_parent`.`sales_date` AS `sales_date`, `sales_parent`.`lease_id` AS `lease_id`, `sales_parent`.`installment_amnt` AS `installment_amnt`, `sales_parent`.`gurrantor_1` AS `gurrantor_1`, `sales_parent`.`remaining_amnt` AS `remaining_amnt`, `sales_parent`.`package_price` AS `package_price`, `sales_parent`.`advance_amnt` AS `advance_amnt`, sum(`payment_collection`.`receive_amnt`) AS `receive_amnt`, `payment_collection`.`receive_date` AS `receive_date`, `payment_collection`.`is_installment` AS `is_installment`, `lease`.`lease_duration` AS `lease_duration`, `lease`.`advance` AS `advance`, `lease`.`markup` AS `markup` FROM ((`sales_parent` join `payment_collection`) join `lease`) WHERE `sales_parent`.`invoice_no` = `payment_collection`.`invoice_no` AND `sales_parent`.`lease_id` = `lease`.`lease_id` AND `payment_collection`.`is_installment` = 1 GROUP BY `sales_parent`.`invoice_no` ;
+DROP VIEW IF EXISTS `recovery_list`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recovery_list`  AS SELECT (`sales_parent`.`remaining_amnt` - sum(`payment_collection`.`receive_amnt`)) AS `over_due`, `sales_parent`.`store_id` AS `store_id`, `sales_parent`.`invoice_no` AS `invoice_no`, `sales_parent`.`customer_id` AS `customer_id`, `sales_parent`.`sales_date` AS `sales_date`, `sales_parent`.`lease_id` AS `lease_id`, `sales_parent`.`installment_amnt` AS `installment_amnt`, `sales_parent`.`gurrantor_1` AS `gurrantor_1`, `sales_parent`.`remaining_amnt` AS `remaining_amnt`, `sales_parent`.`package_price` AS `package_price`, `sales_parent`.`advance_amnt` AS `advance_amnt`, sum(`payment_collection`.`receive_amnt`) AS `receive_amnt`, `payment_collection`.`receive_date` AS `receive_date`, `payment_collection`.`is_installment` AS `is_installment`, `lease`.`lease_duration` AS `lease_duration`, `lease`.`advance` AS `advance`, `lease`.`markup` AS `markup` FROM ((`sales_parent` join `payment_collection`) join `lease`) WHERE ((`sales_parent`.`invoice_no` = `payment_collection`.`invoice_no`) AND (`sales_parent`.`lease_id` = `lease`.`lease_id`) AND (`payment_collection`.`is_installment` = 1)) GROUP BY `sales_parent`.`invoice_no` ;
 
 -- --------------------------------------------------------
 
@@ -2051,528 +2184,8 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `stoere_overdue`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `stoere_overdue`  AS SELECT `sales_parent`.`store_id` AS `store_id`, `sales_parent`.`invoice_no` AS `invoice_no`, `sales_parent`.`customer_id` AS `customer_id`, `sales_parent`.`sales_date` AS `sales_date`, `sales_parent`.`lease_id` AS `lease_id`, `sales_parent`.`installment_amnt` AS `installment_amnt`, `sales_parent`.`package_price` AS `package_price`, `sales_parent`.`advance_amnt` AS `advance_amnt`, `payment_collection`.`receive_amnt` AS `receive_amnt`, `payment_collection`.`receive_date` AS `receive_date`, `payment_collection`.`is_installment` AS `is_installment`, `lease`.`lease_duration` AS `lease_duration`, `lease`.`advance` AS `advance`, `lease`.`markup` AS `markup` FROM ((`sales_parent` join `payment_collection`) join `lease`) WHERE `sales_parent`.`invoice_no` = `payment_collection`.`invoice_no` AND `sales_parent`.`lease_id` = `lease`.`lease_id` ;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `accesslog`
---
-ALTER TABLE `accesslog`
-  ADD UNIQUE KEY `SerialNo` (`sl_no`);
-
---
--- Indexes for table `acc_coa`
---
-ALTER TABLE `acc_coa`
-  ADD PRIMARY KEY (`HeadName`);
-
---
--- Indexes for table `acc_customer_income`
---
-ALTER TABLE `acc_customer_income`
-  ADD UNIQUE KEY `ID` (`ID`);
-
---
--- Indexes for table `acc_glsummarybalance`
---
-ALTER TABLE `acc_glsummarybalance`
-  ADD UNIQUE KEY `ID` (`ID`);
-
---
--- Indexes for table `acc_income_expence`
---
-ALTER TABLE `acc_income_expence`
-  ADD UNIQUE KEY `ID` (`ID`);
-
---
--- Indexes for table `acc_transaction`
---
-ALTER TABLE `acc_transaction`
-  ADD UNIQUE KEY `ID` (`ID`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`customer_id`),
-  ADD UNIQUE KEY `customer_code_unique` (`customer_code`) USING BTREE;
-
---
--- Indexes for table `customer_gurrantor_map`
---
-ALTER TABLE `customer_gurrantor_map`
-  ADD PRIMARY KEY (`rowid`),
-  ADD UNIQUE KEY `lease_id` (`lease_id`,`customer_id`,`gurrantor_id`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`employeeno`),
-  ADD UNIQUE KEY `ID` (`id`);
-
---
--- Indexes for table `gurrantor`
---
-ALTER TABLE `gurrantor`
-  ADD PRIMARY KEY (`gurrantor_id`),
-  ADD UNIQUE KEY `gurrantor_code_unique` (`gurrantor_code`);
-
---
--- Indexes for table `language`
---
-ALTER TABLE `language`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `lease`
---
-ALTER TABLE `lease`
-  ADD PRIMARY KEY (`lease_id`);
-
---
--- Indexes for table `lease_product_map`
---
-ALTER TABLE `lease_product_map`
-  ADD PRIMARY KEY (`row_id`),
-  ADD KEY `fk_lease_id1` (`lease_id`),
-  ADD KEY `fk_prod_id1` (`product_id`);
-
---
--- Indexes for table `lease_store_map`
---
-ALTER TABLE `lease_store_map`
-  ADD PRIMARY KEY (`row_id`),
-  ADD KEY `fk_store_lease_id1` (`lease_id`);
-
---
--- Indexes for table `message`
---
-ALTER TABLE `message`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `module`
---
-ALTER TABLE `module`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `payment_collection`
---
-ALTER TABLE `payment_collection`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indexes for table `product_brand`
---
-ALTER TABLE `product_brand`
-  ADD PRIMARY KEY (`brand_id`),
-  ADD UNIQUE KEY `brand_name_unique` (`brand_name`);
-
---
--- Indexes for table `product_category`
---
-ALTER TABLE `product_category`
-  ADD PRIMARY KEY (`category_id`),
-  ADD UNIQUE KEY `category_name_unique` (`category_name`);
-
---
--- Indexes for table `product_colors`
---
-ALTER TABLE `product_colors`
-  ADD PRIMARY KEY (`color_id`);
-
---
--- Indexes for table `product_model`
---
-ALTER TABLE `product_model`
-  ADD PRIMARY KEY (`model_id`),
-  ADD UNIQUE KEY `model_name_unique` (`model_name`);
-
---
--- Indexes for table `product_unit`
---
-ALTER TABLE `product_unit`
-  ADD PRIMARY KEY (`unit_id`),
-  ADD UNIQUE KEY `unit_name_unique` (`unit_name`);
-
---
--- Indexes for table `purchase_order`
---
-ALTER TABLE `purchase_order`
-  ADD PRIMARY KEY (`po_no`);
-
---
--- Indexes for table `purchase_order_details`
---
-ALTER TABLE `purchase_order_details`
-  ADD PRIMARY KEY (`row_id`),
-  ADD KEY `fk_po_no1` (`po_no`);
-
---
--- Indexes for table `purchase_receive`
---
-ALTER TABLE `purchase_receive`
-  ADD PRIMARY KEY (`receive_id`),
-  ADD KEY `fk_po_no` (`po_no`);
-
---
--- Indexes for table `purchase_receive_details`
---
-ALTER TABLE `purchase_receive_details`
-  ADD KEY `fk_receive_id` (`receive_id`);
-
---
--- Indexes for table `purchase_return`
---
-ALTER TABLE `purchase_return`
-  ADD PRIMARY KEY (`preturn_id`);
-
---
--- Indexes for table `role_permission`
---
-ALTER TABLE `role_permission`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_module_id` (`fk_module_id`),
-  ADD KEY `fk_user_id` (`role_id`);
-
---
--- Indexes for table `sales_parent`
---
-ALTER TABLE `sales_parent`
-  ADD PRIMARY KEY (`sale_id`),
-  ADD UNIQUE KEY `invoice_no` (`invoice_no`),
-  ADD KEY `sale_type_id` (`sale_type_id`);
-
---
--- Indexes for table `sales_return`
---
-ALTER TABLE `sales_return`
-  ADD PRIMARY KEY (`sreturn_id`);
-
---
--- Indexes for table `sale_details`
---
-ALTER TABLE `sale_details`
-  ADD UNIQUE KEY `sale_id` (`sale_id`,`product_id`);
-
---
--- Indexes for table `sale_type`
---
-ALTER TABLE `sale_type`
-  ADD PRIMARY KEY (`sale_type_id`),
-  ADD UNIQUE KEY `shortcode` (`shortcode`);
-
---
--- Indexes for table `sec_role`
---
-ALTER TABLE `sec_role`
-  ADD PRIMARY KEY (`name`),
-  ADD UNIQUE KEY `ID` (`id`);
-
---
--- Indexes for table `sec_userrole`
---
-ALTER TABLE `sec_userrole`
-  ADD UNIQUE KEY `ID` (`id`);
-
---
--- Indexes for table `setting`
---
-ALTER TABLE `setting`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `stock_movement`
---
-ALTER TABLE `stock_movement`
-  ADD PRIMARY KEY (`movement_id`),
-  ADD UNIQUE KEY `proposal_code_unique` (`proposal_code`),
-  ADD UNIQUE KEY `issue_code_unique` (`issue_code`);
-
---
--- Indexes for table `stock_movement_details`
---
-ALTER TABLE `stock_movement_details`
-  ADD KEY `stock_movement_details_ibfk_1` (`movement_id`);
-
---
--- Indexes for table `store`
---
-ALTER TABLE `store`
-  ADD PRIMARY KEY (`store_id`);
-
---
--- Indexes for table `supplier`
---
-ALTER TABLE `supplier`
-  ADD PRIMARY KEY (`supplier_id`);
-
---
--- Indexes for table `synchronizer_setting`
---
-ALTER TABLE `synchronizer_setting`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `test`
---
-ALTER TABLE `test`
-  ADD PRIMARY KEY (`test_id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `warehouse`
---
-ALTER TABLE `warehouse`
-  ADD PRIMARY KEY (`warehouse_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `accesslog`
---
-ALTER TABLE `accesslog`
-  MODIFY `sl_no` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
---
--- AUTO_INCREMENT for table `acc_customer_income`
---
-ALTER TABLE `acc_customer_income`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `acc_glsummarybalance`
---
-ALTER TABLE `acc_glsummarybalance`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `acc_income_expence`
---
-ALTER TABLE `acc_income_expence`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `acc_transaction`
---
-ALTER TABLE `acc_transaction`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=365;
-
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `customer_gurrantor_map`
---
-ALTER TABLE `customer_gurrantor_map`
-  MODIFY `rowid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `employee`
---
-ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `gurrantor`
---
-ALTER TABLE `gurrantor`
-  MODIFY `gurrantor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
-
---
--- AUTO_INCREMENT for table `language`
---
-ALTER TABLE `language`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=452;
-
---
--- AUTO_INCREMENT for table `lease`
---
-ALTER TABLE `lease`
-  MODIFY `lease_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `lease_product_map`
---
-ALTER TABLE `lease_product_map`
-  MODIFY `row_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `lease_store_map`
---
-ALTER TABLE `lease_store_map`
-  MODIFY `row_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `message`
---
-ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `module`
---
-ALTER TABLE `module`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `payment_collection`
---
-ALTER TABLE `payment_collection`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `product_brand`
---
-ALTER TABLE `product_brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `product_category`
---
-ALTER TABLE `product_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `product_colors`
---
-ALTER TABLE `product_colors`
-  MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `product_model`
---
-ALTER TABLE `product_model`
-  MODIFY `model_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `product_unit`
---
-ALTER TABLE `product_unit`
-  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `purchase_order_details`
---
-ALTER TABLE `purchase_order_details`
-  MODIFY `row_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=865317715264155;
-
---
--- AUTO_INCREMENT for table `purchase_return`
---
-ALTER TABLE `purchase_return`
-  MODIFY `preturn_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `role_permission`
---
-ALTER TABLE `role_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=485;
-
---
--- AUTO_INCREMENT for table `sales_parent`
---
-ALTER TABLE `sales_parent`
-  MODIFY `sale_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `sales_return`
---
-ALTER TABLE `sales_return`
-  MODIFY `sreturn_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `sale_type`
---
-ALTER TABLE `sale_type`
-  MODIFY `sale_type_id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `sec_role`
---
-ALTER TABLE `sec_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `sec_userrole`
---
-ALTER TABLE `sec_userrole`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `setting`
---
-ALTER TABLE `setting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `stock_movement`
---
-ALTER TABLE `stock_movement`
-  MODIFY `movement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `store`
---
-ALTER TABLE `store`
-  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `supplier`
---
-ALTER TABLE `supplier`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `synchronizer_setting`
---
-ALTER TABLE `synchronizer_setting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `test`
---
-ALTER TABLE `test`
-  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `warehouse`
---
-ALTER TABLE `warehouse`
-  MODIFY `warehouse_id` int(11) NOT NULL AUTO_INCREMENT;
+DROP VIEW IF EXISTS `stoere_overdue`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `stoere_overdue`  AS SELECT `sales_parent`.`store_id` AS `store_id`, `sales_parent`.`invoice_no` AS `invoice_no`, `sales_parent`.`customer_id` AS `customer_id`, `sales_parent`.`sales_date` AS `sales_date`, `sales_parent`.`lease_id` AS `lease_id`, `sales_parent`.`installment_amnt` AS `installment_amnt`, `sales_parent`.`package_price` AS `package_price`, `sales_parent`.`advance_amnt` AS `advance_amnt`, `payment_collection`.`receive_amnt` AS `receive_amnt`, `payment_collection`.`receive_date` AS `receive_date`, `payment_collection`.`is_installment` AS `is_installment`, `lease`.`lease_duration` AS `lease_duration`, `lease`.`advance` AS `advance`, `lease`.`markup` AS `markup` FROM ((`sales_parent` join `payment_collection`) join `lease`) WHERE ((`sales_parent`.`invoice_no` = `payment_collection`.`invoice_no`) AND (`sales_parent`.`lease_id` = `lease`.`lease_id`)) ;
 
 --
 -- Constraints for dumped tables
