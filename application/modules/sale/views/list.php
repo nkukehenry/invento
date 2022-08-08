@@ -14,8 +14,10 @@
                         <thead>
                             <tr>
                                 <th><?php echo display('sl_no') ?></th>
-                                <th><?php echo display('invoice_no') ?></th>
+
                                 <th><?php echo display('date') ?></th>
+                                <th><?php echo display('invoice_no') ?></th>
+                                <th>Pay Slip</th>
                                 <th><?php echo display('total') ?></th>
                                 <th><?php echo display('action') ?></th> 
                             </tr>
@@ -23,13 +25,19 @@
                         <tbody>
                             <?php if (!empty($sales)) ?>
                             <?php $sl = 1; ?>
-                            <?php foreach ($sales as $sales) { ?>
+                            <?php foreach ($sales as $sales) {
+
+                            $customer = get_customer($sales->customer_id);
+
+                             ?>
                             <tr>
                                 <td><?php echo $sl++; ?></td>
-                                <td><?php echo $sales->invoice_no; ?></td>
                                 <td><?php echo $sales->sales_date; ?></td>
+                                <td><?php echo $sales->invoice_no; ?></td>
+                                <td><?php echo $sales->pay_slip_no; ?></td>
+                                <td><?php echo $customer->customer_name; ?></td>
                                 
-                                <td><?php echo $sales->total_amnt; ?></td>
+                                <td>UGX <?php echo number_format($sales->total_amnt); ?></td>
                                 <td>
                                 <?php if($this->permission->method('sale','read')->access()): ?>
                                     <a href="<?php echo base_url("sale/sale/view/$sales->sale_id") ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -37,11 +45,11 @@
                                 <?php if($this->permission->method('sale','delete')->access()): ?>
                                     <a href="<?php echo base_url("sale/sale/delete/$sales->sale_id") ?>" onclick="return confirm('<?php echo display("are_you_sure") ?>')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="right" title="Delete "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 <?php endif; ?>
-                                 <?php if($this->permission->method('sale','update')->access()): ?>
+                                 <?php /* if($this->permission->method('sale','update')->access()): ?>
                                    
                                    
                                     <a href="<?php echo base_url("sale/sale/sales_up_form/$sales->sale_id") ?>"  class="btn btn-info btn-sm"  title="Update "><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                <?php endif; ?>
+                                <?php endif;*/ ?>
                                 </td>
                             </tr>
                             <?php } ?> 

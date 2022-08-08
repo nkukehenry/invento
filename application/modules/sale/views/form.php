@@ -32,12 +32,12 @@
 
                     <div class="panel-body">
 
-<ul class="nav nav-tabs">
+<!-- <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#cashsale"><?php echo display('cashsale'); ?></a></li>
   <li><a data-toggle="tab" href="#creditsale"><?php echo display('creditsale'); ?></a></li>
   <li><a data-toggle="tab" href="#leasesale"><?php echo display('leasesale'); ?></a></li>
 </ul>
-<br>
+<br> -->
 <br>
 
 <div class="tab-content">
@@ -48,21 +48,17 @@
                         <div class="row" id="invoice_id">
                             <div class="col-sm-6">
                                <div class="form-group row">
-                                    <label for="invoice_id" class="col-sm-3 col-form-label"><?php echo display('invoice_id') ?>
-                                       
-                                    </label>
+                                    <label for="invoice_id" class="col-sm-3 col-form-label"><?php echo display('invoice_id') ?>: </label>
                                     <div class="col-sm-9">
-                                     <input type="text" name="invoice_no" value="<?php echo $invoice_no ?>" class="form-control" placeholder="Invoice ID" readonly>
+                                     <input type="text" name="invoice_no" value="<?php echo $invoice_no ?>" class="form-control" placeholder="Receipt No" readonly>
                                     </div>
-
                                    
                                 </div> 
                             </div>
 
                              <div class="col-sm-6">
                                 <div class="form-group row">
-                                    <label for="customer_name" class="col-sm-3 col-form-label"><?php echo display('customer_name') ?>
-                                    </label>
+                                    <label for="customer_name" class="col-sm-3 col-form-label">Customer: </label>
                                     <div class="col-sm-6">
                                         <?php echo form_dropdown('customer_id',$customer,(!empty($customerr->customer_id)?$customer->customer_id:null), 'class="form-control" id="customer_id" required') ?>
                                     </div>
@@ -79,22 +75,18 @@
                     <div class="row" id="Sales_man">
                             <div class="col-sm-6">
                                <div class="form-group row">
-                                    <label for="Sales_man" class="col-sm-3 col-form-label"><?php echo display('sales_man') ?>
-                                       
-                                    </label>
+                                    <label for="Sales_man" class="col-sm-3 col-form-label">Pay Slip No.</label>
                                     <div class="col-sm-9">
-                                     <input type="text" name="sales_man" value="<?php echo $this->session->userdata('fullname'); ?>" class="form-control" placeholder="Sales man" readonly>
+                                      <input type="text" name="pay_slip_no" class="form-control" placeholder="Pay Slip No." required>
+                                      <input type="hidden" name="sales_man" value="<?php echo $this->session->userdata('fullname'); ?>" class="form-control" placeholder="Sales man" readonly>
                                      <input type="hidden" name="sale_type" value="1">
                                     </div>
-
-                                   
                                 </div> 
                             </div>
 
                              <div class="col-sm-6">
                                 <div class="form-group row">
-                                    <label for="date" class="col-sm-3 col-form-label"><?php echo display('date') ?>
-                                    </label>
+                                    <label for="date" class="col-sm-3 col-form-label"><?php echo display('date') ?>:</label>
                                     <div class="col-sm-9">
                                        <input type="text" name="salesdate" class="datepicker form-control" placeholder="date" value="<?php echo date('Y-m-d'); ?>">
                                     </div>
@@ -107,7 +99,7 @@
                             <table class="table table-bordered table-hover" id="saleTable">
                                 <thead>
                                     <tr>
-                                            <th class="text-center" width="20%"><?php echo display('product_name') ?><i class="text-danger">*</i></th> 
+                                            <th class="text-center" width="30%"><?php echo display('product_name') ?><i class="text-danger">*</i></th> 
                                             <th class="text-center"><?php echo display('stock_ctn') ?></th>
                                             <th class="text-center"><?php echo display('quantity') ?> <i class="text-danger">*</i></th>
                                             <th class="text-center"><?php echo display('price') ?><i class="text-danger">*</i></th>
@@ -273,7 +265,7 @@
                                                 <input type="text" name="product_quantity[]" id="cr_quantity_1" class="form-control text-right store_cal_1" onkeyup="calculate_crsal(1),checkcrqty(1);" onchange="calculate_crsal(1);" placeholder="0.00" value="" min="0" tabindex="8" required="required"/>
                                             </td>
                                             <td class="test">
-                                                <input type="text" name="product_rate[]" onkeyup="calculate_crsal(1),checkcrqty(1);" onchange="calculate_crsal(1);" id="cr_product_rate_1" class="form-control cr_product_rate_1 text-right" placeholder="0.00" value="" min="0" tabindex="9" required="required" />
+                                                <input type="text" name="product_rate[]" onkeyup="calculate_crsal(1),checkcrqty(1);" onchange="calculate_crsal(1);" id="cr_product_rate_1" class="form-control cr_product_rate_1 text-right" placeholder="0.00" value="" min="0" tabindex="9" required="required" readonly/>
                                                  <input type="hidden" name="" id="crd_minimum_price_1" />
                                                  <input type="hidden" name="" id="crd_block_price_1" />
                                             </td>
@@ -283,8 +275,6 @@
                                                 <input class="form-control total_cr_price text-right" type="text" id="cr_total_price_1" name="total_price[]" value="0.00"  />
                                             </td>
                                             <td>
-
-                                               
 
                                                 <button style="text-align: right;" class="btn btn-danger red" type="button" value="<?php echo display('delete')?>" onclick="deleteRowcr(this)" tabindex="10"><i class="fa fa-close" aria-hidden="true"></i></button>
                                             </td>
@@ -683,67 +673,14 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color:green; color: white">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <center><strong>New Cash Customer</strong></center>
+                <center><strong>Add New Cash Customer?</strong></center>
                  <div id="customerMess1" class="alert hide"></div>
               
             </div>
-            <div class="modal-body">
-  <div id="customerErrr1" class="alert hide"></div>
-               <div class="row">
-    <div class="col-sm-12 col-md-12">
-        <div class="panel panel-bd lobidrag">
-           
-            <div class="panel-body">
-
-              
-                 <?= form_open_multipart('sale/sale/new_customer', array("id"=>"customer_insert")) ?>
-                   
-                    <div class="form-group row">
-                        <label for="customer_code" class="col-sm-3 col-form-label"><?php echo display('customer_code') ?> </label>
-                        <div class="col-sm-9">
-                                    <input name="customer_code" class="form-control" type="text" placeholder="<?php echo display('customer_code') ?>" id="customer_code" value="<?php 
-          $result = $this->db->select('*')->from('customer')->where('type',1)->order_by('customer_id','desc')->get()->row();
-            $customer_code = $result->customer_code;
-
-            $ccode = substr($customer_code,3);
-            $c_code = $ccode+1; 
-            $ext ='cc-';
-           echo  $ext.$c_code;
-                                    ?>" readonly>
-                        </div>
-                    </div>  
-                    
-
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label"><?php echo display('customer_name') ?> *</label>
-                        <div class="col-sm-9">
-                                    <input name="customer_name" class="form-control" type="text" placeholder="<?php echo display('customer_name') ?>"  value="" required>
-                                    <input type="hidden" name="customer_type" value="1">
-                        </div>
-                    </div> 
-                   <div class="form-group row">
-                        <label for="customer_phone" class="col-sm-3 col-form-label"><?php echo display('contact') ?></label>
-                        <div class="col-sm-9">
-                                    <input name="customer_phone" class="form-control" type="text" placeholder="<?php echo display('phone') ?>" id="customer_phone" value="">
-                        </div>
-                    </div> 
-                     <div class="form-group row">
-                        <label for="customer_cnic" class="col-sm-3 col-form-label"><?php echo display('customer_cnic') ?></label>
-                        <div class="col-sm-9">
-                            <input  type="number" name="customer_cnic" class="form-control cnics" type="customer_cnic" placeholder="<?php echo display('customer_cnic') ?>" id="customer_cnic" value="">
-                        </div>
-                    </div> 
-         
-                    <div class="form-group text-right">
-                        <button type="reset" class="btn btn-primary w-md m-b-5"><?php echo display('reset') ?></button>
-                        <button type="submit" class="btn btn-success w-md m-b-5"><?php echo display('save') ?></button>
-                    </div>
-                <?php echo form_close() ?>
-
-            </div>  
-        </div>
-    </div>
-</div>
+            <div class="modal-body text-center" style="padding: 20% 10%;">
+                <div id="customerErrr1" class="alert hide"></div>
+                     <a href="<?=base_url('customer/customer/form')?>" class="btn btn-success btn-lg">GO TO NEW CUSTOMER FORM</a>
+              </div>
                 </div>
             </div>
         </div>
@@ -1193,6 +1130,7 @@ function g_code(){
 
 
  <?php $this->load->view('sales.js.php') ?>
+
  <script type="text/javascript">
     function installpreview(){
             var remainig     = $('#slremaining_amnt').val();
