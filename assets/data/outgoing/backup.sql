@@ -30721,3 +30721,7 @@ UPDATE `user` SET `last_login` = '2022-08-08 21:09:29', `ip_address` = '::1'
 WHERE `id` = '1';
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-08 19:20:23', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
