@@ -24,8 +24,8 @@
                 </div>
                 <div class="panel-body">
 
-                    <?= form_open('Upload/Upload/index') ?>
-                    <?php echo form_hidden('store_id', $store->store_id); ?>
+                    <form action="<?php echo base_url()?>Upload/Upload/in" method="post" enctype="multipart/form-data">
+                 
                     <div class="form-group row">
                         <label for="store_name" class="col-sm-3 col-form-label">File*</label>
                         <div class="col-sm-9">
