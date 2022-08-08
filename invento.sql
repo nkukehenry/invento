@@ -36,7 +36,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_store_stock` (IN `s_id` INT, OU
   DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
   
   DROP TABLE IF EXISTS tmp_store_stock; 
- CREATE TABLE `tmp_store_stock` ( `StoreID` int(11) NOT NULL, `Stock_Date` datetime NOT NULL, `ProdID` bigint(20) NOT NULL, `InQty` int(11) NOT NULL, `OutQty` int(11) NOT NULL, `category_id` varchar(11) NOT NULL, `brand_id` varchar(11)  NOT NULL, `model_id` varchar(11) NOT NULL , `Remarks` varchar(50) COLLATE utf8_unicode_ci NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
+ CREATE TABLE `tmp_store_stock` ( `StoreID` int(11) NOT NULL, `Stock_Date` datetime NOT NULL, `ProdID` bigint(20) NOT NULL, `InQty` int(11) NOT NULL, `OutQty` int(11) NOT NULL, `category_id` varchar(11) NOT NULL, `brand_id` varchar(11)  NOT NULL, `model_id` varchar(11) NOT NULL , `Remarks` varchar(50) COLLATE utf8_unicode_ci NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8 ; 
   
  OPEN cursorForStore;
    read_loop: LOOP
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `accesslog` (
   `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `entry_date` datetime DEFAULT NULL,
   UNIQUE KEY `SerialNo` (`sl_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `accesslog`
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `acc_coa` (
   `UpdateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `UpdateDate` datetime NOT NULL,
   PRIMARY KEY (`HeadName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `acc_coa`
@@ -380,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `acc_customer_income` (
   `Date` date NOT NULL,
   `Amount` decimal(10,2) NOT NULL,
   UNIQUE KEY `ID` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -398,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `acc_glsummarybalance` (
   `CreateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
   UNIQUE KEY `ID` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -422,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `acc_income_expence` (
   `CreateBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `CreateDate` datetime NOT NULL,
   UNIQUE KEY `ID` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -436,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `acc_temp` (
   `Name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Debit` decimal(18,2) NOT NULL,
   `Credit` decimal(18,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -462,7 +462,7 @@ CREATE TABLE IF NOT EXISTS `acc_transaction` (
   `UpdateDate` datetime DEFAULT NULL,
   `IsAppove` char(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   UNIQUE KEY `ID` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=365 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=365 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `acc_transaction`
@@ -526,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `isactive` tinyint(1) NOT NULL,
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `customer_code_unique` (`customer_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `customer`
@@ -550,7 +550,7 @@ CREATE TABLE IF NOT EXISTS `customer_gurrantor_map` (
   `gurrantor_id` int NOT NULL,
   PRIMARY KEY (`rowid`),
   UNIQUE KEY `lease_id` (`lease_id`,`customer_id`,`gurrantor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -575,7 +575,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`employeeno`),
   UNIQUE KEY `ID` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -601,7 +601,7 @@ CREATE TABLE IF NOT EXISTS `gurrantor` (
   `isactive` tinyint(1) NOT NULL,
   PRIMARY KEY (`gurrantor_id`),
   UNIQUE KEY `gurrantor_code_unique` (`gurrantor_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1095,7 +1095,7 @@ CREATE TABLE IF NOT EXISTS `lease` (
   `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`lease_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1111,7 +1111,7 @@ CREATE TABLE IF NOT EXISTS `lease_product_map` (
   PRIMARY KEY (`row_id`),
   KEY `fk_lease_id1` (`lease_id`),
   KEY `fk_prod_id1` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1126,7 +1126,7 @@ CREATE TABLE IF NOT EXISTS `lease_store_map` (
   `store_id` int NOT NULL,
   PRIMARY KEY (`row_id`),
   KEY `fk_store_lease_id1` (`lease_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1202,7 +1202,7 @@ CREATE TABLE IF NOT EXISTS `payment_collection` (
   `updateby` int NOT NULL,
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `payment_collection`
@@ -1239,7 +1239,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `product`
@@ -1265,7 +1265,7 @@ CREATE TABLE IF NOT EXISTS `product_brand` (
   `category_id` int DEFAULT NULL,
   PRIMARY KEY (`brand_id`),
   UNIQUE KEY `brand_name_unique` (`brand_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `product_brand`
@@ -1296,7 +1296,7 @@ CREATE TABLE IF NOT EXISTS `product_category` (
   `parent_category_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `category_name_unique` (`category_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `product_category`
@@ -1321,7 +1321,7 @@ CREATE TABLE IF NOT EXISTS `product_colors` (
   `color_id` int NOT NULL AUTO_INCREMENT,
   `color_name` varchar(50) NOT NULL DEFAULT 'N/A',
   PRIMARY KEY (`color_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `product_colors`
@@ -1351,7 +1351,7 @@ CREATE TABLE IF NOT EXISTS `product_model` (
   `category_id` int DEFAULT NULL,
   PRIMARY KEY (`model_id`),
   UNIQUE KEY `model_name_unique` (`model_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `product_model`
@@ -1380,7 +1380,7 @@ CREATE TABLE IF NOT EXISTS `product_unit` (
   `category_id` int DEFAULT NULL,
   PRIMARY KEY (`unit_id`),
   UNIQUE KEY `unit_name_unique` (`unit_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `product_unit`
@@ -1411,7 +1411,7 @@ CREATE TABLE IF NOT EXISTS `purchase_order` (
   `updateby` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `updatedate` datetime DEFAULT NULL,
   PRIMARY KEY (`po_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `purchase_order`
@@ -1443,7 +1443,7 @@ CREATE TABLE IF NOT EXISTS `purchase_order_details` (
   `store_id` int NOT NULL,
   PRIMARY KEY (`row_id`),
   KEY `fk_po_no1` (`po_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=865317715264155 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=865317715264155 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `purchase_order_details`
@@ -1479,7 +1479,7 @@ CREATE TABLE IF NOT EXISTS `purchase_receive` (
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`receive_id`),
   KEY `fk_po_no` (`po_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `purchase_receive`
@@ -1510,7 +1510,7 @@ CREATE TABLE IF NOT EXISTS `purchase_receive_details` (
   `store_id` int NOT NULL,
   `discount` float NOT NULL,
   KEY `fk_receive_id` (`receive_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `purchase_receive_details`
@@ -1548,7 +1548,7 @@ CREATE TABLE IF NOT EXISTS `purchase_return` (
   `updateby` int NOT NULL,
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`preturn_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1564,7 +1564,7 @@ CREATE TABLE IF NOT EXISTS `purchase_return_details` (
   `product_rate` float NOT NULL,
   `store_id` int NOT NULL,
   `discount` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1713,7 +1713,7 @@ CREATE TABLE IF NOT EXISTS `sales_parent` (
   PRIMARY KEY (`sale_id`),
   UNIQUE KEY `invoice_no` (`invoice_no`),
   KEY `sale_type_id` (`sale_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1737,7 +1737,7 @@ CREATE TABLE IF NOT EXISTS `sales_return` (
   `updateby` int NOT NULL,
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`sreturn_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1752,7 +1752,7 @@ CREATE TABLE IF NOT EXISTS `sales_return_details` (
   `qty` int NOT NULL,
   `product_rate` float NOT NULL,
   `discount` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1769,7 +1769,7 @@ CREATE TABLE IF NOT EXISTS `sale_details` (
   `lease_unit_price` float DEFAULT NULL,
   `sale_type_id` tinyint DEFAULT NULL,
   UNIQUE KEY `sale_id` (`sale_id`,`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `sale_details`
@@ -1797,7 +1797,7 @@ CREATE TABLE IF NOT EXISTS `sale_type` (
   `isactive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`sale_type_id`),
   UNIQUE KEY `shortcode` (`shortcode`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `sale_type`
@@ -1825,7 +1825,7 @@ CREATE TABLE IF NOT EXISTS `sec_role` (
   `updatedate` datetime DEFAULT NULL,
   PRIMARY KEY (`name`),
   UNIQUE KEY `ID` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `sec_role`
@@ -1854,7 +1854,7 @@ CREATE TABLE IF NOT EXISTS `sec_userrole` (
   `createby` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `createdate` datetime NOT NULL,
   UNIQUE KEY `ID` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `sec_userrole`
@@ -1923,7 +1923,7 @@ CREATE TABLE IF NOT EXISTS `stock_movement` (
   PRIMARY KEY (`movement_id`),
   UNIQUE KEY `proposal_code_unique` (`proposal_code`),
   UNIQUE KEY `issue_code_unique` (`issue_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1939,7 +1939,7 @@ CREATE TABLE IF NOT EXISTS `stock_movement_details` (
   `issue_qty` int NOT NULL,
   `received_qty` int NOT NULL,
   KEY `stock_movement_details_ibfk_1` (`movement_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -1984,7 +1984,7 @@ CREATE TABLE IF NOT EXISTS `store` (
   `updatedate` datetime DEFAULT NULL,
   `isactive` tinyint(1) NOT NULL,
   PRIMARY KEY (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `store`
@@ -2016,7 +2016,7 @@ CREATE TABLE IF NOT EXISTS `supplier` (
   `updateby` int NOT NULL,
   `updatedate` datetime NOT NULL,
   PRIMARY KEY (`supplier_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `supplier`
@@ -2066,7 +2066,7 @@ DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
   `test_id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`test_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
@@ -2085,7 +2085,7 @@ CREATE TABLE IF NOT EXISTS `tmp_store_stock` (
   `brand_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `model_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `Remarks` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 --
 -- Dumping data for table `tmp_store_stock`
@@ -2165,7 +2165,7 @@ CREATE TABLE IF NOT EXISTS `warehouse` (
   `updatedate` datetime NOT NULL,
   `isactive` tinyint(1) NOT NULL,
   PRIMARY KEY (`warehouse_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ;
 
 -- --------------------------------------------------------
 
