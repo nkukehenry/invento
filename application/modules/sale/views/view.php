@@ -63,7 +63,7 @@ function printDiv() {
                         
                         <div class="col-sm-6" style="text-align: right; padding-right: 70px;width: 50%; float: right;">
                             <h2> <?php echo display('customer') ?></h2>
-                            <?php echo ucwords($sales->customer_name);?> <br>
+                            <?php echo ucwords(get_customer($sales->customer_id)->customer_name ."-".get_customer($sales->customer_id)->customer_code);?> <br>
                            <?php if(!empty($s_info->customer_phone)){?><i class="fa fa-phone"></i><?php } ?> <?php echo $sales->customer_phone;?> 
                             <?php
                                 if($sales->customer_address){

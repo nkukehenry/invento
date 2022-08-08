@@ -1694,6 +1694,7 @@ CREATE TABLE IF NOT EXISTS `sales_parent` (
   `sale_type_id` tinyint NOT NULL,
   `store_id` int NOT NULL,
   `invoice_no` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `pay_slip_no` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `customer_id` int NOT NULL,
   `salesman` int NOT NULL,
   `sales_date` date NOT NULL,
