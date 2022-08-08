@@ -15,7 +15,7 @@ class Upload extends MX_Controller
 
 	public function index()
 	{
-		if (isset($_POST["submit"])) {
+		if ($this->input->post('file')) {
 			$file = $_FILES['file']['tmp_name'];
 			$handle = fopen($file, "r");
 			$c = 0; //
