@@ -173,6 +173,7 @@ class Product extends MX_Controller {
 			'block_price'     => $this->input->post('block_price'),
 			'minimum_price'   => $this->input->post('minimum_price'),
 			'retail_price'    => $this->input->post('retail_price'),
+			'manufacturer_id' => $this->input->post('manufacturer_id'),
 			'createby'        => $createby,
 			'createdate'      => $createdate,
 			'updateby'        => $updatedby,
@@ -236,10 +237,12 @@ class Product extends MX_Controller {
  
 
 		} else { 
+
 			if(!empty($id)) {
 				$data['title']   = display('update');
 			$data['products']    = $this->product_model->findById($id);
 			}
+
 			$data['module']      = "product";
 			$text                ='pro-';
 			$data['model']       = $this->product_model->model_dropdown();
@@ -249,6 +252,10 @@ class Product extends MX_Controller {
 			$data['brand']       = $this->product_model->brand_dropdown();
 			$data['product_code']= $text.$this->code_generator();
 			$data['colors']      = $this->get_product_colors(0,true);
+			$data['manufacturers'] = $this->product_model->read_manufacturer();
+
+			// print_r($data['manufacturers']);
+			// exit();
 
 			$data['page']        = "form";   
 			echo Modules::run('template/layout', $data); 
@@ -1006,6 +1013,115 @@ public function delete_unit($id = null)
 			return $this->db->get('product_category')->row();
 		}
 
+
+
+ public function manufacturer_form($id = null)
+	{ 
+		
+		$data['title'] = "Add Manufacturer";
+		#-------------------------------#
+		$this->form_validation->set_rules('manufacturer_name', display('manufacturer_name')  ,'required|max_length[50]');
+		#-------------------------------#
+	       $data['manufacturer']   = (Object) $postData = [
+			'id' 	  => $this->input->post('id'), 
+			'manufacturer_name'    => $this->input->post('manufacturer_name'),
+			'isactive'        => 1, 
+		]; 
+
+
+		if ($this->form_validation->run()) { 
+
+			if (empty($postData['id'])) {
+
+
+				if ($this->product_model->create_manufacturer($postData)) { 
+					$id = $this->db->insert_id();
+					$this->session->set_flashdata('message', display('save_successfully'));
+					redirect('product/product/manufacturer_index');
+				} else {
+					$this->session->set_flashdata('exception',  display('please_try_again'));
+				}
+				redirect("product/product/manufacturer_form"); 
+
+			} else {
+
+
+				if ($this->product_model->update_manufacturer($postData)) { 
+					$this->session->set_flashdata('message', display('update_successfully'));
+				} else {
+					$this->session->set_flashdata('exception',  display('please_try_again'));
+				}
+				redirect("product/product/manufacturer_form/".$postData['id']);  
+			}
+ 
+
+		} else { 
+			if(!empty($id)) {
+				$data['title'] = display('update');
+				$data['manufacturers']   = $this->product_model->findById_manufacturer($id);
+			}
+			$data['module'] = "product";
+			$data['page']   = "manufacturer_form";   
+			echo Modules::run('template/layout', $data); 
+		}   
+	}
+
+
+public function delete_manufacturer($id = null) 
+	{ 
+		if ($this->product_model->delete_manufacturer($id)) {
+			#set success message
+			$this->session->set_flashdata('message',display('delete_successfully'));
+		} else {
+			#set exception message
+			$this->session->set_flashdata('exception',display('please_try_again'));
+		}
+		redirect('product/product/manufacturer_index');
+	}
+
+	public function manufacturer_index()
+	{   
+        $this->permission->method('product','read')->redirect();
+		$data['title']    = "Manufacturers"; 
+		#-------------------------------#		
+		#
+        #pagination starts
+        #
+        $config["base_url"] = base_url('product/product/manufacturer_index');
+        $config["total_rows"]  = 1;
+        $config["per_page"]    = 25;
+        $config["uri_segment"] = 4;
+        $config["last_link"] = "Last"; 
+        $config["first_link"] = "First"; 
+        $config['next_link'] = 'Next';
+        $config['prev_link'] = 'Prev';  
+        $config['full_tag_open'] = "<ul class='pagination col-xs pull-right'>";
+        $config['full_tag_close'] = "</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tag_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+
+        /* ends of bootstrap */
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data["manufacturers"] = $this->product_model->read_manufacturer($config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+        #
+        #pagination ends
+        #   
+		$data['module'] = "product";
+		$data['page']   = "manufacturer_list";   
+		echo Modules::run('template/layout', $data); 
+	}  
 
 
 

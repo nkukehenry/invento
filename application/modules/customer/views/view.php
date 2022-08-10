@@ -24,7 +24,7 @@
                             <th>Force Rank</th>
                             <td><?php echo $customers->force_rank; ?></td>
                         </tr>
-                        <tr>
+                        <tr style="display: none;">
                             <th><?php echo display('address') ?></th>
                             <td><?php echo $customers->customer_address; ?></td>
                         </tr>

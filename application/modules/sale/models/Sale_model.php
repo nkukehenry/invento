@@ -44,7 +44,10 @@ class Sale_model extends CI_Model {
 			'installment_amnt'      =>  $installamnt,
 			'package_price'         =>  $package_price,
 			'total_amnt'            =>  $this->input->post('grand_total_price'),
+      'destination'           =>  $this->input->post('destination')
 		); 
+
+
 
 	 $this->db->insert('sales_parent',$postparentData);
 	  
@@ -603,9 +606,9 @@ class Sale_model extends CI_Model {
     $this->db->select('*');
     $this->db->from('customer');
     $this->db->where('isactive',1);
-    if($this->session->userdata('isAdmin')==0){
-    $this->db->where('store_id',$this->session->userdata('store_id'));
-    }
+    // if($this->session->userdata('isAdmin')==0){
+    // $this->db->where('store_id',$this->session->userdata('store_id'));
+    // }
     $data = $this->db->get()->result();
 
 		$list[''] = display('select_option');
@@ -1211,6 +1214,28 @@ public function create_coa($data = [])
       );
     $this->db->insert('accesslog',$accesslog);
     return true;
+  }
+
+  public function get_districts(){
+    return $this->db->get('districts')->result();
+  }
+
+  public function districts_dropdown()
+  {
+    $data = $this->db->select("*")
+      ->from("districts")
+      ->get()
+      ->result();
+
+    $list[''] = display('select_option');
+    if (!empty($data)) {
+      $i=0;
+      foreach ($data as $value)
+        $list[$value->district_name] = $value->district_name;
+      return $list;
+    } else {
+      return false;
+    }
   }
 	
 }

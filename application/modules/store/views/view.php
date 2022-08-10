@@ -11,6 +11,7 @@
                         <tr>
                             <th><?php echo display('Sl') ?></th>
                             <th><?php echo display('store_name') ?></th>
+                             <th>Manager</th>
                             <th><?php echo display('store_phone') ?></th>
                             <th><?php echo display('store_address') ?></th>
                             <th><?php echo display('active') ?></th>
@@ -24,6 +25,7 @@
                                 <tr class="<?php echo ($sl & 1)?"odd gradeX":"even gradeC" ?>">
                                     <td><?php echo $sl; ?></td>
                                     <td><?php echo $stores->store_name; ?></td>
+                                    <td><?php echo $stores->manager_name; ?></td>
                                     <td><?php echo $stores->store_phone; ?></td>
                                     <td><?php echo $stores->store_address; ?></td>
                                     <td> <?php echo (($stores->isactive==1)?display('active'):display('inactive')); ?></td>

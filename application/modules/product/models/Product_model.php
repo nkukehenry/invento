@@ -375,4 +375,71 @@ class Product_model extends CI_Model {
 			return false;
 		}
 	} 
+
+
+	// Unit mesurement information
+	public function create_manufacturer($data = [])
+	{	 
+		return $this->db->insert('product_manufacturers',$data);
+	}
+
+	public function read_manufacturer($limit = null, $start = null)
+	{
+		return $this->db->select("*")->from("product_manufacturers")
+			->order_by('id', 'desc')
+    		->limit($limit, $start)
+			->get()
+			->result();
+	} 
+
+	public function findById_manufacturer($id = null)
+	{ 
+		return $this->db->select("*")->from("product_manufacturers")
+			->where('id',$id) 
+    		->limit($limit, $start)
+			->get()
+			->row();
+
+	} 
+ 
+	public function update_manufacturer($data = [])
+	{
+		return $this->db->where('id',$data['id'])
+			->update('product_manufacturers',$data); 
+	} 
+
+
+	public function delete_manufacturer($id = null)
+	{
+		$this->db->where('id',$id)
+			->delete('product_manufacturers');
+
+		if ($this->db->affected_rows()) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
+
+		public function manufacturer_dropdown()
+	{
+		$data = $this->db->select("*")
+			->from('product_manufacturers')
+			->where('isactive', 1)  
+			->get()
+			->result();
+
+		$list[-1] = display('select_option');
+
+		if (!empty($data)) {
+			foreach($data as $value)
+				$list[$value->id] = $value->manufacturer_name;
+			return $list;
+		} else {
+			return false; 
+		}
+	}
+
+
+	
 }

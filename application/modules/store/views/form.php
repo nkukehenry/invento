@@ -39,7 +39,14 @@
                         </div> 
 
                         <div class="form-group row">
-                            <label for="phone" class="col-sm-3 col-form-label"><?php echo display('phone') ?> </label>
+                            <label for="store_name" class="col-sm-3 col-form-label">Manager *</label>
+                            <div class="col-sm-9">
+                                <input name="manager_name" class="form-control" type="text" placeholder="Manager" id="manager_name" value="<?php echo $store->manager_name?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-sm-3 col-form-label">Manager's Contact </label>
                             <div class="col-sm-9">
                                 <input name="store_phone" class="form-control" type="phone" placeholder="<?php echo display('phone') ?>" id="phone" value="<?php echo $store->store_phone ?>">
                             </div>

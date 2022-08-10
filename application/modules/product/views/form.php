@@ -49,11 +49,24 @@
                             <select name="category_name" class="form-control category superSelect">
                                 <option value="" selected="selected"></option>
                                 <?php foreach ($categories as $cat): ?>
-                                 <option value="<?=$cat->category_id?>" <?=($models->category_id==$cat->category_id)?"selected='selected'":""?>><?=$cat->category_name?></option>
+                                 <option value="<?=$cat->category_id?>" <?=($products->category_id==$cat->category_id)?"selected='selected'":""?>><?=$cat->category_name?></option>
                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div> 
+
+                    
+
+                    <div class="form-group row">
+                        <label for="manufacturer_id" class="col-sm-3 col-form-label"><?php echo display('manufacturer_name') ?> *</label>
+                        <div class="col-sm-9">
+                                  <select name="manufacturer_id" class="form-control superSelect">
+                                <?php foreach ($manufacturers as $manu): ?>
+                                 <option value="<?=$manu->id?>" <?=($products->manufacturer_id==$manu->id)?"selected='selected'":""?>><?=$manu->manufacturer_name?></option>
+                               <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
          
          
                      <div class="form-group row">
@@ -155,6 +168,7 @@
 </div>
 
 <script type="text/javascript">
+
  var selectedOptions = [];
      
 function fillProductName(){
@@ -180,6 +194,8 @@ $("select.superSelect").change(function () { fillProductName(); });
 
 
  $("select.category").change(function(){
+
+     selectedOptions = [];
 
     const categoryId = this.value;
 

@@ -17,11 +17,7 @@ $HmvcMenu["sale"] = array(
             "method"     => "index",
             "permission" => "read"
         ), 
-         'credit_sale_list'  => array( 
-            "controller" => "sale",
-            "method"     => "credit_sale",
-            "permission" => "read"
-        )
+        
   
 );
 /*
@@ -31,6 +27,11 @@ $HmvcMenu["sale"] = array(
             "method"     => "lease_sale",
             "permission" => "read"
         ), 
+         'credit_sale_list'  => array( 
+            "controller" => "sale",
+            "method"     => "credit_sale",
+            "permission" => "read"
+        )
 
 */
    

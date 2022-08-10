@@ -14,10 +14,11 @@
                         <thead>
                             <tr>
                                 <th><?php echo display('sl_no') ?></th>
-
                                 <th><?php echo display('date') ?></th>
                                 <th><?php echo display('invoice_no') ?></th>
                                 <th>Pay Slip</th>
+                                <th>Destination</th>
+                                 <th>Customer</th>
                                 <th><?php echo display('total') ?></th>
                                 <th><?php echo display('action') ?></th> 
                             </tr>
@@ -35,6 +36,7 @@
                                 <td><?php echo $sales->sales_date; ?></td>
                                 <td><?php echo $sales->invoice_no; ?></td>
                                 <td><?php echo $sales->pay_slip_no; ?></td>
+                                <td><?php echo $sales->destination; ?></td>
                                 <td><?php echo $customer->customer_name; ?></td>
                                 
                                 <td>UGX <?php echo number_format($sales->total_amnt); ?></td>

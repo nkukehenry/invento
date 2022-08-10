@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group row" style="display: none;">
                     <label for="customer_address" class="col-sm-3 col-form-label"><?php echo display('address') ?></label>
                     <div class="col-sm-9">
                         <textarea name="customer_address" class="form-control" type="customer_address" placeholder="<?php echo display('address') ?>" id="customer_address"><?php echo $customers->customer_address; ?></textarea>
@@ -129,7 +129,7 @@
                     <label for="status" class="col-sm-3 col-form-label"><?php echo display('isactive') ?> *</label>
                     <div class="col-sm-9">
                         <label class="radio-inline">
-                            <?php echo form_radio('isactive', '1', (($customers->isactive == 1) ? 1 : 0), 'id="isactive"'); ?>Active
+                            <?php echo form_radio('isactive', '1', (($customers->isactive == 1 || !$customers) ? 1 : 0), 'id="isactive"'); ?>Active
                         </label>
                         <label class="radio-inline">
                             <?php echo form_radio('isactive', '0', (($customers->isactive == "0") ? 1 : 0), 'id="isactive"'); ?>Inactive

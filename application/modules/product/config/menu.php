@@ -18,7 +18,7 @@ $HmvcMenu["product"] = array(
             "permission" => "read"
         ), 
  
-     'category'    => array( 
+        'category'    => array( 
             "controller" => "product",
             "method"     => "category_index",
             "permission" => "read"
@@ -38,6 +38,11 @@ $HmvcMenu["product"] = array(
        'unit'    => array( 
             "controller" => "product",
             "method"     => "unit_index",
+            "permission" => "read"
+        ),
+       'manufacturer'    => array( 
+            "controller" => "product",
+            "method"     => "manufacturer_index",
             "permission" => "read"
         ) 
 

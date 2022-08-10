@@ -88,6 +88,7 @@ class Sale extends MX_Controller {
         /* ends of bootstrap */
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        
         $data["sales"] = $this->sale_model->credit_sale($config["per_page"], $page);
         $data["links"] = $this->pagination->create_links();
         #
@@ -165,6 +166,8 @@ class Sale extends MX_Controller {
 					$this->session->set_flashdata('exception',  display('please_try_again'));
 				}
 
+
+
 				redirect("sale/sale/form");
  
 
@@ -178,6 +181,8 @@ class Sale extends MX_Controller {
 			$data['leasinfo']    =  $this->sale_model->leaseinf();
 			$data['inquiry']     =  $this->sale_model->inquiry();
 			$data['invoice_no']  =  $this->number_generator();
+            $data['districts']   =  $this->sale_model->districts_dropdown();
+
 			$data['page']        = "form";   
 			echo Modules::run('template/layout', $data); 
 		}   

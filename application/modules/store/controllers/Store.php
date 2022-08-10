@@ -115,6 +115,7 @@ class Store extends MX_Controller {
 				'store_code' => $this->input->post('store_code'),
 				'store_phone'=> $this->input->post('store_phone'),
 			    'store_address' => $this->input->post('store_address'),
+			    'manager_name' => $this->input->post('manager_name'),
 				'createby'   => $createby,
 				'createdate' => $createdate,
 				'isactive'   => 1

@@ -259,4 +259,53 @@ class Customer extends MX_Controller
 
         echo json_encode($cdata);
     }
+
+    public function import()
+    { 
+        
+
+        if(isset($_POST["submit"]))
+        {
+            $file = $_FILES['file']['tmp_name'];
+            $handle = fopen($file, "r");
+            $c = 0;//
+            while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+            {
+                $file_no  = sprintf("%d",$filesop[0]);
+                $rank     = $filesop[1];
+                $unit     = $filesop[2];
+                $names    = $filesop[3];
+                $phone    = $filesop[4];
+
+                $data = array(
+                    "customer_code" => $file_no,
+                    "force_rank"    => $rank,
+                    "unit"    => $unit,
+                    "customer_name"  => $names,
+                    "customer_phone" => $phone,
+                    "isactive"       =>1
+                );
+
+                if($c<>0){                  /* SKIP THE FIRST ROW */
+                    $this->customer_model->create($data);
+                }
+
+                $c = $c + 1;
+            }
+
+           
+            
+             $this->session->set_flashdata('message', "Data successfully imported");
+             redirect('customer/customer/index');
+                
+        }
+
+
+        $this->permission->method('customer', 'read')->redirect();
+        $data['title'] = "Import Customers";
+        $data['module'] = "customer";
+        $data['page']   = "import";
+        echo Modules::run('template/layout', $data);
+    }
+
 }

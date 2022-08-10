@@ -38,6 +38,8 @@
   <li><a data-toggle="tab" href="#leasesale"><?php echo display('leasesale'); ?></a></li>
 </ul>
 <br> -->
+
+
 <br>
 
 <div class="tab-content">
@@ -73,7 +75,7 @@
                         </div>
 
                     <div class="row" id="Sales_man">
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                <div class="form-group row">
                                     <label for="Sales_man" class="col-sm-3 col-form-label">Pay Slip No.</label>
                                     <div class="col-sm-9">
@@ -84,7 +86,17 @@
                                 </div> 
                             </div>
 
-                             <div class="col-sm-6">
+
+                             <div class="col-sm-5">
+                                <div class="form-group row">
+                                    <label for="destination" class="col-sm-3 col-form-label">Destination: </label>
+                                    <div class="col-sm-9">
+                                        <?php echo form_dropdown('destination',$districts,null, 'class="form-control" id="destination" required') ?>
+                                      </div>
+                                </div>
+                            </div>
+
+                             <div class="col-sm-2">
                                 <div class="form-group row">
                                     <label for="date" class="col-sm-3 col-form-label"><?php echo display('date') ?>:</label>
                                     <div class="col-sm-9">
@@ -93,6 +105,8 @@
                                    
                                 </div>
                             </div>
+
+
                         </div>
 
                         <div class="table-responsive" style="margin-top: 10px">
