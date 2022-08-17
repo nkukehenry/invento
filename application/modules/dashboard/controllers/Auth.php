@@ -76,6 +76,8 @@ class Auth extends MX_Controller {
 					'isAdmin' 	  => (($user->row()->is_admin == 1)?true:false),
 					'id' 		  => $user->row()->id,
 					'fullname'	  => $user->row()->fullname,
+					'firstname'	  => $user->row()->firstname,
+					'lastname'	  => $user->row()->lastname,
 					'user_level'  => $user->row()->user_level,
 					'email' 	  => $user->row()->email,
 					'image' 	  => $user->row()->image,
@@ -83,7 +85,9 @@ class Auth extends MX_Controller {
 					'last_logout' => $user->row()->last_logout,
 					'ip_address'  => $user->row()->ip_address,
 					'store_id'    => $user->row()->store_id,
-					'permission'  => json_encode($permission) 
+					'pass_changed'=> $user->row()->pass_changed,
+					'permission'  => json_encode($permission),
+					'about'	      => $user->row()->about
 				);	
 
 				//store date to session 
@@ -91,8 +95,16 @@ class Auth extends MX_Controller {
 				//update database status
 				$this->auth_model->last_login();
 				//welcome message
+				if($sData['pass_changed']){
+
 				$this->session->set_flashdata('message', display('welcome_back').' '.$user->row()->fullname);
 				redirect('dashboard/home');
+				
+				}else{
+
+					$this->session->set_flashdata('message', $user->row()->fullname." please change your password first");
+				    redirect('dashboard/home/setting');
+				}
 
 			} else {
 				$this->session->set_flashdata('exception', display('incorrect_email_or_password'));

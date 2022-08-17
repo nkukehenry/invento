@@ -8,8 +8,9 @@ class Sale extends MX_Controller {
 		parent::__construct();
 		
 		$this->load->model(array(
-			'sale_model'
-		));		 
+			'sale_model','customer/customer_model','store/store_model'
+		));	
+ 
 	}
  //cash sale 
 	public function index()
@@ -624,7 +625,7 @@ public function number_generator()
 	}
 	public function customer_code($id){
 
-		$result = $this->db->select('*')->from('customer')->where('store_id',$this->session->userdata('store_id'))->where('type',$id)->order_by('createdate','desc')->get()->row();
+		$result = $this->db->select('*')->from('customer')->order_by('createdate','desc')->get()->row();
 		$customer_code = $result->customer_code;
 
 		$ccode = substr($customer_code,3);
@@ -687,4 +688,88 @@ public function number_generator()
 
 		echo $html;
 	}
+
+	// product auto complete
+	public function destination_search(){
+
+		$term 	= $this->input->post('search_term');
+       	$destinations 	= $this->sale_model->destination_search_item($term);
+
+		$json_result[''] = '';
+
+		foreach ($destinations as $value) {
+			$json_result[] = array(
+				'label'=>$value->district_name." - ".$value->village_name,
+				'value'=>$value->district_name." - ".$value->village_name);
+		} 
+		
+        echo json_encode($json_result);
+	}
+
+	 //cash sale 
+	public function detailed()
+	{   
+        $this->permission->method('sale','read')->redirect();
+		$data['title']    = "Detailed Sales Report"; 
+		#-------------------------------#		
+		#
+        #pagination starts
+        #
+        $config["base_url"] = base_url('sale/sale/detailed');
+        $config["total_rows"]  = $this->sale_model->count_detailed();
+        $config["per_page"]    = 15;
+        $config["uri_segment"] = 4;
+        $config["last_link"] = "Last"; 
+        $config["first_link"] = "First"; 
+        $config['next_link'] = 'Next';
+        $config['prev_link'] = 'Prev';  
+        $config['full_tag_open'] = "<ul class='pagination col-xs pull-right'>";
+        $config['full_tag_close'] = "</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tag_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+        /* ends of bootstrap */
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+        $data["sales"] = $this->sale_model->detailed($config["per_page"], $page);
+
+         $data['store']  = $this->customer_model->store_list();
+         $data['ranks']  = $this->customer_model->ranks_list();
+         $data['units']  = $this->customer_model->units_list();
+         $search_data = (!empty($_POST))?$_POST:array(
+
+         	'gender'=>'',
+         	'unit'=>'',
+         	'rank'=>'',
+         	'store_id'=>'',
+         	'receipt'=>'',
+         	'date_from'=>'',
+         	'date_to'=>''
+         );
+
+         $data['search'] =  (Object) $search_data;
+
+
+
+        $data["stores"] = $this->store_model->read(1000,0);
+
+        $data["links"] = $this->pagination->create_links();
+        #
+        #pagination ends
+        #   
+		$data['module'] = "sale";
+		$data['page']   = "detailed_report";   
+		echo Modules::run('template/layout', $data); 
+	}  
+
 }

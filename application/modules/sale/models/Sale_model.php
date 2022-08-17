@@ -614,7 +614,7 @@ class Sale_model extends CI_Model {
 		$list[''] = display('select_option');
 		if (!empty($data)) {
 			foreach($data as $value)
-				$list[$value->customer_id] = $value->customer_name;
+				$list[$value->customer_id] = $value->customer_name." - ".$value->customer_code;
 			return $list;
 		} else {
 			return false; 
@@ -634,7 +634,7 @@ class Sale_model extends CI_Model {
 		$list[''] = display('select_option');
 		if (!empty($data)) {
 			foreach($data as $value)
-				$list[$value->customer_id] = $value->customer_name;
+				$list[$value->customer_id] = $value->customer_name."-".$value->customer_code;
 			return $list;
 		} else {
 			return false; 
@@ -653,7 +653,7 @@ class Sale_model extends CI_Model {
 		$list[''] = display('select_option');
 		if (!empty($data)) {
 			foreach($data as $value)
-				$list[$value->customer_id] = $value->customer_name;
+				$list[$value->customer_id] = $value->customer_name."-".$value->customer_code;
 			return $list;
 		} else {
 			return false; 
@@ -1217,13 +1217,13 @@ public function create_coa($data = [])
   }
 
   public function get_districts(){
-    return $this->db->get('districts')->result();
+    return $this->db->get('villages')->result();
   }
 
   public function districts_dropdown()
   {
     $data = $this->db->select("*")
-      ->from("districts")
+      ->from("villages")
       ->get()
       ->result();
 
@@ -1231,11 +1231,118 @@ public function create_coa($data = [])
     if (!empty($data)) {
       $i=0;
       foreach ($data as $value)
-        $list[$value->district_name] = $value->district_name;
+        $list[$value->district_name."-".$value->village_name] = $value->district_name." - ".$value->village_name;
       return $list;
     } else {
       return false;
     }
   }
+
+    //Destination search item
+  public function destination_search_item($term){
+    $query=$this->db->select('*')
+        ->from('villages')
+        ->like('district_name', $term)
+        ->or_like('village_name', $term)
+        ->group_by('district_id')
+        ->get();
+    if ($query->num_rows() > 0) {
+      return $query->result();  
+    }
+    return false;
+  }
+
+
+    // detailed
+  public function detailed($limit = null, $start = null)
+  {
+    $this->db->select('*');
+    $this->db->where('sale_type_id',1);
+
+    if($this->session->userdata('isAdmin')==0){
+      $this->db->where('store_id',$this->session->userdata('store_id'));
+    }
+
+    if($this->input->post('submit')){
+
+      $this->apply_detailed_filters();
+
+    }
+
+
+    $this->db->from('sales_parent');
+
+    $this->db->order_by('sales_date', 'desc');
+    $this->db->limit($limit, $start);
+
+    //dd($this->db->last_query());
+
+
+
+    $query = $this->db->get();
+    if ($query->num_rows() > 0) {
+      return $query->result();  
+    }
+
+     
+    return false;
+  }
+
+  public function apply_detailed_filters(){
+
+      if($this->input->post('from_date'))
+         $this->db->where("sales_date >='".$this->input->post('from_date')."'");
+
+       if($this->input->post('to_date'))
+         $this->db->where("sales_date <='".$this->input->post('to_date')."'");
+
+        if($this->input->post('gender')){
+
+          $gender = $this->input->post('gender');
+
+          $this->db->where("customer_id IN ("."SELECT customer_id from customer WHERE gender='".$gender."')");
+        }
+
+        if($this->input->post('rank')){
+          $rank = $this->input->post('rank');
+          $this->db->where("customer_id IN ("."SELECT customer_id from customer WHERE force_rank ='$rank')");
+        }
+
+        if($this->input->post('unit')){
+          $unit = $this->input->post('unit');
+          $this->db->where("customer_id IN ("."SELECT customer_id from customer WHERE unit = '$unit')");
+        }
+
+         if($this->input->post('store_id')){
+
+          $this->db->where_in("store_id",$this->input->post('store_id'));
+        }
+
+         if($this->input->post('receipt')){
+
+          $this->db->where_in("invoice_no","'".$this->input->post('receipt')."'");
+        }
+  }
+
+
+  //cash sale
+  public function count_detailed()
+  {
+    $this->db->select('*');
+    $this->db->from('sales_parent');
+    $this->db->where('sale_type_id',1);
+
+    if($this->input->post('submit')){
+
+      $this->apply_detailed_filters();
+
+    }
+
+    $query = $this->db->get();
+    if ($query->num_rows() > 0) {
+      return $query->num_rows();  
+    }
+    return false;
+  } 
 	
 }

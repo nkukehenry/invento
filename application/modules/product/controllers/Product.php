@@ -174,6 +174,7 @@ class Product extends MX_Controller {
 			'minimum_price'   => $this->input->post('minimum_price'),
 			'retail_price'    => $this->input->post('retail_price'),
 			'manufacturer_id' => $this->input->post('manufacturer_id'),
+			'color_id'		  => $this->input->post('color_id'),
 			'createby'        => $createby,
 			'createdate'      => $createdate,
 			'updateby'        => $updatedby,
@@ -245,16 +246,16 @@ class Product extends MX_Controller {
 
 			$data['module']      = "product";
 			$text                ='pro-';
-			$data['model']       = $this->product_model->model_dropdown();
-			$data['unit']        = $this->product_model->unit_dropdown();
+			$data['model']       = $this->product_model->read_model();
+			$data['unit']        = $this->product_model->unit_list();
 			//$data['category']    = $this->product_model->category_dropdown();
 			$data['categories']    = $this->product_model->category_list();
-			$data['brand']       = $this->product_model->brand_dropdown();
+			$data['brand']       = $this->product_model->brand_list();
 			$data['product_code']= $text.$this->code_generator();
 			$data['colors']      = $this->get_product_colors(0,true);
 			$data['manufacturers'] = $this->product_model->read_manufacturer();
 
-			// print_r($data['manufacturers']);
+			// print_r($data['unit']);
 			// exit();
 
 			$data['page']        = "form";   

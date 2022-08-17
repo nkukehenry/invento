@@ -1,0 +1,6 @@
+SELECT c.district_id,v.village_name, d.district_name FROM districts d 
+join counties c on c.district_id = d.id
+join sub_counties sb on sb.county_id=c.id
+join parishes p on p.sub_county_id = sb.id
+join villages v on v.parish_id = p.id
+GROUP by v.id;

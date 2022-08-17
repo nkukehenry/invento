@@ -91,7 +91,9 @@
                                 <div class="form-group row">
                                     <label for="destination" class="col-sm-3 col-form-label">Destination: </label>
                                     <div class="col-sm-9">
-                                        <?php echo form_dropdown('destination',$districts,null, 'class="form-control" id="destination" required') ?>
+
+                                         <input type="text" name="destination" required class="form-control destination" onkeyup="search_destination();" placeholder="Destination" id="destination" required />
+
                                       </div>
                                 </div>
                             </div>
@@ -889,6 +891,7 @@
     </div>
 
     <script type="text/javascript">
+
  $('.cnics').bind('keypress', function (event) {
     var regex = new RegExp("^[0-9 \-]+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
@@ -897,6 +900,7 @@
        return false;
     }
 });
+
 function gurrantoralert() {
     var x;
     x = document.getElementById("grantorcheck").value;

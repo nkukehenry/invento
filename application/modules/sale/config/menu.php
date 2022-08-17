@@ -17,6 +17,12 @@ $HmvcMenu["sale"] = array(
             "method"     => "index",
             "permission" => "read"
         ), 
+         'detailed_report'  => array( 
+            "controller" => "sale",
+            "method"     => "detailed",
+            "permission" => "read"
+        ), 
+        
         
   
 );

@@ -16,13 +16,29 @@
             <div class="panel-body" id="PrintMe">
                  <div class="row">
             <div class="col-sm-6 text-center">
-              <h2><?php echo 'Proposal From' ?></h2> <br>
+             
+              <br>
              <?php 
                    $for=$this->db->select('*')->from('store')->where('store_id',$moved->for_store_id)->get()->row();
-                          ?> 
-                    <?php echo $for->store_name;?><br> 
-               <i class="fa fa-phone"></i> <?php echo $for->store_phone;?><br> 
-                <?php echo $for->store_address;?>
+                  
+               if(!$moved->is_damage): 
+
+                ?>
+
+                   <h2><?php echo 'Proposal From' ?></h2>
+                   <?php echo $for->store_name;?><br>
+
+                 <i class="fa fa-phone"></i> <?php echo $for->store_phone;?><br> 
+                
+                <?php 
+
+                  echo $for->store_address;
+                else:
+                  echo '<h2 class="text-danger">Damage Recording</h2>';
+                 endif;
+
+                ?>
+
             </div>
 
                          <div class="col-sm-6 text-center">
@@ -44,7 +60,7 @@
                                         <th class="text-center"><?php echo display('product_name') ?> <i class="text-danger"></i></th>
                                         <th class="text-center"><?php echo 'Request '.display('quantity') ?></th>
                                         <th class="text-center"><?php echo 'Issue Qty' ?></th>
-                                        <th class="text-center"><?php echo 'Received Qty' ?></th>
+                                        <th class="text-center"><?php echo  (!$moved->is_damage)?'Received Qty':'' ?></th>
                                     </tr>
                                 </thead>
                                 <tbody id="addsale">
@@ -70,10 +86,16 @@
                                         </td>
                                         <td class="text-center">
                                             <?php 
+
+                                            if(!$moved->is_damage):
+
                                                 if($dtails['received_qty']>0)
                                                   echo $dtails['received_qty'];
                                                 else
                                                   echo 'Pending';
+
+                                             endif;
+
                                              ?>
                                         </td>
                                     </tr>

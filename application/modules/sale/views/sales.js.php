@@ -688,4 +688,46 @@ if(parseInt(x) <= parseInt(mprice) && parseInt(x) > parseInt(blprice)){
     calculate_lssal()
 }
 
+
+
+function search_destination() {
+
+    // Auto complete
+    var options = {
+        minLength: 0,
+        source: function( request, response ) {
+            var search_term = $('#destination').val();
+            var csrf_test_name = $('[name="csrf_test_name"]').val();
+        $.ajax( {
+          url: "<?php echo site_url('sale/sale/destination_search')?>",
+          method: 'post',
+          dataType: "json",
+          data: {
+            term: request.term,
+            search_term:search_term,
+            csrf_test_name: csrf_test_name
+          },
+          success: function( data ) {
+            response(data);
+          }
+        });
+      },
+       focus: function( event, ui ) {
+           $(this).val(ui.item.label);
+           return false;
+       },
+       select: function( event, ui ) {
+             $(this).val(ui.item.label);
+            $(this).unbind("change");
+            return false;
+       }
+   }
+
+   $('body').on('keydown.autocomplete', '.destination', function() {
+       $(this).autocomplete(options);
+   });
+
+}
+
+
 </script>

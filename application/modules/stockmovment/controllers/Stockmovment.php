@@ -88,6 +88,7 @@ class Stockmovment extends MX_Controller {
 			
 			$product_id       = $pro_id[$i];
 			$product_quantity = $pro_qty[$i];
+
 			$move_details = array(
 				'movement_id'       =>	$id,
 				'product_id'		=>	$product_id,
@@ -168,13 +169,16 @@ class Stockmovment extends MX_Controller {
 					$id = $this->input->post('movement_id');
 
 		// stock movement details
-			$pro_id = $this->input->post('product_id');
+			$pro_id  = $this->input->post('product_id');
 			$isu_qty = $this->input->post('total_qntt');
 			$pro_qty = $this->input->post('prosal_qty');
+
 		for ($i=0, $n=count($pro_id); $i < $n; $i++) {
+
 			$product_id       = $pro_id[$i];
 			$product_quantity = $isu_qty[$i];
 			$proposal_qty =   $pro_qty[$i];
+
 			$move_details = array(
 				'movement_id'       =>	$id,
 				'product_id'		=>	$product_id,
@@ -220,6 +224,8 @@ class Stockmovment extends MX_Controller {
 			echo Modules::run('template/layout', $data); 
 		}   
 	}
+
+
 	public function delete($id = null) 
 	{ 
         $this->permission->method('stockmovment','delete')->redirect();
@@ -427,6 +433,118 @@ public function number_generator()
             }
             $data['stock'] = $stock_qty;
             echo json_encode($data);
+	}
+
+	// recod damage
+	public function damage()
+	{ 
+		$data['title'] = "Stock Damage Capture";
+		#-------------------------------#
+		$this->form_validation->set_rules('from_store', display('from_store')  ,'max_length[50]');
+	    $createby=$this->session->userdata('id');
+	    $storefor=$this->session->userdata('store_id');
+		$createdate=date('Y-m-d H:i:s');
+		
+		#-------------------------------#
+	       $data['Stockmovment']   = (Object) $postData = [ 
+			'proposal_code'        => $this->input->post('proposal_code'), 
+			'for_store_id'         =>  0,
+			'from_store_id'        => $this->input->post('from_store'),
+			'proposal_datetime'    => $this->input->post('proposal_datetime'),
+			'proposal_by'          => $createby,
+			'is_approved'      => 1,
+			'is_issued'        => 1,
+			'is_received'      => 1,
+			'is_proposed'      => 1,
+			'issue_code'	   => 'Damage'.time(),
+			'proposal_remarks' => 'Damaged',
+			'receive_by'       =>$createby,
+			'receive_datetime' => date('Y-m-d'),
+			'is_damage' => 1
+		]; 
+
+		if ($this->form_validation->run()) { 
+
+			
+         $this->permission->method('stockmovment','create')->redirect();
+
+
+		if ($this->Stockmovment_model->create($postData)) { 
+			
+			$movt_id  = $this->db->insert_id();
+
+		// stock movement details
+			$pro_id  = $this->input->post('product_id');
+			$pro_qty = $this->input->post('proposal_qty');
+			
+		for ($i=0, $n=count($pro_id); $i < $n; $i++) {
+			
+			$product_id       = $pro_id[$i];
+			$product_quantity = $pro_qty[$i];
+
+			
+			if(!empty($pro_id))
+			{
+
+					$pro_id  = $this->input->post('product_id');
+					$isu_qty = $this->input->post('proposal_qty');
+					$pro_qty = $this->input->post('proposal_qty');
+
+					for ($i=0, $n=count($pro_id); $i < $n; $i++) {
+
+						$product_id       = $pro_id[$i];
+						$product_quantity = $isu_qty[$i];
+						$proposal_qty =   $pro_qty[$i];
+
+						$move_details = array(
+							'movement_id'       =>	$movt_id,
+							'product_id'		=>	$product_id,
+							'proposal_qty'      =>  $proposal_qty,
+							'issue_qty'	        =>	$product_quantity,
+							'received_qty'      =>   0,
+						);
+					
+					
+						if(!empty($pro_id))
+						{
+							$this->db->insert('stock_movement_details',$move_details);
+						}
+					}
+			}
+		}
+
+		$accesslog = array(
+			'action_page'       =>	'Stockmovment',
+			'action_done'	    =>	'create',
+			'remarks'		    =>	'Stockmovment ID :'.$movt_id,
+			'user_name'			=>	 $this->session->userdata('id'),
+			'entry_date'	    =>	date('Y-m-d H:i:s')
+		);
+
+		$this->db->insert('accesslog',$accesslog);
+
+		$this->session->set_flashdata('message', display('save_successfully'));
+		redirect('stockmovment/Stockmovment/index');
+
+		} 
+		else {
+				$this->session->set_flashdata('exception',  display('please_try_again'));
+			}
+
+		redirect("stockmovment/Stockmovment/damage"); 
+
+
+		} else { 
+			
+			$data['module'] = "stockmovment";
+			$text='p-';
+			$data['proposal_code'] = $text.$this->number_generator();
+			$data['store'] = $this->Stockmovment_model->store_list();
+			$data['storesnd'] = $this->Stockmovment_model->second_store_list();
+			$data['page']   = "damage";   
+			echo Modules::run('template/layout', $data); 
+		}
+
 	}
 
 }

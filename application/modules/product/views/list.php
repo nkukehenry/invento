@@ -27,7 +27,7 @@
                                 <th><?php echo display('sl_no') ?></th>
                                 <th><?php echo display('product_name') ?></th>
                                 <th><?php echo display('category') ?></th>
-                                <th><?php echo display('model') ?></th>
+                                <th>Type</th>
                                 <th><?php echo display('pur_price') ?></th>
                                 <th><?php echo display('min_price') ?></th>
                                 <th><?php echo display('retprice') ?></th>
@@ -67,7 +67,7 @@ $product_info = $this->db->select('product.*,product_category.category_name,prod
                                 <input type="hidden" name="category[]" value="<?php echo $product->category; ?>">
                                 </td>
                                  <td><?php echo $product_info->category_name; ?></td>
-                                 <td><?php echo $product_info->model_name; ?></td>
+                                 <td><?php echo $product_info->brand_name.",".$product_info->model_name; ?></td>
                                 <td>
                                     <input type="text" name="purchase_p[]" style="width:70px" class="form-control" value="<?php echo $product->purchase_price; ?>" <?php if(!$this->permission->method('product','update')->access()): echo 'readonly'; endif?>/>
                                 </td>

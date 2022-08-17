@@ -17,6 +17,11 @@ $HmvcMenu["stockmovment"] = array(
             "method"     => "index",
             "permission" => "read"
         ), 
+        'capture_damages'    => array( 
+            "controller" => "Stockmovment",
+            "method"     => "damage",
+            "permission" => "create"
+        ),
   
 );
    

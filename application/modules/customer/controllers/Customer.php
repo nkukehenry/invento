@@ -97,6 +97,7 @@ class Customer extends MX_Controller
             'customer_cnic'    => $this->input->post('customer_cnic'),
             'business_address' => $this->input->post('business_address'),
             'isactive'         => $this->input->post('isactive'),
+            'gender'           => $this->input->post('gender'),
             'createby'         => $createby,
             'createdate'       => $createdate,
             'updateby'         => $updatedby,
@@ -266,16 +267,19 @@ class Customer extends MX_Controller
 
         if(isset($_POST["submit"]))
         {
+            set_time_limit(0);
+
             $file = $_FILES['file']['tmp_name'];
             $handle = fopen($file, "r");
             $c = 0;//
             while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
             {
-                $file_no  = sprintf("%d",$filesop[0]);
+                $file_no  = $filesop[0];
                 $rank     = $filesop[1];
                 $unit     = $filesop[2];
                 $names    = $filesop[3];
                 $phone    = $filesop[4];
+                $gender   = $filesop[5];
 
                 $data = array(
                     "customer_code" => $file_no,
@@ -283,6 +287,7 @@ class Customer extends MX_Controller
                     "unit"    => $unit,
                     "customer_name"  => $names,
                     "customer_phone" => $phone,
+                    "gender" => $gender,
                     "isactive"       =>1
                 );
 

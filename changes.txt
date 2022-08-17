@@ -1,0 +1,10 @@
+File No. should be alpha numeric
+Model on product list...find a way to generalize
+Add Gender to staff
+Destination District and village, 
+Daily Opening & closing stock
+Sales by gender,rank,unit
+Record damages
+New sale , search customer by File number
+Product insertion , manufacturer after units, auto complete select on 
+Change password on first login

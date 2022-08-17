@@ -166,6 +166,19 @@ class Product_model extends CI_Model {
 			return false; 
 		}
 	}
+
+	/// unit drop down
+	public function unit_list()
+	{
+		$data = $this->db->select("*")
+			->from('product_unit')
+			->where('isactive', 1)  
+			->get()
+			->result();
+
+		return $data;
+	}
+
 	/// unit drop down
 	public function unit_dropdown()
 	{
@@ -183,6 +196,18 @@ class Product_model extends CI_Model {
 		} else {
 			return false; 
 		}
+	}
+
+	// brand list 
+	public function brand_list()
+	{
+		$data = $this->db->select("*")
+			->from('product_brand')
+			->where('isactive', 1)  
+			->get()
+			->result();
+
+		return $data;
 	}
 // brand list 
 	public function brand_dropdown()

@@ -18,11 +18,11 @@
                      <div class="form-group row">
                         <label for="product_code" class="col-sm-3 col-form-label"><?php echo display('product_code') ?> *</label>
                         <div class="col-sm-9">
-                                    <input name="product_code" class="form-control" type="text" placeholder="<?php echo display('product_code') ?>" id="product_code" value="<?php if(empty($products->product_code)){
-                                        echo $product_code;
-                                    }else{
-                                       echo $products->product_code; 
-                                    } ?>" required>
+                            <input name="product_code" class="form-control" type="text" placeholder="<?php echo display('product_code') ?>" id="product_code" value="<?php if(empty($products->product_code)){
+                                echo $product_code;
+                            }else{
+                               echo $products->product_code; 
+                            } ?>" required>
                         </div>
                     </div>
 
@@ -31,62 +31,58 @@
                         <label for="product_name" class="col-sm-3 col-form-label"><?php echo display('product_name') ?> *</label>
                         <div class="col-sm-9">
                                     
-                                    <textarea name="product_name" id="product_name" class="form-control"  readonly ><?php echo $products->product_name; ?></textarea>
+                           <textarea name="product_name" id="product_name" class="form-control"  readonly ><?php echo $products->product_name; ?></textarea>
                         </div>
                     </div> 
-                    <!-- <div class="form-group row">
-                        <label for="category_name" class="col-sm-3 col-form-label"><?php echo display('category_name') ?> *</label>
-                        <div class="col-sm-9">
-                                  
-                                    <?php echo form_dropdown('category_name',$category,(!empty($products->category)?$products->category:null), 'class="form-control superSelect category"  ') ?>
-                        </div>
-                    </div>  -->
-
+                   
 
                      <div class="form-group row">
                         <label for="category_name" class="col-sm-3 col-form-label"><?php echo display('category_name') ?> *</label>
                         <div class="col-sm-9">
                             <select name="category_name" class="form-control category superSelect">
-                                <option value="" selected="selected"></option>
+                                <option>SELECT</option>
                                 <?php foreach ($categories as $cat): ?>
-                                 <option value="<?=$cat->category_id?>" <?=($products->category_id==$cat->category_id)?"selected='selected'":""?>><?=$cat->category_name?></option>
+                                 <option value="<?=$cat->category_id?>" <?=($products->category==$cat->category_id)?"selected":""?>><?=$cat->category_name?></option>
                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div> 
 
                     
-
-                    <div class="form-group row">
-                        <label for="manufacturer_id" class="col-sm-3 col-form-label"><?php echo display('manufacturer_name') ?> *</label>
-                        <div class="col-sm-9">
-                                  <select name="manufacturer_id" class="form-control superSelect">
-                                <?php foreach ($manufacturers as $manu): ?>
-                                 <option value="<?=$manu->id?>" <?=($products->manufacturer_id==$manu->id)?"selected='selected'":""?>><?=$manu->manufacturer_name?></option>
-                               <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-         
          
                      <div class="form-group row">
                         <label for="brand_name" class="col-sm-3 col-form-label brand_label"><?php echo display('brand_name') ?> *</label>
                         <div class="col-sm-9">
-                                    <?php echo form_dropdown('brand_name',$brand,(!empty($products->brand)?$products->brand:null), 'class="form-control superSelect brand"  ') ?>
+                                <select name="brand_name" class="form-control superSelect brand">
+                                <option>SELECT</option>
+                                <?php foreach ($brand as $brd): ?>
+                                 <option value="<?=$brd->brand_id?>" <?=($products->brand==$brd->brand_id)?"selected":""?>><?=$brd->brand_name?></option>
+                               <?php endforeach; ?>
+                            </select>
                         </div>
                     </div> 
 
                    <div class="form-group row">
                         <label for="model_name" class="col-sm-3 col-form-label model_label"><?php echo display('model_name') ?> *</label>
                         <div class="col-sm-9">
-                                     <?php echo form_dropdown('model_name',$model,(!empty($products->model)?$products->model:null), 'class="form-control superSelect model" ') ?>
+                            <select name="model_name" class="form-control superSelect model">
+                                <option>SELECT</option>
+                                <?php foreach ($model as $mdl): ?>
+                                 <option value="<?=$mdl->model_id?>" <?=($products->model==$mdl->model_id)?"selected":""?>><?=$mdl->model_name?></option>
+                               <?php endforeach; ?>
+                            </select>
                         </div>
                     </div> 
 
                     <div class="form-group row">
                         <label for="color_name" class="col-sm-3 col-form-label"><?php echo display('color_name') ?> *</label>
                         <div class="col-sm-9">
-                                     <?php echo form_dropdown('color_id',[],(!empty($products->color_id)?$products->color_id:null), 'class="form-control color superSelect"') ?>
+                            <select name="color_id" class="form-control superSelect color">
+                                <option>SELECT</option>
+                                <?php foreach ($colors as $colo): ?>
+                                 <option value="<?=$colo->color_id?>" <?=($products->color_id==$colo->color_id)?"selected":""?>><?=$colo->color_name?></option>
+                               <?php endforeach; ?>
+                            </select>
                         </div>
                     </div> 
                    
@@ -94,10 +90,30 @@
                      <div class="form-group row">
                         <label for="unit_name" class="col-sm-3 col-form-label"><?php echo display('um') ?> *</label>
                         <div class="col-sm-9">
-                                     <?php echo form_dropdown('unit_name',$unit,(!empty($products->unit)?$products->unit:null), 'class="form-control unit"') ?>
+                               <select name="unit_name" class="form-control unit">
+                                <option>SELECT</option>
+                                <?php foreach ($unit as $un): ?>
+                                 <option value="<?=$un->unit_id?>" <?=($products->unit==$un->unit_id)?"selected":""?>><?=$un->unit_name?></option>
+                               <?php endforeach; ?>
+                            </select>
                         </div>
                     </div> 
                      
+
+
+                    <div class="form-group row">
+                        <label for="manufacturer_id" class="col-sm-3 col-form-label"><?php echo display('manufacturer_name') ?> *</label>
+                        <div class="col-sm-9">
+                            <select name="manufacturer_id" class="form-control superSelect">
+                                <option>SELECT</option>
+                                <?php foreach ($manufacturers as $manu): ?>
+                                 <option value="<?=$manu->id?>" <?=($products->manufacturer_id==$manu->id)?"selected":""?>><?=$manu->manufacturer_name?></option>
+                               <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+         
+
                     <div class="form-group row">
                         <label for="product_details" class="col-sm-3 col-form-label"><?php echo display('product_details') ?> </label>
                         <div class="col-sm-9">

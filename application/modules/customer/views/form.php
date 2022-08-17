@@ -44,6 +44,19 @@
                         <input name="name" class="form-control" type="text" placeholder="<?php echo display('name') ?>" id="name" value="<?php echo $customers->customer_name; ?>">
                     </div>
                 </div>
+
+                 <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Gender*</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="gender" required>
+                            <option>SELECT</option>
+                            <option value="MALE" <?=($customers->gender=="MALE")?"selected":""?> >MALE</option>
+                            <option value="FEMALE" <?=($customers->gender=="FEMALE")?"selected":""?> >FEMALE</option>
+                        </select>
+
+                    </div>
+                </div>
+
                 <div class="form-group row">
                     <label for="customer_phone" class="col-sm-3 col-form-label"><?php echo display('phone') ?> *</label>
                     <div class="col-sm-9">
@@ -56,7 +69,7 @@
                     <div class="col-sm-9">
                         <select class="form-control" name="unit" required>
                             <?php foreach ($units as $rank) :
-                                $srank = $rank->unit; ?>
+                                $srank = $customers->unit; ?>
                                 <option value="<?php echo $rank->unit; ?>" <?php if ($srank == $rank->unit) {
                                                                                 echo "selected";
                                                                             } ?>><?php echo $rank->unit; ?></option>

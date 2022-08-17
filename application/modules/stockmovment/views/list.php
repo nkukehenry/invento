@@ -17,7 +17,7 @@
                                 <th><?php echo display('sl_no') ?></th>
                                 <th><?php echo display('proposal_code') ?></th>
                                 <th><?php echo display('proposed_by') ?></th>
-                                <th><?php echo display('for_store') ?></th>
+                                <th><?php echo display('from_store') ?></th>
                                 <th><?php echo display('proposal_datetime') ?></th>
                                 <th><?php echo display('action') ?></th> 
                             </tr>
@@ -34,10 +34,15 @@
      echo $userinfo->firstname.' '.$userinfo->lastname;
 
       ?></td>
+
     <td><?php 
-       $for=$this->db->select('store_name')->from('store')->where('store_id',$movement->for_store_id)->get()->row();
-       echo $for->store_name;
+       $for=$this->db->select('store_name')->from('store')->where('store_id',$movement->from_store_id)->get()->row();
+       
+       $damage = ($movement->is_damage)?'<span class="text-danger"> (Damage) </span>':'';
+
+       echo $for->store_name . " ".$damage ;
      ?></td>
+
     <td><?php echo $movement->proposal_datetime;?></td>
     <?php if($this->session->userdata('isAdmin')==0){ ?>
     <td>

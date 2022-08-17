@@ -148,3 +148,214 @@ CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@ca
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
 CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-11 06:24:41', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-12 10:07:27', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `purchase_order` (`po_no`, `supplier_id`, `total_amnt`, `store_id`, `warehouse_id`, `createby`, `createdate`, `isapproved`) VALUES ('20220812103510', '3', '2000000.00', 0, 0, '1', '2022-08-12 10:35:10', 0);
+INSERT INTO `purchase_order_details` (`row_id`, `po_no`, `product_id`, `order_qty`, `product_rate`, `discount`, `store_id`) VALUES ('244512919498895', '20220812103510', '3', '100', '20000', '', '1');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order', 'create', 'Orde Id-20220812103510 total amount-2000000.00', '1', '2022-08-12 10:35:10');
+INSERT INTO `purchase_receive` (`receive_id`, `po_no`, `supplier_id`, `store_id`, `warehouse_id`, `voucher_no`, `receive_by`, `receive_date`) VALUES ('20220812103537', '20220812103510', '3', 0, 0, 1008, '1', '2022-08-12');
+INSERT INTO `purchase_receive_details` (`receive_id`, `product_id`, `receive_qty`, `product_rate`, `store_id`, `discount`) VALUES ('20220812103537', '3', '100', '20000', '1', '');
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220812103510', 'PO', '2022-08-12', 10107, 'PO Receive Receive No 20220812103537', '2000000.00', 0, '1', 1, '1', '2022-08-12', 1);
+INSERT INTO `acc_transaction` (`VNo`, `Vtype`, `VDate`, `COAID`, `Narration`, `Debit`, `Credit`, `StoreID`, `IsPosted`, `CreateBy`, `CreateDate`, `IsAppove`) VALUES ('20220812103510', 'PO', '2022-08-12', '5020200010', 'PO received For PO No.20220812103510 Receive No.20220812103537', 0, '2000000.00', NULL, 1, '1', '2022-08-12', 1);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('purchase order receive', 'create', 'Order Id- total amount-2000000.00', '1', '2022-08-12 10:35:37');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-0001', '2', '1', '2022-08-12', '1');
+INSERT INTO `stock_movement_details` (`movement_id`, `product_id`, `proposal_qty`) VALUES (2, '3', '10');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'create', 'Stockmovment ID :2', '1', '2022-08-12 10:36:42');
+UPDATE `stock_movement` SET `movement_id` = '2', `is_approved` = 1
+WHERE `movement_id` = '2';
+UPDATE `stock_movement` SET `movement_id` = '2', `proposal_code` = 'p-0001', `for_store_id` = '2', `from_store_id` = '1', `proposal_datetime` = '2022-08-12', `proposal_by` = '1', `issue_by` = '1', `for_warehouse` = 0, `from_warehouse` = 0, `issue_code` = 'is-2', `issue_datetime` = '2022-08-12 10:37:02', `issue_remarks` = '', `is_issued` = 1, `is_approved` = 1
+WHERE `movement_id` = '2';
+UPDATE `stock_movement_details` SET `movement_id` = '2', `product_id` = '3', `proposal_qty` = '10', `issue_qty` = '10', `received_qty` = 0
+WHERE `movement_id` = '2'
+AND `product_id` = '3';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'issue', 'Stockmovment ID :2', '1', '2022-08-12 10:37:02');
+UPDATE `stock_movement` SET `movement_id` = '2', `proposal_code` = 'p-0001', `for_store_id` = '2', `from_store_id` = '1', `proposal_by` = '1', `issue_by` = '1', `for_warehouse` = 0, `from_warehouse` = 0, `issue_code` = 'is-2', `issue_remarks` = NULL, `is_issued` = 1, `is_received` = 1, `is_proposed` = 1, `receive_by` = '1', `receive_datetime` = '2022-08-12 10:37:29'
+WHERE `movement_id` = '2';
+UPDATE `stock_movement_details` SET `movement_id` = '2', `product_id` = '3', `proposal_qty` = '10', `issue_qty` = '8', `received_qty` = '8'
+WHERE `movement_id` = '2'
+AND `product_id` = '3';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('stockmovement ', 'create', 'movemet received', '1', '2022-08-12 10:37:29');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-12 19:12:23', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-14 19:29:37', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_logout` = '2022-08-14 19:58:38'
+WHERE `id` = '1';
+UPDATE `user` SET `last_login` = '2022-08-14 20:00:00', `ip_address` = '::1'
+WHERE `id` = '2';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `customer` SET `customer_id` = '36', `customer_code` = '5100090000', `customer_name` = 'Mugisha Isaac', `force_rank` = 'SSP', `unit` = 'CID', `type` = '', `customer_phone` = '78976666', `store_id` = '', `job_designation` = '', `customer_address` = '', `customer_cnic` = '', `business_address` = '', `isactive` = '1', `gender` = 'MALE', `createby` = '2', `createdate` = '2022-08-14 20:58:24', `updateby` = '2', `updatedate` = '2022-08-14 20:58:24'
+WHERE `customer_id` = '36';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Customer', 'update', 'customer ID :36', '2', '2022-08-14 20:58:24');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'update', 'product ID :7', '2', '2022-08-14 21:17:35');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'update', 'product ID :7', '2', '2022-08-14 21:19:01');
+UPDATE `product` SET `product_id` = '7', `product_name` = 'IRON SHEET-SUPER TILE-28-Maroon-Steel & Tube-SUPER', `product_code` = 'pro-1005', `model` = '6', `category` = '2', `brand` = '3', `unit` = '3', `product_details` = '', `purchase_price` = '0', `block_price` = '0', `minimum_price` = '0', `retail_price` = '0', `manufacturer_id` = '8', `color_id` = '2', `createby` = '2', `createdate` = '2022-08-14 21:19:14', `updateby` = '2', `updatedate` = '2022-08-14 21:19:14', `isactive` = 1
+WHERE `product_id` = '7';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Product', 'update', 'product ID :7', '2', '2022-08-14 21:19:14');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_logout` = '2022-08-14 21:30:24'
+WHERE `id` = '2';
+UPDATE `user` SET `last_login` = '2022-08-14 21:30:53', `ip_address` = '::1'
+WHERE `id` = '1';
+UPDATE `user` SET `last_logout` = '2022-08-14 21:32:29'
+WHERE `id` = '1';
+UPDATE `user` SET `last_login` = '2022-08-14 21:32:51', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_logout` = '2022-08-14 21:35:22'
+WHERE `id` = '1';
+UPDATE `user` SET `last_login` = '2022-08-14 21:35:37', `ip_address` = '::1'
+WHERE `id` = '1';
+UPDATE `user` SET `last_logout` = '2022-08-14 21:35:46'
+WHERE `id` = '1';
+UPDATE `user` SET `last_login` = '2022-08-14 21:36:13', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+UPDATE `user` SET `last_login` = '2022-08-17 19:05:20', `ip_address` = '::1'
+WHERE `id` = '1';
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-3', NULL, '1', '2022-08-17', '1');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-3', '2', '2', '2022-08-17', '1');
+INSERT INTO `stock_movement_details` (`movement_id`, `product_id`, `proposal_qty`) VALUES (3, '3', '2');
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'create', 'Stockmovment ID :3', '1', '2022-08-17 19:32:14');
+UPDATE `stock_movement` SET `movement_id` = '3', `is_approved` = 1
+WHERE `movement_id` = '3';
+UPDATE `stock_movement` SET `movement_id` = '3', `proposal_code` = 'p-3', `for_store_id` = '2', `from_store_id` = '2', `proposal_datetime` = '2022-08-17', `proposal_by` = '1', `issue_by` = '1', `for_warehouse` = 0, `from_warehouse` = 0, `issue_code` = 'is-3', `issue_datetime` = '2022-08-17 19:34:43', `issue_remarks` = '', `is_issued` = 1, `is_approved` = 1
+WHERE `movement_id` = '3';
+UPDATE `stock_movement_details` SET `movement_id` = '3', `product_id` = '3', `proposal_qty` = '2', `issue_qty` = '2', `received_qty` = 0
+WHERE `movement_id` = '3'
+AND `product_id` = '3';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'issue', 'Stockmovment ID :3', '1', '2022-08-17 19:34:43');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-4', NULL, '1', '2022-08-17', '1');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-4', NULL, '1', '2022-08-17', '1');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-4', NULL, '1', '2022-08-17', '1');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-4', NULL, '1', '2022-08-17', '1');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`) VALUES ('p-4', NULL, '1', '2022-08-17', '1');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`, `is_approved`, `is_issued`, `is_received`, `is_proposed`, `receive_by`) VALUES ('p-4', 0, '1', '2022-08-17', '1', 1, 1, 1, 1, '1');
+INSERT INTO `stock_movement_details` (`movement_id`, `product_id`, `proposal_qty`, `issue_qty`, `received_qty`) VALUES (4, '3', NULL, NULL, 0);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'create', 'Stockmovment ID :4', '1', '2022-08-17 19:49:18');
+DELETE FROM `stock_movement`
+WHERE `movement_id` = '4';
+DELETE FROM `stock_movement_details`
+WHERE `movement_id` = '4';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'delete', 'Stockmovment ID :4', '1', '2022-08-17 19:49:40');
+DELETE FROM `stock_movement`
+WHERE `movement_id` = '3';
+DELETE FROM `stock_movement_details`
+WHERE `movement_id` = '3';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'delete', 'Stockmovment ID :3', '1', '2022-08-17 19:49:43');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`, `is_approved`, `is_issued`, `is_received`, `is_proposed`, `receive_by`) VALUES ('p-4', 0, '1', '2022-08-17', '1', 1, 1, 1, 1, '1');
+INSERT INTO `stock_movement_details` (`movement_id`, `product_id`, `proposal_qty`, `issue_qty`, `received_qty`) VALUES (5, '3', '2', '2', 0);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'create', 'Stockmovment ID :5', '1', '2022-08-17 19:50:48');
+DELETE FROM `stock_movement`
+WHERE `movement_id` = '3';
+DELETE FROM `stock_movement_details`
+WHERE `movement_id` = '3';
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'delete', 'Stockmovment ID :3', '1', '2022-08-17 20:08:42');
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+INSERT INTO `stock_movement` (`proposal_code`, `for_store_id`, `from_store_id`, `proposal_datetime`, `proposal_by`, `is_approved`, `is_issued`, `is_received`, `is_proposed`, `issue_code`, `proposal_remarks`, `receive_by`, `receive_datetime`, `is_damage`) VALUES ('p-6', 0, '1', '2022-08-17', '1', 1, 1, 1, 1, 'Damage1660759926', 'Damaged', '1', '2022-08-17', 1);
+INSERT INTO `stock_movement_details` (`movement_id`, `product_id`, `proposal_qty`, `issue_qty`, `received_qty`) VALUES (6, '3', '30', '30', 0);
+INSERT INTO `accesslog` (`action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('Stockmovment', 'create', 'Stockmovment ID :6', '1', '2022-08-17 20:12:06');
+CALL get_store_stock('',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
+CALL get_store_stock('0',@store_id,@stock_date,@prod_id,@in_qty,@outqty,@rem,@cat_id,@brand_id,@model_id);
